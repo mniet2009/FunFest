@@ -1,6 +1,6 @@
-const mix = require('laravel-mix');
-require('vuetifyjs-mix-extension')
-const path = require('path');
+const mix = require("laravel-mix");
+require("vuetifyjs-mix-extension");
+const path = require("path");
 
 /*
  |--------------------------------------------------------------------------
@@ -13,11 +13,12 @@ const path = require('path');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .vue()
-    .vuetify('vuetify-loader')
-    .alias({ '@': path.join(__dirname, 'resources/js') })
-    .sass('resources/css/app.scss', 'public/css')
-    .sourceMaps(false)
-    .version()
-    .disableNotifications()
+mix
+  .js("resources/js/app.js", "public/js")
+  .vue()
+  .vuetify("vuetify-loader")
+  .alias({ "@": path.join(__dirname, "resources/js") })
+  .sass("resources/css/app.scss", "public/css")
+  .sourceMaps(false)
+  .version()
+  .disableNotifications();

@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use HasFactory, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -49,4 +51,19 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [];
+
+    public function team()
+    {
+        return $this->belongsTo(Team::class);
+    }
+
+    public function completions()
+    {
+        return $this->hasMany(Completion::class);
+    }
+
+    public function activities()
+    {
+        return $this->belongsToMany(Activity::class, 'completions');
+    }
 }

@@ -15,9 +15,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'home'])->name("home");
-Route::get('/test', [HomeController::class, 'test']);
 
-Route::get('login', [App\Http\Controllers\DiscordController::class, 'login'])
-  ->name('login')->withoutMiddleware('VerifyCsrfToken');
-Route::post('logout', [App\Http\Controllers\DiscordController::class, 'logout'])
+// auth bs
+Route::get('tologin', [App\Http\Controllers\DiscordController::class, 'tologin'])
+  ->name('login');
+Route::get('login', [App\Http\Controllers\DiscordController::class, 'loginCallback'])
+  ->withoutMiddleware('VerifyCsrfToken');
+Route::get('logout', [App\Http\Controllers\DiscordController::class, 'logout'])
   ->name('logout');
+
+Route::get("/activities", [App\Http\Controllers\ActivityController::class, "index"])
+  ->name("activities.index");
+Route::get("/activities/{activity}", [App\Http\Controllers\ActivityController::class, "show"])
+  ->name("activities.show");

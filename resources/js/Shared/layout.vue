@@ -1,11 +1,9 @@
 <template>
-    <v-app>
-        <v-main>
-            <TrMenu></TrMenu>
+  <v-app>
+    <Menu></Menu>
 
-            <v-container>
-                <slot></slot>
-            </v-container>
-        </v-main>
-    </v-app>
+    <v-main>
+      <slot></slot>
+    </v-main>
+  </v-app>
 </template>

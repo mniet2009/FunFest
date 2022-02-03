@@ -22,7 +22,20 @@ class DiscordController extends Controller
     "scope" => "identifiy&email"
   ];
 
-  public function login(Request $request)
+  public function tologin()
+  {
+    if (Auth::check()) {
+      return redirect()->route("home");
+    };
+
+    if (!session()->has('from')) {
+      session(['from' => url()->previous()]);
+    }
+
+    return redirect("https://discord.com/oauth2/authorize?client_id=" . env("DISCORD_CLIENT_ID") . "&redirect_uri=" . env("DISCORD_REDIRECT_URI") . "&response_type=code&scope=identify%20email");
+  }
+
+  public function loginCallback(Request $request)
   {
     if (Auth::check()) {
       return redirect()->route("home");
@@ -52,13 +65,18 @@ class DiscordController extends Controller
 
     $userData = json_decode($userData);
 
+    $avatarUrl = "https://cdn.discordapp.com/avatars/$userData->id/$userData->avatar";
+
     $user = User::updateOrCreate(
+      [
+        'id' => $userData->id,
+      ],
       [
         'id' => $userData->id,
         'username' => $userData->username,
         'discriminator' => $userData->discriminator,
         'email' => $userData->email,
-        'avatar' => $userData->avatar,
+        'avatar' => $avatarUrl,
         'verified' => $userData->verified,
         'locale' => $userData->locale,
         'mfa_enabled' => $userData->mfa_enabled,
@@ -68,7 +86,7 @@ class DiscordController extends Controller
 
     Auth::login($user, true);
 
-    return redirect()->route("home");
+    return redirect(session('from'));
   }
 
   public function logout(Request $request)
@@ -76,6 +94,6 @@ class DiscordController extends Controller
     Auth::logout();
     $request->session()->invalidate();
 
-    return redirect()->route("home");
+    return redirect()->back();
   }
 }

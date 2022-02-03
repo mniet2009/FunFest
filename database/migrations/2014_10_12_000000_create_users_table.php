@@ -14,6 +14,7 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
+            // discord shit
             $table->string("id")->primary();
             $table->string('username');
             $table->string('discriminator');
@@ -24,6 +25,9 @@ class CreateUsersTable extends Migration
             $table->boolean('mfa_enabled');
             $table->string('refresh_token')->nullable();
             $table->rememberToken();
+
+            $table->bigInteger("team_id")->nullable();
+
             $table->timestamps();
         });
     }
