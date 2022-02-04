@@ -30,7 +30,7 @@ class UserSeeder extends Seeder
         User::all()->each(function ($user) {
             Activity::all()->each(function ($activity) use ($user) {
                 if (rand(0, 1)) {
-                    $user->activities()->attach($activity);
+                    $user->activities()->attach($activity, ["proof" => "https://i.ytimg.com/vi/D0q0QeQbw9U/maxresdefault.jpg"]);
                 }
             });
         });
