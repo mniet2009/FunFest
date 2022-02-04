@@ -110,6 +110,7 @@ export default {
     submitComplete() {
       if (this.$refs.form.validate()) {
         this.form.post(route("activities.complete", this.activity.slug));
+        this.formOpen = false;
       }
     },
   },
