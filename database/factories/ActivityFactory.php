@@ -22,15 +22,23 @@ class ActivityFactory extends Factory
      */
     public function definition()
     {
+        $this->faker->addProvider(new \DavidBadura\FakerMarkdownGenerator\FakerProvider($this->faker));
+
         $name = $this->faker->words(2, true);
+        $limit = null;
+
+        if (rand(0, 1)) {
+            $limit = rand(1, 10);
+        }
 
         return [
             "tickets" => $this->faker->numberBetween(1, 100),
             "name" => $name,
             "slug" => str_replace(" ", "-", $name),
-            "description" => $this->faker->sentence,
+            "excerpt" => $this->faker->sentence,
+            "description" => $this->faker->markdown(),
             "image" => "/storage/activities/1.jpg",
-            "limit" => null,
+            "limit" => $limit,
             "activity_type_id" => ActivityType::all()->random()->id,
         ];
     }

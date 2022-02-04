@@ -15,7 +15,7 @@
         >
           <funfest-activity-card
             :activity="activity"
-            :completion="getCompletion(activity.id)"
+            :completions="getCompletions(activity.id)"
           ></funfest-activity-card>
         </router-link>
       </v-col>
@@ -37,12 +37,12 @@
 </style>
 
 <script>
+import * as util from "../../util.js";
+
 export default {
   methods: {
-    getCompletion(activityId) {
-      return this.$page.props.auth.user.completions.find(
-        (completion) => completion.activity_id === activityId
-      );
+    getCompletions(activityId) {
+      return util.getCompletions(this, activityId);
     },
   },
 

@@ -25,6 +25,7 @@
         "vuetify-loader": "^1.7.2"
     },
     "dependencies": {
+        "@adapttive/vue-markdown": "^4.0.1",
         "@inertiajs/inertia": "^0.10.1",
         "@inertiajs/inertia-vue": "^0.7.2",
         "@inertiajs/progress": "^0.2.6",

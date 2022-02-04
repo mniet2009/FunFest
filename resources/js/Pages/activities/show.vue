@@ -18,33 +18,122 @@
     </v-parallax>
 
     <v-container>
+      <div class="ticket-action-box">
+        <p v-if="activity.limit == null">
+          This activity can be redeemed for {{ activity.tickets }} tickets.
+        </p>
+
+        <p v-if="activity.limit != null">
+          This activity can be redeemed for {{ activity.tickets }} tickets, up
+          to {{ activity.limit }} times.
+        </p>
+
+        <p v-if="completions.length > 0 && activity.limit != null">
+          You have redeemed this activity {{ completions.length }}
+          {{ completions.length == 1 ? "time" : "times" }}.
+        </p>
+
+        <p v-if="completions.length > 0 && activity.limit == null">
+          You have already redeemed this activity. Poggers.
+        </p>
+
+        <div
+          v-if="
+            completions.length == 0 ||
+              (activity.limit != null && completions.length < activity.limit)
+          "
+        >
+          <v-btn v-if="!formOpen" block @click="formOpen = true"
+            >Redeem now</v-btn
+          >
+
+          <v-card v-if="formOpen">
+            <v-card-text>
+              <v-form ref="form" v-model="valid" lazy-validation>
+                <v-text-field
+                  v-model="form.proof"
+                  label="Vod/Screenshot"
+                  required
+                  :rules="proofRules"
+                ></v-text-field>
+              </v-form>
+            </v-card-text>
+
+            <v-card-actions>
+              <v-btn @click="submitComplete" color="primary">
+                Redeem
+              </v-btn>
+              <v-btn @click="formOpen = false" color="grey">
+                Nevermind
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </div>
+      </div>
       <h1>{{ activity.name }}</h1>
 
-      <p>{{ activity.description }}</p>
-
-      <div v-if="isCompleted()">Complete!</div>
-
-      <v-btn block color="primary" @click="complete">Redeem</v-btn>
+      <vue-markdown>{{ activity.description }}</vue-markdown>
     </v-container>
   </div>
 </template>
 
-<script>
-export default {
-  methods: {
-    complete() {
-      this.$inertia.post(route("activities.complete", this.activity.slug));
-    },
+<style scoped lang="scss">
+.container {
+  padding-top: 0px;
+}
 
-    isCompleted() {
-      return this.$page.props.auth.user.completions.find(
-        (completion) => completion.activity_id === this.activity.id
-      );
+.ticket-action-box {
+  background-color: #00bebe;
+  border-radius: 0px 0px 10px 10px;
+  padding: 10px;
+
+  p {
+    text-align: center;
+
+    &:last-child {
+      margin-bottom: 0px;
+    }
+  }
+}
+</style>
+
+<script>
+import * as util from "../../util.js";
+import VueMarkdown from "@adapttive/vue-markdown";
+
+export default {
+  components: {
+    VueMarkdown,
+  },
+
+  methods: {
+    submitComplete() {
+      if (this.$refs.form.validate()) {
+        this.form.post(route("activities.complete", this.activity.slug));
+      }
+    },
+  },
+
+  computed: {
+    completions() {
+      return util.getCompletions(this, this.activity.id);
     },
   },
 
   props: {
     activity: Object,
+  },
+
+  data() {
+    return {
+      proof: "",
+      valid: true,
+      formOpen: false,
+      proofRules: [(v) => !!v || "You gotta submit a vod or something."],
+      form: this.$inertia.form({
+        proof: "",
+      }),
+    };
   },
 };
 </script>

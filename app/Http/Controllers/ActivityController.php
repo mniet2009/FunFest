@@ -21,11 +21,15 @@ class ActivityController extends Controller
         return Inertia::render('activities/show', compact('activity'));
     }
 
-    public function complete(Activity $activity)
+    public function complete(Request $request, Activity $activity)
     {
+        $validated = $request->validate([
+            "proof" => "required"
+        ]);
+
         $user = Auth::user();
 
-        $user->activities()->attach($activity);
+        $user->activities()->attach($activity, ["proof" => $validated["proof"]]);
 
         return redirect()->back();
     }

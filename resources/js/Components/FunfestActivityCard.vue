@@ -1,17 +1,43 @@
 <template>
   <v-card class="activity-card">
     <v-img height="250" :src="activity.image">
-      <div class="tickets" :class="{ complete: this.completion }">
-        <v-icon>mdi-star</v-icon>
-        {{ getTickets() }}
-        /
-        {{ activity.tickets }}
+      <div
+        class="tickets"
+        :class="{
+          complete:
+            this.completions.length == this.activity.limit ||
+            (this.completions.length == 1 && !this.activity.limit),
+        }"
+      >
+        <v-icon>mdi-ticket</v-icon>
+
+        <span
+          v-if="this.completions.length == 0 && this.activity.limit == null"
+        >
+          Redeem for {{ activity.tickets }} tickets
+        </span>
+
+        <span
+          v-if="this.completions.length == 0 && this.activity.limit != null"
+        >
+          Redeem for {{ activity.tickets }} tickets, up to
+          {{ this.activity.limit }} times
+        </span>
+
+        <span v-if="this.completions.length > 0 && this.activity.limit != null">
+          Completed {{ this.completions.length }} /
+          {{ this.activity.limit }} times, {{ activity.tickets }} tickets each
+        </span>
+
+        <span v-if="this.completions.length > 0 && this.activity.limit == null">
+          Completed
+        </span>
       </div>
     </v-img>
 
     <v-card-title>{{ activity.name }}</v-card-title>
 
-    <v-card-text>{{ activity.description }}</v-card-text>
+    <v-card-text>{{ activity.excerpt }}</v-card-text>
   </v-card>
 </template>
 
@@ -30,14 +56,8 @@
 
 <script>
 export default {
-  methods: {
-    getTickets() {
-      return this.completion ? this.activity.tickets : 0;
-    },
-  },
-
   props: {
-    completion: Object,
+    completions: Array,
     activity: Object,
   },
 };
