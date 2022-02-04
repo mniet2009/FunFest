@@ -21,14 +21,30 @@
       <h1>{{ activity.name }}</h1>
 
       <p>{{ activity.description }}</p>
+
+      <div v-if="isCompleted()">Complete!</div>
+
+      <v-btn block color="primary" @click="complete">Redeem</v-btn>
     </v-container>
   </div>
 </template>
 
 <script>
 export default {
+  methods: {
+    complete() {
+      this.$inertia.post(route("activities.complete", this.activity.slug));
+    },
+
+    isCompleted() {
+      return this.$page.props.auth.user.completions.find(
+        (completion) => completion.activity_id === this.activity.id
+      );
+    },
+  },
+
   props: {
-    activity: Array,
+    activity: Object,
   },
 };
 </script>

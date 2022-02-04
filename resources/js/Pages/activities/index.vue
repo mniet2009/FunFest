@@ -13,7 +13,10 @@
           :href="route('activities.show', { activity: activity.slug })"
           as="div"
         >
-          <funfest-activity-card :activity="activity"></funfest-activity-card>
+          <funfest-activity-card
+            :activity="activity"
+            :completion="getCompletion(activity.id)"
+          ></funfest-activity-card>
         </router-link>
       </v-col>
     </v-row>
@@ -35,6 +38,14 @@
 
 <script>
 export default {
+  methods: {
+    getCompletion(activityId) {
+      return this.$page.props.auth.user.completions.find(
+        (completion) => completion.activity_id === activityId
+      );
+    },
+  },
+
   props: {
     activities: Array,
   },

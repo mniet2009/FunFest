@@ -17,10 +17,10 @@ class CreateActivitiesTable extends Migration
             $table->id();
 
             $table->text("name");
-            $table->text("slug")->unique();
+            $table->text("slug");
             $table->bigInteger("activity_type_id");
 
-            $table->integer("points");
+            $table->integer("tickets");
             $table->integer("limit")->nullable();
             $table->text("image")->nullable();
             $table->text("description");

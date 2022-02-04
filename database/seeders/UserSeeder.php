@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Activity;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -21,6 +22,12 @@ class UserSeeder extends Seeder
         ]);
 
         $maurice->assignRole("Admin");
+
+        Activity::all()->each(function ($activity) use ($maurice) {
+            if (rand(0, 1)) {
+                $maurice->activities()->attach($activity);
+            }
+        });
 
         User::factory()
             ->count(50)

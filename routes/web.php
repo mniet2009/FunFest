@@ -28,3 +28,5 @@ Route::get("/activities", [App\Http\Controllers\ActivityController::class, "inde
   ->name("activities.index");
 Route::get("/activities/{activity}", [App\Http\Controllers\ActivityController::class, "show"])
   ->name("activities.show");
+Route::post("/activities/{activity}/complete", [App\Http\Controllers\ActivityController::class, "complete"])
+  ->name("activities.complete");

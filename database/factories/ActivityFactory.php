@@ -25,7 +25,7 @@ class ActivityFactory extends Factory
         $name = $this->faker->words(2, true);
 
         return [
-            "points" => $this->faker->numberBetween(1, 100),
+            "tickets" => $this->faker->numberBetween(1, 100),
             "name" => $name,
             "slug" => str_replace(" ", "-", $name),
             "description" => $this->faker->sentence,

@@ -16,7 +16,7 @@ class CreateCompletionsTable extends Migration
         Schema::create('completions', function (Blueprint $table) {
             $table->id();
 
-            $table->bigInteger("user_id");
+            $table->text("user_id");
             $table->bigInteger("activity_id");
 
             $table->timestamps();
