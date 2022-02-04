@@ -111,6 +111,7 @@ export default {
       if (this.$refs.form.validate()) {
         this.form.post(route("activities.complete", this.activity.slug));
         this.formOpen = false;
+        this.form.proof = "";
       }
     },
   },
@@ -127,7 +128,6 @@ export default {
 
   data() {
     return {
-      proof: "",
       valid: true,
       formOpen: false,
       proofRules: [(v) => !!v || "You gotta submit a vod or something."],
