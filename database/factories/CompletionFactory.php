@@ -22,7 +22,7 @@ class CompletionFactory extends Factory
     public function definition()
     {
         return [
-            //
+            "proof" => "https://i.ytimg.com/vi/D0q0QeQbw9U/maxresdefault.jpg"
         ];
     }
 }
