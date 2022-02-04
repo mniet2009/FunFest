@@ -17,6 +17,7 @@ class CreateCompletionsTable extends Migration
             $table->id();
 
             $table->text("user_id");
+            $table->text("proof")->nullable();
             $table->bigInteger("activity_id");
 
             $table->timestamps();

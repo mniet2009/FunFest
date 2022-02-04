@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Team;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -31,6 +32,7 @@ class UserFactory extends Factory
             'locale' => $this->faker->locale,
             'mfa_enabled' => $this->faker->boolean,
             'refresh_token' => $this->faker->uuid,
+            'team_id' => Team::all()->random()->id,
         ];
     }
 }

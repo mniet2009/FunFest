@@ -23,14 +23,16 @@ class UserSeeder extends Seeder
 
         $maurice->assignRole("Admin");
 
-        Activity::all()->each(function ($activity) use ($maurice) {
-            if (rand(0, 1)) {
-                $maurice->activities()->attach($activity);
-            }
-        });
-
         User::factory()
             ->count(50)
             ->create();
+
+        User::all()->each(function ($user) {
+            Activity::all()->each(function ($activity) use ($user) {
+                if (rand(0, 1)) {
+                    $user->activities()->attach($activity);
+                }
+            });
+        });
     }
 }

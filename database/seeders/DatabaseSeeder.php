@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(PermissionSeeder::class);
         $this->call(ActivityTypeSeeder::class);
+        $this->call(TeamSeeder::class);
 
         if (App::environment() == "local") {
             $this->call(ActivitySeeder::class);
