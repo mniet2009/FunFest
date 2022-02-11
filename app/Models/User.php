@@ -34,6 +34,7 @@ class User extends Authenticatable
      * @var boolean
      */
     public $incrementing = false;
+    protected $keyType = 'string';
 
     /**
      * The attributes that should be hidden for arrays.
