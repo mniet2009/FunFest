@@ -13,7 +13,7 @@ class TeamController extends Controller
     {
         $teams = Team::withSum("completions", "tickets")
             ->with(["completions" => function ($query) {
-                $query->groupBy("user_id")
+                $query->groupBy("user_id", "team_id")
                     ->select("user_id", DB::raw("SUM(tickets) as tickets"))
                     ->orderBy("tickets", "desc")
                     ->with("user:id,username");
