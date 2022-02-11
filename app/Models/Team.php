@@ -13,4 +13,9 @@ class Team extends Model
     {
         return $this->hasMany(User::class);
     }
+
+    public function completions()
+    {
+        return $this->hasManyThrough(Completion::class, User::class);
+    }
 }

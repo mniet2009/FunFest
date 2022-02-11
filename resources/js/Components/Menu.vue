@@ -59,7 +59,7 @@
 
     <template v-slot:append>
       <v-sheet color="rgba(0, 0, 0, 0.5)" class="pa-1 text-center grey--text">
-        <span class="by">By Maurice</span>
+        <span class="by">made by Maurice</span>
       </v-sheet>
     </template>
   </v-navigation-drawer>
@@ -107,7 +107,7 @@ export default {
         {
           title: "Standings",
           icon: "mdi-podium",
-          route: "/standings",
+          route: "/teams",
         },
         {
           title: "About",

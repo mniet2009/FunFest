@@ -30,3 +30,7 @@ Route::get("/activities/{activity}", [App\Http\Controllers\ActivityController::c
   ->name("activities.show");
 Route::post("/activities/{activity}/complete", [App\Http\Controllers\ActivityController::class, "complete"])
   ->name("activities.complete");
+
+
+Route::get("/teams", [App\Http\Controllers\TeamController::class, "index"])
+  ->name("teams.index");

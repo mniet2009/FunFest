@@ -17,6 +17,7 @@ class CreateCompletionsTable extends Migration
             $table->id();
 
             $table->text("user_id");
+            $table->integer("tickets");
             $table->text("proof");
             $table->bigInteger("activity_id");
 

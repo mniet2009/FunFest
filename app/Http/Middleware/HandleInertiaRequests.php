@@ -40,13 +40,11 @@ class HandleInertiaRequests extends Middleware
         $auth = [];
         if (Auth::check()) {
             $user = Auth::user();
-            $completions = $user->completions()->get('activity_id');
 
             $auth["user"] = [
                 'id' => $user->id,
                 'username' => $user->username,
                 'avatar' => $user->avatar,
-                'completions' => $completions,
             ];
         }
 

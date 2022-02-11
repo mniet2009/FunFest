@@ -11,14 +11,20 @@ class ActivityController extends Controller
 {
     public function index()
     {
-        $activities = Activity::all();
+        $activities = Activity::with(["completions" => function ($query) {
+            $query->where("user_id", Auth::id());
+        }])->get();
 
-        return Inertia::render('activities/index', compact('activities'));
+        return Inertia::render('Activity/Index', compact('activities'));
     }
 
     public function show(Activity $activity)
     {
-        return Inertia::render('activities/show', compact('activity'));
+        $activity->load(["completions" => function ($query) {
+            $query->where("user_id", Auth::id());
+        }])->get();
+
+        return Inertia::render('Activity/Show', compact('activity'));
     }
 
     public function complete(Request $request, Activity $activity)

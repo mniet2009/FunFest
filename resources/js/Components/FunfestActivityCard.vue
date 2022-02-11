@@ -5,31 +5,43 @@
         class="tickets"
         :class="{
           complete:
-            this.completions.length == this.activity.limit ||
-            (this.completions.length == 1 && !this.activity.limit),
+            this.activity.completions.length == this.activity.limit ||
+            (this.activity.completions.length == 1 && !this.activity.limit),
         }"
       >
         <v-icon>mdi-ticket</v-icon>
 
         <span
-          v-if="this.completions.length == 0 && this.activity.limit == null"
+          v-if="
+            this.activity.completions.length == 0 && this.activity.limit == null
+          "
         >
           Redeem for {{ activity.tickets }} tickets
         </span>
 
         <span
-          v-if="this.completions.length == 0 && this.activity.limit != null"
+          v-if="
+            this.activity.completions.length == 0 && this.activity.limit != null
+          "
         >
           Redeem for {{ activity.tickets }} tickets, up to
           {{ this.activity.limit }} times
         </span>
 
-        <span v-if="this.completions.length > 0 && this.activity.limit != null">
-          Completed {{ this.completions.length }} /
+        <span
+          v-if="
+            this.activity.completions.length > 0 && this.activity.limit != null
+          "
+        >
+          Completed {{ this.activity.completions.length }} /
           {{ this.activity.limit }} times, {{ activity.tickets }} tickets each
         </span>
 
-        <span v-if="this.completions.length > 0 && this.activity.limit == null">
+        <span
+          v-if="
+            this.activity.completions.length > 0 && this.activity.limit == null
+          "
+        >
           Completed
         </span>
       </div>
@@ -57,7 +69,6 @@
 <script>
 export default {
   props: {
-    completions: Array,
     activity: Object,
   },
 };
