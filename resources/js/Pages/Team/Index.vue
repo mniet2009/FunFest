@@ -25,7 +25,9 @@
                 :key="completion.user.username"
               >
                 <td>{{ completion.user.username }}</td>
-                <td class="text-right">{{ completion.tickets }}</td>
+                <td class="text-right">
+                  {{ formatNumber(completion.tickets) }}
+                </td>
               </tr>
             </tbody>
           </template>

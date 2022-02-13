@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\TeamController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,20 +19,25 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'home'])->name("home");
 
 // auth bs
-Route::get('tologin', [App\Http\Controllers\DiscordController::class, 'tologin'])
+Route::get('tologin', [DiscordController::class, 'tologin'])
   ->name('login');
-Route::get('login', [App\Http\Controllers\DiscordController::class, 'loginCallback'])
+Route::get('login', [DiscordController::class, 'loginCallback'])
   ->withoutMiddleware('VerifyCsrfToken');
-Route::get('logout', [App\Http\Controllers\DiscordController::class, 'logout'])
+Route::get('logout', [DiscordController::class, 'logout'])
   ->name('logout');
 
-Route::get("/activities", [App\Http\Controllers\ActivityController::class, "index"])
+// Activities
+Route::get("/activities", [ActivityController::class, "index"])
   ->name("activities.index");
-Route::get("/activities/{activity}", [App\Http\Controllers\ActivityController::class, "show"])
+Route::get("/activities/{activity}", [ActivityController::class, "show"])
   ->name("activities.show");
-Route::post("/activities/{activity}/complete", [App\Http\Controllers\ActivityController::class, "complete"])
+Route::post("/activities/{activity}/complete", [ActivityController::class, "complete"])
   ->name("activities.complete");
 
-
-Route::get("/teams", [App\Http\Controllers\TeamController::class, "index"])
+// Teams
+Route::get("/teams", [TeamController::class, "index"])
   ->name("teams.index");
+
+// About
+Route::get("/about", [HomeController::class, "about"])
+  ->name("about");
