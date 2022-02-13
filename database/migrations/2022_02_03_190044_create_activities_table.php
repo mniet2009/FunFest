@@ -23,7 +23,7 @@ class CreateActivitiesTable extends Migration
 
             $table->bigInteger("activity_type_id");
             $table->integer("tickets");
-            $table->integer("limit")->nullable();
+            $table->integer("limit");
             $table->text("image")->nullable();
         });
     }

@@ -25,11 +25,7 @@ class ActivityFactory extends Factory
         $this->faker->addProvider(new \DavidBadura\FakerMarkdownGenerator\FakerProvider($this->faker));
 
         $name = $this->faker->words(2, true);
-        $limit = null;
-
-        if (rand(0, 1)) {
-            $limit = rand(1, 10);
-        }
+        $limit = rand(1, 10);
 
         return [
             "tickets" => $this->faker->numberBetween(1, 100),
