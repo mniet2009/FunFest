@@ -35,7 +35,10 @@ class ActivityController extends Controller
 
         $user = Auth::user();
 
-        $user->activities()->attach($activity, ["proof" => $validated["proof"]]);
+        $user->activities()->attach($activity, [
+            "proof" => $validated["proof"],
+            "tickets" => $activity->tickets,
+        ]);
 
         return redirect()->back();
     }
