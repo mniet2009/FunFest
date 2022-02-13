@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Activity;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
 
 class ActivitySeeder extends Seeder
 {
@@ -14,8 +15,18 @@ class ActivitySeeder extends Seeder
      */
     public function run()
     {
-        Activity::factory()
-            ->count(50)
-            ->create();
+
+        $files = Storage::allFiles("public/activities");
+
+        foreach ($files as $file) {
+            $activityName = basename($file, ".png");
+            $url = "storage/activities/{$activityName}.png";
+
+            Activity::factory()->create([
+                "name" => $activityName,
+                "image" => $url,
+                "slug" => str_replace(" ", "-", $activityName),
+            ]);
+        }
     }
 }
