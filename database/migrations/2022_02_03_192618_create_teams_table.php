@@ -18,8 +18,6 @@ class CreateTeamsTable extends Migration
 
             $table->text("name");
             $table->text("color");
-
-            $table->timestamps();
         });
     }
 

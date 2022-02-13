@@ -1,0 +1,17 @@
+.ticket-action-box {
+  background-color: #00bebe;
+  border-radius: 0px 0px 10px 10px;
+  padding: 10px;
+
+  p {
+    text-align: center;
+
+    &:last-child {
+      margin-bottom: 0px;
+    }
+  }
+}
+
+.top-image img {
+  filter: blur(5px);
+}

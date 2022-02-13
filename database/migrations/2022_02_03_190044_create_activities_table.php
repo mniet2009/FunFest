@@ -25,8 +25,6 @@ class CreateActivitiesTable extends Migration
             $table->integer("tickets");
             $table->integer("limit")->nullable();
             $table->text("image")->nullable();
-
-            $table->timestamps();
         });
     }
 

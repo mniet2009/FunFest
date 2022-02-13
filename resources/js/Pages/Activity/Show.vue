@@ -4,7 +4,7 @@
       :height="300"
       dark
       :src="activity.image"
-      class="d-flex align-center justify-center"
+      class="d-flex align-center justify-center top-image"
     >
       <!-- <v-sheet color="rgba(0, 0, 0, 0.7)" class="text-center px-8 py-3">
         <h1 class="text-h1 font-weight-bold text-uppercase mb-4">
@@ -81,20 +81,6 @@
 <style scoped lang="scss">
 .container {
   padding-top: 0px;
-}
-
-.ticket-action-box {
-  background-color: #00bebe;
-  border-radius: 0px 0px 10px 10px;
-  padding: 10px;
-
-  p {
-    text-align: center;
-
-    &:last-child {
-      margin-bottom: 0px;
-    }
-  }
 }
 </style>
 

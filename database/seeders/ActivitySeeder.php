@@ -20,7 +20,7 @@ class ActivitySeeder extends Seeder
 
         foreach ($files as $file) {
             $activityName = basename($file, ".png");
-            $url = "storage/activities/{$activityName}.png";
+            $url = "/storage/activities/{$activityName}.png";
 
             Activity::factory()->create([
                 "name" => $activityName,
