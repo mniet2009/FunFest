@@ -1,7 +1,6 @@
 <template>
   <v-container>
     <div class="mb-3">
-      Filter
       <v-btn
         class="mr-3"
         v-for="activityType of activityTypesPlusAll"
