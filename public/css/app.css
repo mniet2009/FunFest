@@ -13,3 +13,22 @@
 .top-image img {
   filter: blur(5px);
 }
+
+.ticket-box {
+  white-space: nowrap;
+  padding: 0em 1em;
+  border-bottom-left-radius: inherit;
+  line-height: 0.9;
+  text-align: center;
+}
+.ticket-box .ticket-box-text {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.ticket-box .ticket-box-top {
+  font-size: 2rem;
+}
+.ticket-box .ticket-box-count {
+  vertical-align: middle;
+}

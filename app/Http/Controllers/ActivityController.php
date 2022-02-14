@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activity;
+use App\Models\ActivityType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -11,11 +12,12 @@ class ActivityController extends Controller
 {
     public function index()
     {
+        $activityTypes = ActivityType::all();
         $activities = Activity::with(["completions" => function ($query) {
             $query->where("user_id", Auth::id());
         }])->get();
 
-        return Inertia::render('Activity/Index', compact('activities'));
+        return Inertia::render('Activity/Index', compact('activities', 'activityTypes'));
     }
 
     public function show(Activity $activity)

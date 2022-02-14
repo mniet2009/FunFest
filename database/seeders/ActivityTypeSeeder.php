@@ -21,6 +21,7 @@ class ActivityTypeSeeder extends Seeder
             "Matchmaking Wins",
             "Races",
             "Competitions",
+            "Contests",
         ];
 
         foreach ($types as $type) {

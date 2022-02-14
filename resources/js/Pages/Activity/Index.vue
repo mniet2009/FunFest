@@ -1,12 +1,24 @@
 <template>
   <v-container>
-    <h1>Activites wow fun</h1>
+    <div class="mb-3">
+      Filter
+      <v-btn
+        class="mr-3"
+        v-for="activityType of activityTypesPlusAll"
+        :key="activityType.id"
+        rounded
+        :color="filter == activityType.id ? 'primary' : 'grey'"
+        dark
+        @click="filter = activityType.id"
+        >{{ activityType.name }}</v-btn
+      >
+    </div>
     <v-row>
       <v-col
         :cols="12"
         :md="4"
         :lg="3"
-        v-for="activity of activities"
+        v-for="activity of activitiesFiltered"
         :key="activity.id"
       >
         <router-link
@@ -37,6 +49,28 @@
 export default {
   props: {
     activities: Array,
+    activityTypes: Array,
+  },
+
+  computed: {
+    activityTypesPlusAll() {
+      return [{ id: 0, name: "All" }].concat(this.activityTypes);
+    },
+    activitiesFiltered() {
+      if (this.filter == 0) {
+        return this.activities;
+      } else {
+        return this.activities.filter(
+          (activity) => activity.activity_type_id == this.filter
+        );
+      }
+    },
+  },
+
+  data() {
+    return {
+      filter: 0,
+    };
   },
 };
 </script>
