@@ -1,8 +1,8 @@
 <template>
   <v-container>
-    <div class="mb-3">
+    <div>
       <v-btn
-        class="mr-3"
+        class="mr-3 mb-3"
         v-for="activityType of activityTypesPlusAll"
         :key="activityType.id"
         rounded
