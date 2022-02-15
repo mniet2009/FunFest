@@ -46,6 +46,7 @@
   cursor: pointer;
 
   &:hover {
+    z-index: 10;
     box-shadow: 0 0 7px 7px rgba(0, 190, 190, 0.8);
   }
 }
