@@ -12,6 +12,20 @@
         >{{ activityType.name }}</v-btn
       >
     </div>
+
+    <div>
+      <v-btn
+        class="mr-3 mb-3"
+        v-for="filter of completionFilters"
+        :key="filter"
+        rounded
+        :color="filter == completionFilter ? 'primary' : 'grey'"
+        dark
+        @click="completionFilter = filter"
+        >{{ filter }}</v-btn
+      >
+    </div>
+
     <v-row>
       <v-col
         :cols="12"
@@ -45,6 +59,8 @@
 </style>
 
 <script>
+import * as util from "../../util.js";
+
 export default {
   props: {
     activities: Array,
@@ -55,20 +71,33 @@ export default {
     activityTypesPlusAll() {
       return [{ id: 0, name: "All" }].concat(this.activityTypes);
     },
+
     activitiesFiltered() {
-      if (this.filter == 0) {
-        return this.activities;
-      } else {
-        return this.activities.filter(
+      let filtered = this.activities;
+
+      if (this.filter != 0) {
+        filtered = filtered.filter(
           (activity) => activity.activity_type_id == this.filter
         );
       }
+
+      if (this.completionFilter != "All") {
+        filtered = filtered.filter(
+          (activity) =>
+            util.getActivityState(activity).state ==
+            this.completionFilter.toLowerCase()
+        );
+      }
+
+      return filtered;
     },
   },
 
   data() {
     return {
       filter: 0,
+      completionFilter: "All",
+      completionFilters: ["All", "Incomplete", "Partial", "Complete"],
     };
   },
 };
