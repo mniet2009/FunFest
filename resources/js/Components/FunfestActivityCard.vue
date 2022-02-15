@@ -65,15 +65,7 @@
 import * as util from "../util.js";
 
 export default {
-  created() {
-    this.randomizeDegrees();
-  },
-
   methods: {
-    randomizeDegrees() {
-      this.degrees = Math.random() * 20 - 10;
-    },
-
     color(state) {
       if (state == "incomplete") {
         return "error";
@@ -108,13 +100,6 @@ export default {
 
       return excerpts;
     },
-
-    styleObject: function() {
-      return {
-        "--translate": "-2em",
-        "--rotate": `${this.degrees}deg`,
-      };
-    },
   },
 
   props: {
@@ -123,7 +108,6 @@ export default {
 
   data() {
     return {
-      degrees: 0,
       activeExcerpt: 0,
     };
   },
