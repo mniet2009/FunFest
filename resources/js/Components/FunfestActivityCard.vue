@@ -1,18 +1,17 @@
 <template>
-  <v-card class="activity-card" :style="styleObject">
+  <v-card class="activity-card">
     <v-img height="250" :src="activity.image"> </v-img>
 
     <div class="d-flex">
       <div class="ticket-box" :class="color(activityState.state)">
-        <div class="ticket-box-text">
-          <div class="ticket-box-top">
-            <div>
-              <v-icon>mdi-ticket</v-icon>
-            </div>
-            <span class="ticket-box-count"
-              >{{ this.activityState.tickets }} /
-              {{ this.activityState.availableTickets }}</span
-            >
+        <div>
+          <div class="ticket-box-icon">
+            <v-icon :size="40">{{
+              activityTypeBoxes[activity.activity_type_id - 1].icon
+            }}</v-icon>
+          </div>
+          <div v-if="activityTypeBoxes[activity.activity_type_id - 1].subtitle">
+            {{ activityTypeBoxes[activity.activity_type_id - 1].subtitle() }}
           </div>
         </div>
       </div>
@@ -109,6 +108,35 @@ export default {
   data() {
     return {
       activeExcerpt: 0,
+      activityTypeBoxes: [
+        {
+          icon: "mdi-podium",
+        },
+        {
+          icon: "mdi-ticket",
+          subtitle: () =>
+            `${this.activityState.tickets} / ${this.activityState.availableTickets}`,
+        },
+        {
+          icon: "mdi-ticket",
+          subtitle: () =>
+            `${this.activityState.tickets} / ${this.activityState.availableTickets}`,
+        },
+        {
+          icon: "mdi-ticket",
+          subtitle: () =>
+            `${this.activityState.tickets} / ${this.activityState.availableTickets}`,
+        },
+        {
+          icon: "mdi-flag-checkered",
+        },
+        {
+          icon: "mdi-tournament",
+        },
+        {
+          icon: "mdi-brush",
+        },
+      ],
     };
   },
 };
