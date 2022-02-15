@@ -1,5 +1,5 @@
 <template>
-  <v-card class="activity-card">
+  <v-card class="activity-card" :style="styleObject">
     <v-img height="250" :src="activity.image"> </v-img>
 
     <div class="d-flex">
@@ -17,6 +17,7 @@
         </div>
       </div>
       <div class="flex-grow-1">
+        <v-card-title>{{ activity.name }}</v-card-title>
         <div class="d-flex align-stretch">
           <div
             v-if="activityState.states.length > 1"
@@ -28,8 +29,6 @@
           </div>
 
           <div class="flex-grow-1">
-            <v-card-title>{{ activity.name }}</v-card-title>
-
             <v-card-text>
               <v-tabs-items v-model="activeExcerpt">
                 <v-tab-item v-for="(excerpt, i) in excerpts" :key="i">
@@ -66,7 +65,15 @@
 import * as util from "../util.js";
 
 export default {
+  created() {
+    this.randomizeDegrees();
+  },
+
   methods: {
+    randomizeDegrees() {
+      this.degrees = Math.random() * 20 - 10;
+    },
+
     color(state) {
       if (state == "incomplete") {
         return "error";
@@ -101,6 +108,13 @@ export default {
 
       return excerpts;
     },
+
+    styleObject: function() {
+      return {
+        "--translate": "-2em",
+        "--rotate": `${this.degrees}deg`,
+      };
+    },
   },
 
   props: {
@@ -109,6 +123,7 @@ export default {
 
   data() {
     return {
+      degrees: 0,
       activeExcerpt: 0,
     };
   },

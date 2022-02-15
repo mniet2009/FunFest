@@ -10,8 +10,6 @@ export function getActivityState(activity) {
 
   let combinedActivities = [activity].concat(activity.children);
 
-  console.log(combinedActivities);
-
   for (activity of combinedActivities) {
     if (activity.limit == 1) {
       ret.availableTickets += activity.tickets;

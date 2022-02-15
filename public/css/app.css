@@ -20,17 +20,11 @@
   border-bottom-left-radius: inherit;
   line-height: 0.9;
   text-align: center;
-}
-.ticket-box .ticket-box-text {
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
 }
 .ticket-box .ticket-box-top {
   font-size: 1rem;
-}
-.ticket-box .ticket-box-count {
-  vertical-align: middle;
 }
 
 .schedule-table tbody tr {
@@ -43,16 +37,15 @@
 
 .v-card.v-sheet.activity-card {
   transition: transform 0.3s, box-shadow 0.3s;
-  transform-origin: 100% 100%;
   cursor: pointer;
 }
 .v-card.v-sheet.activity-card:hover {
-  box-shadow: 0 5px 10px 2px rgba(0, 190, 190, 0.8);
+  box-shadow: 0 0 7px 7px rgba(0, 190, 190, 0.8);
 }
 
 @media (hover: hover) {
   .v-card.v-sheet.activity-card:hover {
-    transform: translateY(-1em) rotate(2deg);
+    transform: translateY(var(--translate)) rotate(var(--rotate));
   }
 }
 .activity-card .activity-card-progress-markers {
@@ -74,6 +67,7 @@
   cursor: pointer;
   display: flex;
   align-items: center;
+  padding: 0 5px;
 }
 .activity-card-arrow:hover {
   background-color: #333;
