@@ -68,7 +68,7 @@ class ActivityController extends Controller
             })
             ->whereNotNull("event_at")
             ->get()
-            ->orderBy("event_at");
+            ->sortBy("event_at");
 
         return Inertia::render('Activity/Schedule', compact('activities'));
     }
