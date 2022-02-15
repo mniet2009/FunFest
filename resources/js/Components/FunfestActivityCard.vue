@@ -6,7 +6,9 @@
       <div class="ticket-box" :class="color(activityState.state)">
         <div class="ticket-box-text">
           <div class="ticket-box-top">
-            <v-icon>mdi-ticket</v-icon>
+            <div>
+              <v-icon>mdi-ticket</v-icon>
+            </div>
             <span class="ticket-box-count"
               >{{ this.activityState.tickets }} /
               {{ this.activityState.availableTickets }}</span
