@@ -42,7 +42,7 @@
       <router-link
         v-for="item in items"
         :key="item.title"
-        :href="item.route"
+        :href="route(item.route)"
         as="div"
       >
         <v-list-item link>
@@ -97,22 +97,27 @@ export default {
         {
           title: "Home",
           icon: "mdi-home",
-          route: "/",
+          route: "home",
         },
         {
           title: "Activities",
           icon: "mdi-ticket",
-          route: "/activities",
+          route: "activities.index",
         },
         {
           title: "Standings",
           icon: "mdi-podium",
-          route: "/teams",
+          route: "teams.index",
+        },
+        {
+          title: "Schedule",
+          icon: "mdi-table",
+          route: "activities.schedule",
         },
         {
           title: "About",
           icon: "mdi-information",
-          route: "/about",
+          route: "about",
         },
       ],
     };

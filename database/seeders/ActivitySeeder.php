@@ -22,11 +22,20 @@ class ActivitySeeder extends Seeder
             $activityName = basename($file, ".png");
             $url = "/storage/activities/{$activityName}.png";
 
-            Activity::factory()->create([
+            $activity = Activity::factory()->create([
                 "name" => $activityName,
                 "image" => $url,
                 "slug" => str_replace(" ", "-", $activityName),
             ]);
+
+            if (rand(0, 2) == 2) {
+                Activity::factory(rand(1, 3))->create([
+                    "name" => $activityName . " child",
+                    "image" => $url,
+                    "slug" => str_replace(" ", "-", $activityName),
+                    "parent_id" => $activity->id,
+                ]);
+            }
         }
     }
 }

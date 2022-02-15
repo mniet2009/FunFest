@@ -1,3 +1,13 @@
+.activity-card {
+  transition: transform 0.3s, box-shadow 0.3s;
+  transform-origin: 100% 100%;
+}
+.activity-card:hover {
+  cursor: pointer;
+  transform: translateY(-1em) rotate(2deg);
+  box-shadow: 0 5px 10px 2px rgba(0, 190, 190, 0.8);
+}
+
 .ticket-action-box {
   background-color: #00bebe;
   border-radius: 0px 0px 10px 10px;
@@ -31,4 +41,8 @@
 }
 .ticket-box .ticket-box-count {
   vertical-align: middle;
+}
+
+.schedule-table tbody tr {
+  cursor: pointer;
 }

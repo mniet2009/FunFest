@@ -25,4 +25,14 @@ class Activity extends Model
     {
         return $this->belongsToMany(User::class, "completions")->withTimestamps();
     }
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        "revealed_at" => "datetime",
+        "event_at" => "datetime",
+    ];
 }

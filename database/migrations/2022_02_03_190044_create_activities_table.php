@@ -20,7 +20,10 @@ class CreateActivitiesTable extends Migration
             $table->text("slug");
             $table->text("description");
             $table->text("excerpt");
+            $table->dateTime("revealed_at")->nullable();
+            $table->dateTime("event_at")->nullable();
 
+            $table->bigInteger("parent_id")->nullable();
             $table->bigInteger("activity_type_id");
             $table->integer("tickets");
             $table->integer("limit");

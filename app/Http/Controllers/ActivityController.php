@@ -13,9 +13,15 @@ class ActivityController extends Controller
     public function index()
     {
         $activityTypes = ActivityType::all();
-        $activities = Activity::with(["completions" => function ($query) {
-            $query->where("user_id", Auth::id());
-        }])->get();
+        $activities = Activity::whereNull("parent_id")
+            ->where(function ($query) {
+                $query->where("revealed_at", "<=", now())
+                    ->orWhereNull("revealed_at");
+            })
+            ->with(["completions" => function ($query) {
+                $query->where("user_id", Auth::id());
+            }])
+            ->get();
 
         return Inertia::render('Activity/Index', compact('activities', 'activityTypes'));
     }
@@ -43,5 +49,18 @@ class ActivityController extends Controller
         ]);
 
         return redirect()->back();
+    }
+
+    public function schedule()
+    {
+        $activities = Activity::whereNull("parent_id")
+            ->where(function ($query) {
+                $query->where("revealed_at", "<=", now())
+                    ->orWhereNull("revealed_at");
+            })
+            ->whereNotNull("event_at")
+            ->get();
+
+        return Inertia::render('Activity/Schedule', compact('activities'));
     }
 }

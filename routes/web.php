@@ -35,6 +35,9 @@ Route::get("/activities/{activity}", [ActivityController::class, "show"])
 Route::post("/activities/{activity}/complete", [ActivityController::class, "complete"])
   ->name("activities.complete");
 
+Route::get("/schedule", [ActivityController::class, "schedule"])
+  ->name("activities.schedule");
+
 // Teams
 Route::get("/teams", [TeamController::class, "index"])
   ->name("teams.index");

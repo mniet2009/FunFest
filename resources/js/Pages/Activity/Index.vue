@@ -45,19 +45,6 @@
   </v-container>
 </template>
 
-<style scoped lang="scss">
-.activity-card {
-  transition: transform 0.3s, box-shadow 0.3s;
-  transform-origin: 100% 100%;
-
-  &:hover {
-    cursor: pointer;
-    transform: translateY(-1em) rotate(2deg);
-    box-shadow: 0 5px 10px 2px rgba(0, 190, 190, 0.8);
-  }
-}
-</style>
-
 <script>
 import * as util from "../../util.js";
 
