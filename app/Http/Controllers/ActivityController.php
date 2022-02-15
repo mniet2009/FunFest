@@ -21,6 +21,7 @@ class ActivityController extends Controller
             ->with(["completions" => function ($query) {
                 $query->where("user_id", Auth::id());
             }])
+            ->with("children")
             ->get();
 
         return Inertia::render('Activity/Index', compact('activities', 'activityTypes'));
@@ -28,6 +29,9 @@ class ActivityController extends Controller
 
     public function show(Activity $activity)
     {
+        if ($activity->revealed_at && $activity->revealed_at > now()) {
+            abort(404);
+        }
         $activity->load(["completions" => function ($query) {
             $query->where("user_id", Auth::id());
         }])->get();
@@ -37,6 +41,10 @@ class ActivityController extends Controller
 
     public function complete(Request $request, Activity $activity)
     {
+        if ($activity->revealed_at && $activity->revealed_at > now()) {
+            abort(404);
+        }
+
         $validated = $request->validate([
             "proof" => "required"
         ]);
@@ -59,7 +67,8 @@ class ActivityController extends Controller
                     ->orWhereNull("revealed_at");
             })
             ->whereNotNull("event_at")
-            ->get();
+            ->get()
+            ->orderBy("event_at");
 
         return Inertia::render('Activity/Schedule', compact('activities'));
     }

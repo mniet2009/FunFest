@@ -29,7 +29,7 @@
     <v-row>
       <v-col
         :cols="12"
-        :md="4"
+        :md="6"
         :lg="3"
         v-for="activity of activitiesFiltered"
         :key="activity.id"

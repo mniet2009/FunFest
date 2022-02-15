@@ -26,6 +26,11 @@ class Activity extends Model
         return $this->belongsToMany(User::class, "completions")->withTimestamps();
     }
 
+    public function children()
+    {
+        return $this->hasMany(Activity::class, 'parent_id');
+    }
+
     /**
      * The attributes that should be cast to native types.
      *

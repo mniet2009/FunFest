@@ -46,3 +46,7 @@
 .schedule-table tbody tr {
   cursor: pointer;
 }
+
+.flip-list-move {
+  transition: transform 1s;
+}
