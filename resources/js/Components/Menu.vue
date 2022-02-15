@@ -111,7 +111,7 @@ export default {
         },
         {
           title: "Schedule",
-          icon: "mdi-table",
+          icon: "mdi-calendar",
           route: "activities.schedule",
         },
         {
