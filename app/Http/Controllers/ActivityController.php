@@ -22,6 +22,9 @@ class ActivityController extends Controller
                 $query->where("user_id", Auth::id());
             }])
             ->with("children")
+            ->with(["children.completions" => function ($query) {
+                $query->where("user_id", Auth::id());
+            }])
             ->get();
 
         return Inertia::render('Activity/Index', compact('activities', 'activityTypes'));
