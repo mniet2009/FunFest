@@ -30,9 +30,16 @@ class UserSeeder extends Seeder
         User::all()->each(function ($user) {
             Activity::all()->each(function ($activity) use ($user) {
                 if (rand(0, 1)) {
+                    $placement = null;
+
+                    if (in_array($activity->activity_type_id, [1, 5, 6, 7])) {
+                        $placement = rand(1, 16);
+                    }
+
                     $user->activities()->attach($activity, [
                         "tickets" => $activity->tickets,
                         "proof" => "https://i.ytimg.com/vi/D0q0QeQbw9U/maxresdefault.jpg",
+                        "placement" => $placement,
                     ]);
                 }
             });

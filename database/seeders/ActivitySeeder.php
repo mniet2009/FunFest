@@ -28,7 +28,7 @@ class ActivitySeeder extends Seeder
                 "slug" => str_replace(" ", "-", $activityName),
             ]);
 
-            if (rand(0, 2) == 2) {
+            if (in_array($activity->activity_type_id, [2, 3]) && rand(0, 1)) {
                 Activity::factory(rand(1, 3))->create([
                     "name" => $activityName . " child",
                     "image" => $url,

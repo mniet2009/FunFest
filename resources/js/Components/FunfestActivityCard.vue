@@ -111,6 +111,11 @@ export default {
       activityTypeBoxes: [
         {
           icon: "mdi-podium",
+          subtitle: () => {
+            return this.activity.completions[0]
+              ? util.ordinal_number(this.activity.completions[0].placement)
+              : "";
+          },
         },
         {
           icon: "mdi-ticket",
@@ -129,12 +134,27 @@ export default {
         },
         {
           icon: "mdi-flag-checkered",
+          subtitle: () => {
+            return this.activity.completions[0]
+              ? util.ordinal_number(this.activity.completions[0].placement)
+              : "";
+          },
         },
         {
           icon: "mdi-tournament",
+          subtitle: () => {
+            return this.activity.completions[0]
+              ? util.ordinal_number(this.activity.completions[0].placement)
+              : "";
+          },
         },
         {
           icon: "mdi-brush",
+          subtitle: () => {
+            return this.activity.completions[0]
+              ? util.ordinal_number(this.activity.completions[0].placement)
+              : "";
+          },
         },
       ],
     };
