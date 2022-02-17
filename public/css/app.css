@@ -72,3 +72,7 @@
 .activity-card-arrow:hover {
   background-color: #333;
 }
+
+.leaderboard-time-symbol {
+  font-size: 0.7em;
+}

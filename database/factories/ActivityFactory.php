@@ -42,6 +42,9 @@ class ActivityFactory extends Factory
 
         if ($activityTypeId == 1) {
             $leaderboardTypeId = rand(1, 2);
+        }
+
+        if (in_array($activityTypeId, [1, 5, 6, 7])) {
             $leaderboardTickets = [20, 15, 10, 8, 6, 5, 4, 3, 2, 1];
         }
 

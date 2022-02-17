@@ -40,19 +40,37 @@ class Activity extends Model
     {
         $this->users()->detach();
 
-        $entries = $this->entries()->orderBy("result", "desc")->get();
+        if ($this->leaderboard_type_id == 1) { // score (descending)
+            $entries = $this->entries()->orderBy("result", "desc")->get();
+        } else { // time (ascending)
+            $entries = $this->entries()->orderBy("result", "asc")->get();
+        }
 
-        foreach ($entries as $placement => $entry) {
+        $previousResult = null;
+        $previousTickets = null;
+        $previousPlacement = null;
+
+        foreach ($entries as $i => $entry) {
+            $placement = $i + 1;
             $tickets = 0;
 
             if ($placement < count($this->leaderboard_tickets)) {
-                $tickets = $this->leaderboard_tickets[$placement];
+                $tickets = $this->leaderboard_tickets[$placement - 1];
             }
+
+            if ($entry->result == $previousResult) {
+                $tickets = $previousTickets;
+                $placement = $previousPlacement;
+            }
+
+            $previousResult = $entry->result;
+            $previousTickets = $tickets;
+            $previousPlacement = $placement;
 
             $entry->user->activities()->attach($this->id, [
                 'proof' => $entry->proof,
                 'result' => $entry->result,
-                'placement' => $placement + 1,
+                'placement' => $placement,
                 "tickets" => $tickets,
             ]);
         }

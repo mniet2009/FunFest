@@ -25,6 +25,27 @@
 
         <v-col cols="6">
           <vue-markdown>{{ activity.description }}</vue-markdown>
+
+          <div v-if="[1, 5, 6, 7].includes(activity.activity_type_id)">
+            <h2>Ticket distribution</h2>
+            <v-simple-table>
+              <thead>
+                <tr>
+                  <th>Rank</th>
+                  <th>Tickets</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  v-for="(tickets, rank) in activity.leaderboard_tickets"
+                  :key="rank"
+                >
+                  <td>{{ ordinal_number(rank + 1) }}</td>
+                  <td>{{ tickets }}</td>
+                </tr>
+              </tbody>
+            </v-simple-table>
+          </div>
         </v-col>
       </v-row>
     </v-container>
@@ -38,6 +59,7 @@
 </style>
 
 <script>
+import * as util from "../../util.js";
 import VueMarkdown from "@adapttive/vue-markdown";
 
 export default {
@@ -46,6 +68,7 @@ export default {
   },
 
   methods: {
+    ordinal_number: util.ordinal_number,
     submitComplete() {
       if (this.$refs.form.validate()) {
         this.form.post(route("activities.complete", this.activity.slug));
