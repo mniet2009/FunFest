@@ -43,11 +43,17 @@ class Activity extends Model
         $entries = $this->entries()->orderBy("result", "desc")->get();
 
         foreach ($entries as $placement => $entry) {
+            $tickets = 0;
+
+            if ($placement < count($this->leaderboard_tickets)) {
+                $tickets = $this->leaderboard_tickets[$placement];
+            }
+
             $entry->user->activities()->attach($this->id, [
                 'proof' => $entry->proof,
                 'result' => $entry->result,
                 'placement' => $placement + 1,
-                "tickets" => 100 - $placement,
+                "tickets" => $tickets,
             ]);
         }
     }
@@ -65,5 +71,6 @@ class Activity extends Model
     protected $casts = [
         "revealed_at" => "datetime",
         "event_at" => "datetime",
+        'leaderboard_tickets' => 'array',
     ];
 }

@@ -26,26 +26,29 @@ class ActivityFactory extends Factory
 
         $name = $this->faker->words(2, true);
 
-        $activity_type_id = ActivityType::all()->random()->id;
-
-        $limit = 1;
+        $activityTypeId = ActivityType::all()->random()->id;
 
         // completion stuff can have limits
-        if (in_array($activity_type_id, [4])) {
+        $limit = 1;
+
+        if (in_array($activityTypeId, [4])) {
             $limit = rand(2, 5);
         }
 
-        $leaderboard_type_id = null;
 
         // score/time attacks need a leaderboard type
-        if ($activity_type_id == 1) {
-            $leaderboard_type_id = rand(1, 2);
+        $leaderboardTypeId = null;
+        $leaderboardTickets = null;
+
+        if ($activityTypeId == 1) {
+            $leaderboardTypeId = rand(1, 2);
+            $leaderboardTickets = [20, 15, 10, 8, 6, 5, 4, 3, 2, 1];
         }
 
         $event_at = null;
 
         // events need an event date
-        if (in_array($activity_type_id, [5, 6])) {
+        if (in_array($activityTypeId, [5, 6])) {
             $event_at = $this->faker->dateTimeBetween("+1 week", "+1 month");
         }
 
@@ -57,8 +60,9 @@ class ActivityFactory extends Factory
             "description" => $this->faker->markdown(),
             "image" => "/storage/activities/1.jpg",
             "limit" => $limit,
-            "activity_type_id" => $activity_type_id,
-            "leaderboard_type_id" => $leaderboard_type_id,
+            "activity_type_id" => $activityTypeId,
+            "leaderboard_type_id" => $leaderboardTypeId,
+            "leaderboard_tickets" => $leaderboardTickets,
             "event_at" => $event_at,
         ];
     }

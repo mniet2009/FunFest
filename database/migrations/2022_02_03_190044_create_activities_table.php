@@ -23,6 +23,7 @@ class CreateActivitiesTable extends Migration
             $table->dateTime("revealed_at")->nullable();
             $table->dateTime("event_at")->nullable();
             $table->bigInteger("leaderboard_type_id")->nullable();
+            $table->json("leaderboard_tickets")->nullable();
 
             $table->bigInteger("parent_id")->nullable();
             $table->bigInteger("activity_type_id");
