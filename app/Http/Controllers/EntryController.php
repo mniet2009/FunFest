@@ -33,9 +33,11 @@ class EntryController extends Controller
 
         $activity->updateLeaderboard();
 
+        $completion = $activity->completions()->where("user_id", $user->id)->first();
+
         session()->flash('flash', [
             'type' => 'success',
-            'text' => 'Submission successful!',
+            'text' => "Submission successful! You're " . ordinal($completion->placement) . " place!",
             'bla' => rand(1, 100),
         ]);
 
