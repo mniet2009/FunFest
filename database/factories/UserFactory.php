@@ -27,7 +27,7 @@ class UserFactory extends Factory
             'username' => $this->faker->userName,
             'discriminator' => $this->faker->randomNumber(4),
             'email' => $this->faker->email,
-            'avatar' => "https://picsum.photos/512?{$this->faker->uuid}",
+            'avatar' => "https://picsum.photos/96?{$this->faker->uuid}",
             'verified' => $this->faker->boolean,
             'locale' => $this->faker->locale,
             'mfa_enabled' => $this->faker->boolean,
