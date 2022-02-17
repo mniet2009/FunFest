@@ -24,7 +24,7 @@
                 v-for="completion in team.completions"
                 :key="completion.user.username"
               >
-                <td>{{ completion.user.username }}</td>
+                <td><user-avatar :user="completion.user"></user-avatar></td>
                 <td class="text-right">
                   {{ formatNumber(completion.tickets) }}
                 </td>
