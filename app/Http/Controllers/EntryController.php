@@ -33,6 +33,12 @@ class EntryController extends Controller
 
         $activity->updateLeaderboard();
 
+        session()->flash('flash', [
+            'type' => 'success',
+            'text' => 'Submission successful!',
+            'bla' => rand(1, 100),
+        ]);
+
         return redirect()->back();
     }
 }
