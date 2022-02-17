@@ -47,7 +47,7 @@ class Activity extends Model
                 'proof' => $entry->proof,
                 'result' => $entry->result,
                 'placement' => $placement + 1,
-                "tickets" => 1,
+                "tickets" => 101 - $placement,
             ]);
         }
     }
