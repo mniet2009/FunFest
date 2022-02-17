@@ -57,3 +57,7 @@ export function ordinal_number(i) {
   }
   return i + "th";
 }
+
+export function formatNumber(number) {
+  return new Intl.NumberFormat("en-US", {}).format(number);
+}

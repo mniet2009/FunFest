@@ -30,14 +30,23 @@ class ActivityFactory extends Factory
 
         $limit = 1;
 
+        // completion stuff can have limits
         if (in_array($activity_type_id, [4])) {
             $limit = rand(2, 5);
         }
 
         $leaderboard_type_id = null;
 
+        // score/time attacks need a leaderboard type
         if ($activity_type_id == 1) {
             $leaderboard_type_id = rand(1, 2);
+        }
+
+        $event_at = null;
+
+        // events need an event date
+        if (in_array($activity_type_id, [5, 6])) {
+            $event_at = $this->faker->dateTimeBetween("+1 week", "+1 month");
         }
 
         return [
@@ -50,6 +59,7 @@ class ActivityFactory extends Factory
             "limit" => $limit,
             "activity_type_id" => $activity_type_id,
             "leaderboard_type_id" => $leaderboard_type_id,
+            "event_at" => $event_at,
         ];
     }
 }

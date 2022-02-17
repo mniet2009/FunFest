@@ -17,8 +17,9 @@ class CreateEntriesTable extends Migration
             $table->id();
 
             $table->bigInteger("activity_id");
-            $table->bigInteger("user_id");
+            $table->text("user_id");
 
+            $table->text("proof");
             $table->bigInteger("result");
 
             $table->timestamps();

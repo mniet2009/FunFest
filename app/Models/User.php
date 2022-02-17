@@ -67,4 +67,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Activity::class, 'completions')->withTimestamps();
     }
+
+    public function entries()
+    {
+        return $this->hasMany(Entry::class);
+    }
 }

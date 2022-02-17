@@ -6,74 +6,27 @@
       :src="activity.image"
       class="d-flex align-center justify-center top-image"
     >
-      <!-- <v-sheet color="rgba(0, 0, 0, 0.7)" class="text-center px-8 py-3">
-        <h1 class="text-h1 font-weight-bold text-uppercase mb-4">
-          Mystery Fun Fest
-        </h1>
-
-        <h2 class="text-h5">
-          Come one come all! This needs a better font!
-        </h2>
-      </v-sheet> -->
+      <h1>{{ activity.name }}</h1>
     </v-parallax>
 
-    <v-container>
-      <div class="ticket-action-box">
-        <p v-if="activity.limit == null">
-          This activity can be redeemed for {{ activity.tickets }} tickets.
-        </p>
+    <v-container class="pt-3">
+      <v-row>
+        <v-col cols="6">
+          <activity-completion
+            v-if="[2, 3, 4].includes(activity.activity_type_id)"
+            :activity="activity"
+          ></activity-completion>
 
-        <p v-if="activity.limit != null">
-          This activity can be redeemed for {{ activity.tickets }} tickets, up
-          to {{ activity.limit }} times.
-        </p>
+          <activity-leaderboard
+            v-if="activity.activity_type_id == 1"
+            :activity="activity"
+          ></activity-leaderboard>
+        </v-col>
 
-        <p v-if="activity.completions.length > 0 && activity.limit != null">
-          You have redeemed this activity {{ activity.completions.length }}
-          {{ activity.completions.length == 1 ? "time" : "times" }}.
-        </p>
-
-        <p v-if="activity.completions.length > 0 && activity.limit == null">
-          You have already redeemed this activity. Poggers.
-        </p>
-
-        <div
-          v-if="
-            activity.completions.length == 0 ||
-              (activity.limit != null &&
-                activity.completions.length < activity.limit)
-          "
-        >
-          <v-btn v-if="!formOpen" block @click="formOpen = true"
-            >Redeem now</v-btn
-          >
-
-          <v-card v-if="formOpen">
-            <v-card-text>
-              <v-form ref="form" v-model="valid" lazy-validation>
-                <v-text-field
-                  v-model="form.proof"
-                  label="Vod/Screenshot"
-                  required
-                  :rules="proofRules"
-                ></v-text-field>
-              </v-form>
-            </v-card-text>
-
-            <v-card-actions>
-              <v-btn @click="submitComplete" color="primary">
-                Redeem
-              </v-btn>
-              <v-btn @click="formOpen = false" color="grey">
-                Nevermind
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </div>
-      </div>
-      <h1>{{ activity.name }}</h1>
-
-      <vue-markdown>{{ activity.description }}</vue-markdown>
+        <v-col cols="6">
+          <vue-markdown>{{ activity.description }}</vue-markdown>
+        </v-col>
+      </v-row>
     </v-container>
   </div>
 </template>

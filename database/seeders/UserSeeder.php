@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Activity;
+use App\Models\Entry;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -30,19 +31,39 @@ class UserSeeder extends Seeder
         User::all()->each(function ($user) {
             Activity::all()->each(function ($activity) use ($user) {
                 if (rand(0, 1)) {
-                    $placement = null;
+                    if (in_array($activity->activity_type_id, [1])) {
+                        // completions are calculated from entries for these
+                        Entry::create([
+                            "activity_id" => $activity->id,
+                            "user_id" => $user->id,
+                            "result" => rand(1, 500000),
+                            "proof" => "https://i.ytimg.com/vi/D0q0QeQbw9U/maxresdefault.jpg"
+                        ]);
+                    } else {
+                        $placement = null;
 
-                    if (in_array($activity->activity_type_id, [1, 5, 6, 7])) {
-                        $placement = rand(1, 16);
+                        if (in_array($activity->activity_type_id, [5, 6, 7])) {
+                            // placements still exist in races and competitions though
+                            $placement = rand(1, 16);
+                        }
+
+                        for ($i = 0; $i < rand(1, $activity->limit); $i++) {
+                            $user->activities()->attach($activity, [
+                                "tickets" => $activity->tickets,
+                                "placement" => $placement,
+                                "proof" => "https://i.ytimg.com/vi/D0q0QeQbw9U/maxresdefault.jpg"
+                            ]);
+                        }
                     }
-
-                    $user->activities()->attach($activity, [
-                        "tickets" => $activity->tickets,
-                        "proof" => "https://i.ytimg.com/vi/D0q0QeQbw9U/maxresdefault.jpg",
-                        "placement" => $placement,
-                    ]);
                 }
             });
+        });
+
+        // calculate leaderboard completions based on entries
+        Activity::all()->each(function ($activity) {
+            if (in_array($activity->activity_type_id, [1])) {
+                $activity->updateLeaderboard();
+            }
         });
     }
 }

@@ -47,12 +47,13 @@
   background-color: #fff;
 }
 </style>
+
 <script>
+import * as util from "../../util.js";
+
 export default {
   methods: {
-    formatNumber(number) {
-      return new Intl.NumberFormat("en-US", {}).format(number);
-    },
+    formatNumber: util.formatNumber,
   },
 
   props: {

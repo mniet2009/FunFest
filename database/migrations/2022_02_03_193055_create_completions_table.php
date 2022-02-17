@@ -21,6 +21,7 @@ class CreateCompletionsTable extends Migration
 
             $table->integer("tickets");
             $table->text("proof");
+            $table->bigInteger("result")->nullable();
             $table->integer("placement")->nullable();
 
             $table->timestamps();

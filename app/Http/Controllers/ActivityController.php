@@ -35,9 +35,7 @@ class ActivityController extends Controller
         if ($activity->revealed_at && $activity->revealed_at > now()) {
             abort(404);
         }
-        $activity->load(["completions" => function ($query) {
-            $query->where("user_id", Auth::id());
-        }])->get();
+        $activity->load("completions.user");
 
         return Inertia::render('Activity/Show', compact('activity'));
     }

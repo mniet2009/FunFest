@@ -31,6 +31,27 @@ class Activity extends Model
         return $this->hasMany(Activity::class, 'parent_id');
     }
 
+    public function entries()
+    {
+        return $this->hasMany(Entry::class);
+    }
+
+    public function updateLeaderboard()
+    {
+        $this->users()->detach();
+
+        $entries = $this->entries()->orderBy("result", "desc")->get();
+
+        foreach ($entries as $placement => $entry) {
+            $entry->user->activities()->attach($this->id, [
+                'proof' => $entry->proof,
+                'result' => $entry->result,
+                'placement' => $placement + 1,
+                "tickets" => 1,
+            ]);
+        }
+    }
+
     /**
      * The attributes that should be cast to native types.
      *

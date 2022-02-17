@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\DiscordController;
+use App\Http\Controllers\EntryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TeamController;
 use Illuminate\Support\Facades\Route;
@@ -37,6 +38,9 @@ Route::post("/activities/{activity}/complete", [ActivityController::class, "comp
 
 Route::get("/schedule", [ActivityController::class, "schedule"])
   ->name("activities.schedule");
+
+Route::post("/activities/{activity}/entry", [EntryController::class, "store"])
+  ->name("entries.store");
 
 // Teams
 Route::get("/teams", [TeamController::class, "index"])
