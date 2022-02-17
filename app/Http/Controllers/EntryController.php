@@ -11,8 +11,13 @@ class EntryController extends Controller
 {
     public function store(Request $request, Activity $activity)
     {
-        if ($activity->revealed_at && $activity->revealed_at > now()) {
+        if (!$activity->visible()) {
             abort(404);
+        }
+
+        // only score/time attacks can have entries
+        if ($activity->activity_type_id != 1) {
+            abort(400);
         }
 
         $validated = $request->validate([
@@ -39,7 +44,7 @@ class EntryController extends Controller
 
         session()->flash('flash', [
             'type' => 'success',
-            'text' => "Submission successful! You're " . ordinal($completion->placement) . " place!",
+            'text' => "Submission successful! You're in " . ordinal($completion->placement) . " place!",
             'bla' => rand(1, 100),
         ]);
 

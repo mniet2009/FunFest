@@ -52,6 +52,11 @@ class Activity extends Model
         }
     }
 
+    public function visible()
+    {
+        return is_null($this->revealed_at) || $this->revealed_at <= now();
+    }
+
     /**
      * The attributes that should be cast to native types.
      *
