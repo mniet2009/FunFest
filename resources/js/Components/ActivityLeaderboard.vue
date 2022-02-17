@@ -72,6 +72,7 @@ export default {
       if (this.$refs.form.validate()) {
         this.form.post(route("entries.store", this.activity.slug));
         this.formOpen = false;
+        this.form.result = "";
         this.form.proof = "";
       }
     },
@@ -85,8 +86,8 @@ export default {
     return {
       valid: true,
       formOpen: false,
-      proofRules: [(v) => !!v || "You gotta submit a vod or something."],
       resultRules: [(v) => !!v || "You gotta submit a score"],
+      proofRules: [(v) => !!v || "You gotta submit a vod or something."],
       form: this.$inertia.form({
         proof: "",
         result: "",
