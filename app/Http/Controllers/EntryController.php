@@ -22,7 +22,7 @@ class EntryController extends Controller
 
         $user = Auth::user();
 
-        Entry::where("activity_id", $activity->id)
+        $activity->entries()
             ->where("user_id", $user->id)
             ->delete();
 

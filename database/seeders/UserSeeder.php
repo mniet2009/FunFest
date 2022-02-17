@@ -22,6 +22,12 @@ class UserSeeder extends Seeder
             "avatar" => "https://cdn.discordapp.com/avatars/84300263346704384/e932a3333e0424d2d7594427179e13e9"
         ]);
 
+        $bony = User::factory()->create([
+            "id" => "167157504847904768",
+            "username" => "bony",
+            "avatar" => "https://cdn.discordapp.com/avatars/167157504847904768/0bb2e819d55feb4e69a993e1362d118b"
+        ]);
+
         $maurice->assignRole("Admin");
 
         User::factory()

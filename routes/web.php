@@ -5,6 +5,8 @@ use App\Http\Controllers\DiscordController;
 use App\Http\Controllers\EntryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TeamController;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +19,10 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get("/test", function () {
+  Auth::login(User::find("167157504847904768"));
+});
 
 Route::get('/', [HomeController::class, 'home'])->name("home");
 

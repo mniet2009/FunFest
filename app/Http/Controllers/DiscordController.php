@@ -32,7 +32,7 @@ class DiscordController extends Controller
       session(['from' => url()->previous()]);
     }
 
-    return redirect("https://discord.com/oauth2/authorize?client_id=" . env("DISCORD_CLIENT_ID") . "&redirect_uri=" . env("DISCORD_REDIRECT_URI") . "&response_type=code&scope=identify%20email");
+    return redirect("https://discord.com/oauth2/authorize?client_id=" . config("discord.client_id") . "&redirect_uri=" . config("discord.redirect_uri") . "&response_type=code&scope=identify%20email");
   }
 
   public function loginCallback(Request $request)
