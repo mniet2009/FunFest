@@ -12,18 +12,6 @@
     <v-container class="pt-3">
       <v-row>
         <v-col cols="12" lg="6">
-          <activity-completion
-            v-if="[2, 3, 4].includes(activity.activity_type_id)"
-            :activity="activity"
-          ></activity-completion>
-
-          <activity-leaderboard
-            v-if="activity.activity_type_id == 1"
-            :activity="activity"
-          ></activity-leaderboard>
-        </v-col>
-
-        <v-col cols="12" lg="6">
           <vue-markdown>{{ activity.description }}</vue-markdown>
 
           <div v-if="[1, 5, 6, 7].includes(activity.activity_type_id)">
@@ -46,6 +34,18 @@
               </tbody>
             </v-simple-table>
           </div>
+        </v-col>
+
+        <v-col cols="12" lg="6">
+          <activity-completion
+            v-if="[2, 3, 4].includes(activity.activity_type_id)"
+            :activity="activity"
+          ></activity-completion>
+
+          <activity-leaderboard
+            v-if="activity.activity_type_id == 1"
+            :activity="activity"
+          ></activity-leaderboard>
         </v-col>
       </v-row>
     </v-container>
