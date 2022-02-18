@@ -52,7 +52,7 @@ class ActivityFactory extends Factory
 
         // events need an event date
         if (in_array($activityTypeId, [5, 6])) {
-            $event_at = $this->faker->dateTimeBetween("+1 week", "+1 month");
+            $event_at = $this->faker->dateTimeBetween("-1 month", "+1 month");
         }
 
         return [

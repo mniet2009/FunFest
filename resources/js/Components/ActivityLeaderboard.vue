@@ -106,7 +106,13 @@
       <tbody>
         <tr v-for="(completion, i) in activity.completions" :key="i">
           <td>{{ completion.placement }}</td>
-          <td><user-avatar :user="completion.user"></user-avatar></td>
+          <td>
+            <user-avatar
+              :url="completion.user.avatar"
+              :username="completion.user.username"
+              :color="$page.props.teams[completion.user.team_id - 1].color"
+            ></user-avatar>
+          </td>
           <td class="text-right">
             <div v-if="activity.leaderboard_type_id == 1">
               {{ formatNumber(completion.result) }}

@@ -15,19 +15,38 @@ class ActivityTypeSeeder extends Seeder
     public function run()
     {
         $types = [
-            "Score / Time Attacks",
-            "Completion Challenges - Solo",
-            "Completion Challenges - Team",
-            "Matchmaking Wins",
-            "Races",
-            "Competitions",
-            "Contests",
+            [
+                "name" => "Score / Time Attacks",
+                "icon" => "mdi-podium",
+            ],
+            [
+                "name" => "Completion Challenges - Solo",
+                "icon" => "mdi-ticket",
+            ],
+            [
+                "name" => "Completion Challenges - Team",
+                "icon" => "mdi-ticket",
+            ],
+            [
+                "name" => "Matchmaking Wins",
+                "icon" => "mdi-ticket",
+            ],
+            [
+                "name" => "Races",
+                "icon" => "mdi-flag-checkered",
+            ],
+            [
+                "name" => "Competitions",
+                "icon" => "mdi-tournament",
+            ],
+            [
+                "name" => "Contests",
+                "icon" => "mdi-brush",
+            ]
         ];
 
         foreach ($types as $type) {
-            ActivityType::create([
-                'name' => $type,
-            ]);
+            ActivityType::create($type);
         }
     }
 }

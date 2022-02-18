@@ -86,3 +86,39 @@
 .leaderboard-time-symbol {
   font-size: 0.7em;
 }
+
+.avatar {
+  align-items: center;
+  border-radius: 50%;
+  display: inline-flex;
+  justify-content: center;
+  line-height: normal;
+  position: relative;
+  text-align: center;
+  vertical-align: middle;
+  overflow: hidden;
+
+  &.avatar-bordered {
+    border-style: solid;
+  }
+
+  img {
+    border-radius: inherit;
+    display: inline-flex;
+    height: inherit;
+    width: inherit;
+  }
+}
+
+.avatar-number {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3em;
+  text-shadow: 0px 2px 3px rgba(0, 0, 0, 0.5);
+}

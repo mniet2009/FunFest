@@ -16,6 +16,11 @@ class Activity extends Model
         return 'slug';
     }
 
+    public function activityType()
+    {
+        return $this->belongsTo(ActivityType::class);
+    }
+
     public function completions()
     {
         return $this->hasMany(Completion::class);

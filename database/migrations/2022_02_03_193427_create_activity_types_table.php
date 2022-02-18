@@ -17,6 +17,7 @@ class CreateActivityTypesTable extends Migration
             $table->id();
 
             $table->text("name");
+            $table->text("icon");
         });
     }
 

@@ -6,6 +6,7 @@ use App\Models\Activity;
 use App\Models\ActivityType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class ActivityController extends Controller
@@ -18,14 +19,21 @@ class ActivityController extends Controller
                 $query->where("revealed_at", "<=", now())
                     ->orWhereNull("revealed_at");
             })
+            ->with("activityType")
             ->with(["completions" => function ($query) {
-                $query->where("user_id", Auth::id());
+                $query->groupBy("activity_id", "user_id", "placement")
+                    ->select("user_id", "activity_id", "placement", DB::raw("SUM(tickets) as tickets"))
+                    ->where("user_id", Auth::id());
             }])
             ->with("children")
             ->with(["children.completions" => function ($query) {
-                $query->where("user_id", Auth::id());
+                $query->groupBy("activity_id", "user_id", "placement")
+                    ->select("user_id", "activity_id", "placement", DB::raw("SUM(tickets) as tickets"))
+                    ->where("user_id", Auth::id());
             }])
             ->get();
+
+        // dd($activities->toArray());
 
         return Inertia::render('Activity/Index', compact('activities', 'activityTypes'));
     }
@@ -35,7 +43,10 @@ class ActivityController extends Controller
         if ($activity->revealed_at && $activity->revealed_at > now()) {
             abort(404);
         }
-        $activity->load("completions.user");
+        $activity->load(["completions" => function ($query) {
+            $query->groupBy("user_id")
+                ->select("user_id", "activity_id", DB::raw("COUNT(*) as count"))->with("user");
+        }]);
 
         return Inertia::render('Activity/Show', compact('activity'));
     }

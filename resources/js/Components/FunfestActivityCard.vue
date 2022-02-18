@@ -6,9 +6,7 @@
       <div class="ticket-box" :class="color(activityState.state)">
         <div>
           <div class="ticket-box-icon">
-            <v-icon :size="40">{{
-              activityTypeBoxes[activity.activity_type_id - 1].icon
-            }}</v-icon>
+            <v-icon :size="40">{{ activity.activity_type.icon }}</v-icon>
           </div>
           <div v-if="activityTypeBoxes[activity.activity_type_id - 1].subtitle">
             {{ activityTypeBoxes[activity.activity_type_id - 1].subtitle() }}
@@ -83,6 +81,23 @@ export default {
       this.activeExcerpt =
         (this.activeExcerpt - 1 + this.excerpts.length) % this.excerpts.length;
     },
+
+    eventSubtitle() {
+      if (this.activity.completions[0]) {
+        return util.ordinal_number(this.activity.completions[0].placement);
+      }
+
+      let eventDate = new Date(this.activity.event_at);
+
+      if (eventDate > new Date()) {
+        return eventDate.toLocaleDateString(undefined, {
+          month: "short",
+          day: "numeric",
+        });
+      } else {
+        return "DNF";
+      }
+    },
   },
 
   computed: {
@@ -110,51 +125,32 @@ export default {
       activeExcerpt: 0,
       activityTypeBoxes: [
         {
-          icon: "mdi-podium",
           subtitle: () => {
             return this.activity.completions[0]
               ? util.ordinal_number(this.activity.completions[0].placement)
-              : "";
+              : "-";
           },
         },
         {
-          icon: "mdi-ticket",
           subtitle: () =>
             `${this.activityState.tickets} / ${this.activityState.availableTickets}`,
         },
         {
-          icon: "mdi-ticket",
           subtitle: () =>
             `${this.activityState.tickets} / ${this.activityState.availableTickets}`,
         },
         {
-          icon: "mdi-ticket",
           subtitle: () =>
             `${this.activityState.tickets} / ${this.activityState.availableTickets}`,
         },
         {
-          icon: "mdi-flag-checkered",
-          subtitle: () => {
-            return this.activity.completions[0]
-              ? util.ordinal_number(this.activity.completions[0].placement)
-              : "";
-          },
+          subtitle: this.eventSubtitle,
         },
         {
-          icon: "mdi-tournament",
-          subtitle: () => {
-            return this.activity.completions[0]
-              ? util.ordinal_number(this.activity.completions[0].placement)
-              : "";
-          },
+          subtitle: this.eventSubtitle,
         },
         {
-          icon: "mdi-brush",
-          subtitle: () => {
-            return this.activity.completions[0]
-              ? util.ordinal_number(this.activity.completions[0].placement)
-              : "";
-          },
+          subtitle: this.eventSubtitle,
         },
       ],
     };

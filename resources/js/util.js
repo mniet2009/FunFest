@@ -2,8 +2,6 @@ export function getActivityState(activity) {
   let ret = {
     availableTickets: 0,
     tickets: 0,
-    limit: 0,
-    completions: 0,
     state: "incomplete",
     states: [],
   };
@@ -11,33 +9,51 @@ export function getActivityState(activity) {
   let combinedActivities = [activity].concat(activity.children);
 
   for (activity of combinedActivities) {
-    if (activity.limit == 1) {
-      ret.availableTickets += activity.tickets;
-      ret.tickets += activity.tickets * activity.completions.length;
-      ret.limit += 1;
-      ret.completions += activity.completions.length;
+    let state;
+    let tickets = activity.completions[0]
+      ? parseInt(activity.completions[0].tickets)
+      : 0;
+    ret.availableTickets += activity.tickets * activity.limit;
+    ret.tickets += tickets;
+
+    if (activity.activity_type_id == 1) {
+      // For score/time attacks, any points is green, any other time is yellow, no time is red
+      if (tickets > 0) {
+        state = "complete";
+      } else if (activity.completions[0]) {
+        state = "partial";
+      } else {
+        state = "incomplete";
+      }
+    } else if ([5, 6, 7].includes(activity.activity_type_id)) {
+      // For races/competitions/contests, any participation is green, anything else is red
+      if (activity.completions[0]) {
+        state = "complete";
+      } else {
+        state = "incomplete";
+      }
     } else {
-      ret.availableTickets += activity.tickets * activity.limit;
-      ret.tickets += activity.tickets * activity.completions.length;
-      ret.limit += activity.limit;
-      ret.completions += activity.completions.length;
+      if (tickets == 0) {
+        state = "incomplete";
+      } else if (tickets < activity.tickets * activity.limit) {
+        state = "partial";
+      } else {
+        state = "complete";
+      }
     }
 
-    if (activity.completions.length == 0) {
-      ret.states.push("incomplete");
-    } else if (activity.completions.length < activity.limit) {
-      ret.states.push("partial");
-    } else {
-      ret.states.push("complete");
-    }
+    ret.states.push(state);
   }
 
-  if (ret.completions == 0) {
-    ret.state = "incomplete";
-  } else if (ret.completions < ret.limit) {
-    ret.state = "partial";
-  } else {
+  if (!ret.states.includes("incomplete") && !ret.states.includes("partial")) {
     ret.state = "complete";
+  } else if (
+    !ret.states.includes("partial") &&
+    !ret.states.includes("complete")
+  ) {
+    ret.state = "incomplete";
+  } else {
+    ret.state = "partial";
   }
 
   return ret;

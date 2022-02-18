@@ -34,6 +34,8 @@ class ActivitySeeder extends Seeder
                     "image" => $url,
                     "slug" => str_replace(" ", "-", $activityName),
                     "parent_id" => $activity->id,
+                    "activity_type_id" => rand(3, 4),
+                    "limit" => 1,
                 ]);
             }
         }
