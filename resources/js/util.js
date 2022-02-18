@@ -6,9 +6,13 @@ export function getActivityState(activity) {
     states: [],
   };
 
-  let combinedActivities = [activity].concat(activity.children);
+  let activities = [activity];
 
-  for (activity of combinedActivities) {
+  if (activity.children.length > 0) {
+    activities = activity.children;
+  }
+
+  for (activity of activities) {
     let state;
     let tickets = activity.completions[0]
       ? parseInt(activity.completions[0].tickets)

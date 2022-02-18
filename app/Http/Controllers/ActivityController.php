@@ -51,6 +51,15 @@ class ActivityController extends Controller
                 ->orderBy(DB::raw("MIN(id)"), "asc");
         }]);
 
+        $activity->load("children")
+            ->load(["children.completions" => function ($query) {
+                $query->groupBy("activity_id", "user_id", "result", "placement", "tickets")
+                    ->select("user_id", "activity_id", "result", "placement", "tickets", DB::raw("COUNT(*) as count"))
+                    ->with("user")
+                    ->orderBy("count", "desc")
+                    ->orderBy(DB::raw("MIN(id)"), "asc");
+            }]);
+
         return Inertia::render('Activity/Show', compact('activity'));
     }
 

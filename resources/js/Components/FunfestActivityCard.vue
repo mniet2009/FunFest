@@ -94,6 +94,8 @@ export default {
           month: "short",
           day: "numeric",
         });
+      } else if (this.activity.activity_type_id == 7) {
+        return "TBD";
       } else {
         return "DNF";
       }

@@ -32,7 +32,7 @@ class ActivitySeeder extends Seeder
                 Activity::factory(rand(1, 3))->create([
                     "name" => $activityName . " child",
                     "image" => $url,
-                    "slug" => str_replace(" ", "-", $activityName),
+                    "slug" => str_replace(" ", "-", $activityName . " child"),
                     "parent_id" => $activity->id,
                     "activity_type_id" => rand(3, 4),
                     "limit" => 1,
