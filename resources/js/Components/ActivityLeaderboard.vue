@@ -94,7 +94,7 @@
       </v-card-text>
     </v-card>
 
-    <v-simple-table>
+    <v-simple-table class="mt-10">
       <thead>
         <tr>
           <th>Rank</th>

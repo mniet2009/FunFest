@@ -36,7 +36,7 @@ class UserSeeder extends Seeder
 
         User::all()->each(function ($user) {
             Activity::all()->each(function ($activity) use ($user) {
-                if ($activity->children->count() == 0 && rand(0, 1)) {
+                if ($activity->children->count() == 0 && rand(0, 1) && (is_null($activity->event_at) || $activity->event_at->isPast())) {
                     if (in_array($activity->activity_type_id, [1])) {
                         // completions are calculated from entries for these
                         Entry::create([

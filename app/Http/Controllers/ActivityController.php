@@ -45,18 +45,20 @@ class ActivityController extends Controller
         }
         $activity->load(["completions" => function ($query) {
             $query->groupBy("activity_id", "user_id", "result", "placement")
-                ->select("user_id", "activity_id", "result", "placement", DB::raw("COUNT(*) as count", DB::raw("SUM(tickets) as tickets")))
+                ->select("user_id", "activity_id", "result", "placement", DB::raw("SUM(tickets) as tickets"), DB::raw("COUNT(*) as count"))
                 ->with("user")
                 ->orderBy("count", "desc")
+                ->orderBy("placement", "asc")
                 ->orderBy(DB::raw("MIN(id)"), "asc");
         }]);
 
         $activity->load("children")
             ->load(["children.completions" => function ($query) {
                 $query->groupBy("activity_id", "user_id", "result", "placement")
-                    ->select("user_id", "activity_id", "result", "placement", DB::raw("COUNT(*) as count"), DB::raw("SUM(tickets) as tickets"))
+                    ->select("user_id", "activity_id", "result", "placement", DB::raw("SUM(tickets) as tickets"), DB::raw("COUNT(*) as count"))
                     ->with("user")
                     ->orderBy("count", "desc")
+                    ->orderBy("placement", "asc")
                     ->orderBy(DB::raw("MIN(id)"), "asc");
             }]);
 

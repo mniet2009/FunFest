@@ -1,6 +1,12 @@
 <template>
   <div>
-    <v-tabs v-model="tab" grow dark slider-color="white">
+    <v-tabs
+      v-if="activities.length > 1"
+      v-model="tab"
+      grow
+      dark
+      slider-color="white"
+    >
       <v-tab
         v-for="(activity, i) in activities"
         :key="activity.id"
@@ -12,10 +18,14 @@
     </v-tabs>
 
     <v-tabs-items v-model="tab">
-      <v-tab-item v-for="activity in activities" :key="activity.id">
+      <v-tab-item v-for="(activity, i) in activities" :key="activity.id">
         <v-card>
           <v-card-text>
-            <div class="mb-5">
+            <div class="mb-10" v-if="activityState.states[i] != 'complete'">
+              <p>
+                You can redeem this activity for {{ activity.tickets }} tickets.
+              </p>
+
               <v-btn
                 v-if="!formOpen"
                 @click="formOpen = true"
@@ -45,8 +55,8 @@
               </v-form>
             </div>
 
-            <h2 class="mb-3">Completions</h2>
-            <div class="completion-list">
+            <h2>Completions</h2>
+            <div class="completion-list mt-3">
               <user-avatar
                 v-for="completion in activity.completions"
                 :key="completion.id"
@@ -84,7 +94,7 @@ export default {
     activityState() {
       return util.getActivityState(
         this.activity,
-        this.$page.props.auth.user.id
+        this.$page.props.auth.user ? this.$page.props.auth.user.id : null
       );
     },
 

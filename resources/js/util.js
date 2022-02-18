@@ -21,8 +21,6 @@ export function getActivityState(activity, user_id) {
       );
     }
 
-    console.log(completions);
-
     let state;
     let tickets = completions.length > 0 ? parseInt(completions[0].tickets) : 0;
     ret.availableTickets += activity.tickets * activity.limit;

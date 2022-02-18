@@ -14,7 +14,10 @@
         <v-col cols="12" lg="6">
           <vue-markdown>{{ activity.description }}</vue-markdown>
 
-          <div v-if="[1, 5, 6, 7].includes(activity.activity_type_id)">
+          <div
+            v-if="[1, 5, 6, 7].includes(activity.activity_type_id)"
+            class="mt-10"
+          >
             <h2>Ticket distribution</h2>
             <v-simple-table>
               <thead>
@@ -37,15 +40,20 @@
         </v-col>
 
         <v-col cols="12" lg="6">
+          <activity-leaderboard
+            v-if="activity.activity_type_id == 1"
+            :activity="activity"
+          ></activity-leaderboard>
+
           <activity-completion
             v-if="[2, 3, 4].includes(activity.activity_type_id)"
             :activity="activity"
           ></activity-completion>
 
-          <activity-leaderboard
-            v-if="activity.activity_type_id == 1"
+          <activity-competition
+            v-if="[5, 6, 7].includes(activity.activity_type_id)"
             :activity="activity"
-          ></activity-leaderboard>
+          ></activity-competition>
         </v-col>
       </v-row>
     </v-container>
