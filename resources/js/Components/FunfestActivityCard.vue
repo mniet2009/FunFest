@@ -110,8 +110,8 @@ export default {
     excerpts() {
       let excerpts = [this.activity.excerpt];
 
-      for (let activity of this.activity.children) {
-        excerpts.push(activity.excerpt);
+      if (this.activity.children.length > 0) {
+        excerpts = this.activity.children.map((child) => child.excerpt);
       }
 
       return excerpts;
