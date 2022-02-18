@@ -44,7 +44,7 @@ class ActivityController extends Controller
             abort(404);
         }
         $activity->load(["completions" => function ($query) {
-            $query->groupBy("user_id")
+            $query->groupBy("activity_id", "user_id")
                 ->select("user_id", "activity_id", DB::raw("COUNT(*) as count"))->with("user");
         }]);
 
