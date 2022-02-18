@@ -29,14 +29,17 @@ class ActivitySeeder extends Seeder
             ]);
 
             if (in_array($activity->activity_type_id, [2, 3]) && rand(0, 1)) {
-                Activity::factory(rand(1, 3))->create([
-                    "name" => $activityName . " child",
-                    "image" => $url,
-                    "slug" => str_replace(" ", "-", $activityName . " child"),
-                    "parent_id" => $activity->id,
-                    "activity_type_id" => rand(3, 4),
-                    "limit" => 1,
-                ]);
+                for ($i = 0; $i < rand(1, 8); $i++) {
+                    $name = $activityName . " child " . $i;
+                    Activity::factory()->create([
+                        "name" => $name,
+                        "image" => $url,
+                        "slug" => str_replace(" ", "-", $name),
+                        "parent_id" => $activity->id,
+                        "activity_type_id" => rand(3, 4),
+                        "limit" => 1,
+                    ]);
+                }
             }
         }
     }

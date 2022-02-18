@@ -1,66 +1,98 @@
 <template>
   <div>
-    <v-tabs v-model="tab" grow>
-      <v-tab v-for="activity in activity.children" :key="activity.id">
+    <v-tabs v-model="tab" grow dark slider-color="white">
+      <v-tab
+        v-for="(activity, i) in activities"
+        :key="activity.id"
+        class="white--text"
+        :class="getStateColor(activityState.states[i])"
+      >
         {{ activity.name }}
       </v-tab>
     </v-tabs>
 
     <v-tabs-items v-model="tab">
-      <v-tab-item v-for="activity in activity.children" :key="activity.id">
-        <v-card color="primary">
+      <v-tab-item v-for="activity in activities" :key="activity.id">
+        <v-card>
           <v-card-text>
-            <v-btn v-if="!formOpen" @click="formOpen = true" block
-              >Redeem</v-btn
-            >
+            <div class="mb-5">
+              <v-btn
+                v-if="!formOpen"
+                @click="formOpen = true"
+                color="primary"
+                block
+                >Redeem</v-btn
+              >
 
-            <v-card v-if="formOpen">
-              <v-card-text>
-                <v-form ref="form" v-model="valid" lazy-validation>
-                  <v-text-field
-                    v-model="form.proof"
-                    label="Vod/Screenshot"
-                    required
-                    :rules="proofRules"
-                  ></v-text-field>
-                </v-form>
-              </v-card-text>
-
-              <v-card-actions>
+              <v-form
+                v-if="formOpen"
+                ref="form"
+                v-model="valid"
+                lazy-validation
+              >
+                <v-text-field
+                  v-model="form.proof"
+                  label="Vod/Screenshot"
+                  required
+                  :rules="proofRules"
+                ></v-text-field>
                 <v-btn @click="submitComplete" color="primary">
                   Redeem
                 </v-btn>
                 <v-btn @click="formOpen = false" color="grey">
                   Nevermind
                 </v-btn>
-              </v-card-actions>
-            </v-card>
+              </v-form>
+            </div>
+
+            <h2 class="mb-3">Completions</h2>
+            <div class="completion-list">
+              <user-avatar
+                v-for="completion in activity.completions"
+                :key="completion.id"
+                :url="completion.user.avatar"
+                :username="completion.user.username"
+                :color="$page.props.teams[completion.user.team_id - 1].color"
+                tooltip
+                :number="activity.limit > 1 ? completion.count : null"
+              ></user-avatar>
+            </div>
           </v-card-text>
         </v-card>
-
-        <h2>Completions</h2>
-        <user-avatar
-          v-for="completion in activity.completions"
-          :key="completion.id"
-          :url="completion.user.avatar"
-          :username="completion.user.username"
-          :color="$page.props.teams[completion.user.team_id - 1].color"
-          tooltip
-          :number="activity.limit > 1 ? completion.count : null"
-        ></user-avatar>
       </v-tab-item>
     </v-tabs-items>
   </div>
 </template>
 
 <script>
+import * as util from "../util.js";
+
 export default {
   methods: {
+    getStateColor: util.getStateColor,
+
     submitComplete() {
-      if (this.$refs.form.validate()) {
-        this.form.post(route("activities.complete", this.activity.slug));
+      if (this.$refs.form[0].validate()) {
+        this.form.post(route("activities.complete", this.activities[this.tab]));
         this.formOpen = false;
         this.form.proof = "";
+      }
+    },
+  },
+
+  computed: {
+    activityState() {
+      return util.getActivityState(
+        this.activity,
+        this.$page.props.auth.user.id
+      );
+    },
+
+    activities() {
+      if (this.activity.children.length == 0) {
+        return [this.activity];
+      } else {
+        return this.activity.children;
       }
     },
   },

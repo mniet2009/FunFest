@@ -3,7 +3,7 @@
     <v-img height="250" :src="activity.image"> </v-img>
 
     <div class="d-flex">
-      <div class="ticket-box" :class="color(activityState.state)">
+      <div class="ticket-box" :class="getStateColor(activityState.state)">
         <div>
           <div class="ticket-box-icon">
             <v-icon :size="40">{{ activity.activity_type.icon }}</v-icon>
@@ -48,7 +48,7 @@
         <div class="activity-card-progress-markers d-flex">
           <div
             class="activity-card-progress-marker"
-            :class="[{ active: i === activeExcerpt }, color(state)]"
+            :class="[{ active: i === activeExcerpt }, getStateColor(state)]"
             v-for="(state, i) in activityState.states"
             :key="i"
           ></div>
@@ -63,15 +63,7 @@ import * as util from "../util.js";
 
 export default {
   methods: {
-    color(state) {
-      if (state == "incomplete") {
-        return "error";
-      } else if (state == "partial") {
-        return "warning";
-      } else if (state == "complete") {
-        return "success";
-      }
-    },
+    getStateColor: util.getStateColor,
 
     nextExcerpt() {
       this.activeExcerpt = (this.activeExcerpt + 1) % this.excerpts.length;

@@ -1,5 +1,5 @@
 <template>
-  <span>
+  <div>
     <v-tooltip top v-if="tooltip" :color="color">
       <template v-slot:activator="{ on, attrs }">
         <div
@@ -24,8 +24,6 @@
       <div
         class="avatar mr-3"
         :class="{ 'avatar-bordered': color }"
-        v-bind="attrs"
-        v-on="on"
         style="width: 50px; height: 50px; border-width: 3px;"
         :style="{ 'border-color': color }"
       >
@@ -33,7 +31,7 @@
       </div>
       {{ username }}
     </span>
-  </span>
+  </div>
 </template>
 
 <script>

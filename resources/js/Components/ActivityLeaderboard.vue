@@ -164,7 +164,7 @@ export default {
         }
       }
 
-      if (this.$refs.form.validate()) {
+      if (this.$refs.form[0].validate()) {
         this.form.post(route("entries.store", this.activity.slug));
         this.formOpen = false;
         this.form.result = "";

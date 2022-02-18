@@ -1,4 +1,4 @@
-export function getActivityState(activity) {
+export function getActivityState(activity, user_id) {
   let ret = {
     availableTickets: 0,
     tickets: 0,
@@ -13,10 +13,18 @@ export function getActivityState(activity) {
   }
 
   for (activity of activities) {
+    // filter completions for current user
+    let completions = activity.completions;
+    if (user_id) {
+      completions = activity.completions.filter(
+        (completion) => completion.user_id === user_id
+      );
+    }
+
+    console.log(completions);
+
     let state;
-    let tickets = activity.completions[0]
-      ? parseInt(activity.completions[0].tickets)
-      : 0;
+    let tickets = completions.length > 0 ? parseInt(completions[0].tickets) : 0;
     ret.availableTickets += activity.tickets * activity.limit;
     ret.tickets += tickets;
 
@@ -24,14 +32,14 @@ export function getActivityState(activity) {
       // For score/time attacks, any points is green, any other time is yellow, no time is red
       if (tickets > 0) {
         state = "complete";
-      } else if (activity.completions[0]) {
+      } else if (completions.length > 0) {
         state = "partial";
       } else {
         state = "incomplete";
       }
     } else if ([5, 6, 7].includes(activity.activity_type_id)) {
       // For races/competitions/contests, any participation is green, anything else is red
-      if (activity.completions[0]) {
+      if (completions.length > 0) {
         state = "complete";
       } else {
         state = "incomplete";
@@ -129,4 +137,14 @@ export function formatTime(ms) {
   }
 
   return ret;
+}
+
+export function getStateColor(state) {
+  if (state == "incomplete") {
+    return "error";
+  } else if (state == "partial") {
+    return "warning";
+  } else if (state == "complete") {
+    return "success";
+  }
 }
