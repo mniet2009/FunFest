@@ -1,5 +1,7 @@
 <template>
   <div>
+    <Head :title="activity.name" />
+
     <v-parallax
       :height="300"
       dark

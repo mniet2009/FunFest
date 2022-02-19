@@ -1,5 +1,7 @@
 <template>
   <div>
+    <Head title="Activities" />
+
     <v-parallax
       :height="300"
       dark

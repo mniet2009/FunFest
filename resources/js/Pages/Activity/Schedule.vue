@@ -1,5 +1,7 @@
 <template>
   <v-container>
+    <Head title="Schedule" />
+
     <h1>Activity Schedule</h1>
 
     <v-simple-table class="schedule-table">

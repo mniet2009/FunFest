@@ -1,5 +1,7 @@
 <template>
   <v-container>
+    <Head title="Standings" />
+
     <v-row>
       <v-col :cols="6" v-for="team of teams" :key="team.id">
         <div class="team-top text-center" :style="{ background: team.color }">

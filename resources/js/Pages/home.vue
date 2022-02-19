@@ -1,5 +1,7 @@
 <template>
   <div>
+    <Head title="Home" />
+
     <v-parallax
       :height="700"
       dark
