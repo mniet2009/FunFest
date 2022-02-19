@@ -49,6 +49,8 @@
 import * as util from "../../util.js";
 
 export default {
+  remember: ["filter", "completionFilter"],
+
   props: {
     activities: Array,
     activityTypes: Array,
