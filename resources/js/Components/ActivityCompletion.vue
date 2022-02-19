@@ -60,7 +60,7 @@
               <user-avatar
                 v-for="completion in activity.completions"
                 :key="completion.id"
-                :url="completion.user.avatar"
+                :url="completion.user.id"
                 :username="completion.user.username"
                 :color="$page.props.teams[completion.user.team_id - 1].color"
                 tooltip

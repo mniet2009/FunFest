@@ -8,6 +8,7 @@ use \GuzzleHttp;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Storage;
 
 class DiscordController extends Controller
 {
@@ -65,7 +66,18 @@ class DiscordController extends Controller
 
     $userData = json_decode($userData);
 
-    $avatarUrl = "https://cdn.discordapp.com/avatars/$userData->id/$userData->avatar";
+    // see if we need to cache that avatar
+    $user = User::find("id");
+
+    // No avatar or outdated avatar
+    if (!$user || $userData->avatar != $user->avatar) {
+      $avatarUrl = "https://cdn.discordapp.com/avatars/$userData->id/$userData->avatar";
+
+      $path = Storage::path('public/avatars/' . $userData->id);
+      $client->request('GET', $avatarUrl, [
+        'sink' => $path,
+      ]);
+    }
 
     $user = User::updateOrCreate(
       [
@@ -76,7 +88,7 @@ class DiscordController extends Controller
         'username' => $userData->username,
         'discriminator' => $userData->discriminator,
         'email' => $userData->email,
-        'avatar' => $avatarUrl,
+        'avatar' => $userData->avatar,
         'verified' => $userData->verified,
         'locale' => $userData->locale,
         'mfa_enabled' => $userData->mfa_enabled,

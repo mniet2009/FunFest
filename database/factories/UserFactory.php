@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Storage;
 
 class UserFactory extends Factory
 {
@@ -27,7 +28,7 @@ class UserFactory extends Factory
             'username' => $this->faker->userName,
             'discriminator' => $this->faker->randomNumber(4),
             'email' => $this->faker->email,
-            'avatar' => "https://picsum.photos/100?{$this->faker->uuid}",
+            'avatar' => "doesntmatter",
             'verified' => $this->faker->boolean,
             'locale' => $this->faker->locale,
             'mfa_enabled' => $this->faker->boolean,

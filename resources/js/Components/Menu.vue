@@ -4,7 +4,7 @@
       <v-list>
         <v-list-item class="px-2" v-if="$page.props.auth.user">
           <v-list-item-avatar>
-            <img :src="$page.props.auth.user.avatar" />
+            <img :src="`/storage/avatars/${$page.props.auth.user.id}`" />
           </v-list-item-avatar>
 
           <v-list-item-title>

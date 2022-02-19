@@ -28,7 +28,7 @@
               >
                 <td>
                   <user-avatar
-                    :url="completion.user.avatar"
+                    :url="completion.user.id"
                     :username="completion.user.username"
                   ></user-avatar>
                 </td>

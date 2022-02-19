@@ -6,6 +6,8 @@ use App\Models\Activity;
 use App\Models\Entry;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
+use \GuzzleHttp;
 
 class UserSeeder extends Seeder
 {
@@ -30,9 +32,20 @@ class UserSeeder extends Seeder
 
         $maurice->assignRole("Admin");
 
+        $client = new GuzzleHttp\Client();
+
         User::factory()
             ->count(50)
-            ->create();
+            ->create()
+            ->each(function (User $user) use ($client) {
+                $avatarUrl = "https://picsum.photos/100?{$user->id}";
+
+                // gotta cache avatars
+                $path = Storage::path('public/avatars/' . $user->id);
+                $client->request('GET', $avatarUrl, [
+                    'sink' => $path,
+                ]);
+            });
 
         User::all()->each(function ($user) {
             Activity::all()->each(function ($activity) use ($user) {

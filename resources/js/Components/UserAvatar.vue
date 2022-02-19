@@ -10,7 +10,7 @@
           style="width: 100px; height: 100px; border-width: 5px;"
           :style="{ 'border-color': color }"
         >
-          <img :src="url" />
+          <img :src="`/storage/avatars/${url}`" />
 
           <div class="avatar-number" v-if="number">
             {{ number }}
@@ -27,7 +27,7 @@
         style="width: 50px; height: 50px; border-width: 3px;"
         :style="{ 'border-color': color }"
       >
-        <img :src="url" />
+        <img :src="`/storage/avatars/${url}`" />
       </div>
       {{ username }}
     </span>
