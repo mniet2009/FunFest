@@ -1,48 +1,59 @@
 <template>
-  <v-container>
-    <div>
-      <v-btn
-        class="mr-3 mb-3"
-        v-for="activityType of activityTypesPlusAll"
-        :key="activityType.id"
-        rounded
-        :color="filter == activityType.id ? 'primary' : 'grey'"
-        dark
-        @click="filter = activityType.id"
-        >{{ activityType.name }}</v-btn
-      >
-    </div>
+  <div>
+    <v-parallax
+      :height="300"
+      dark
+      src="/img/activities.jpg"
+      class="d-flex align-center justify-center"
+    >
+      <h1>Activities</h1>
+    </v-parallax>
 
-    <div>
-      <v-btn
-        class="mr-3 mb-3"
-        v-for="filter of completionFilters"
-        :key="filter"
-        rounded
-        :color="filter == completionFilter ? 'primary' : 'grey'"
-        dark
-        @click="completionFilter = filter"
-        >{{ filter }}</v-btn
-      >
-    </div>
-
-    <v-row>
-      <v-col
-        :cols="12"
-        :md="6"
-        :lg="3"
-        v-for="activity of activitiesFiltered"
-        :key="activity.id"
-      >
-        <router-link
-          :href="route('activities.show', { activity: activity })"
-          as="div"
+    <v-container>
+      <div>
+        <v-btn
+          class="mr-3 mb-3"
+          v-for="activityType of activityTypesPlusAll"
+          :key="activityType.id"
+          rounded
+          :color="filter == activityType.id ? 'primary' : 'grey'"
+          dark
+          @click="filter = activityType.id"
+          >{{ activityType.name }}</v-btn
         >
-          <funfest-activity-card :activity="activity"></funfest-activity-card>
-        </router-link>
-      </v-col>
-    </v-row>
-  </v-container>
+      </div>
+
+      <div>
+        <v-btn
+          class="mr-3 mb-3"
+          v-for="filter of completionFilters"
+          :key="filter"
+          rounded
+          :color="filter == completionFilter ? 'primary' : 'grey'"
+          dark
+          @click="completionFilter = filter"
+          >{{ filter }}</v-btn
+        >
+      </div>
+
+      <v-row>
+        <v-col
+          :cols="12"
+          :md="6"
+          :lg="3"
+          v-for="activity of activitiesFiltered"
+          :key="activity.id"
+        >
+          <router-link
+            :href="route('activities.show', { activity: activity })"
+            as="div"
+          >
+            <funfest-activity-card :activity="activity"></funfest-activity-card>
+          </router-link>
+        </v-col>
+      </v-row>
+    </v-container>
+  </div>
 </template>
 
 <script>
