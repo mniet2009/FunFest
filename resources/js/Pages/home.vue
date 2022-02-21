@@ -9,7 +9,7 @@
       class="d-flex align-center justify-center parallax-home"
     >
       <h1 class="text-uppercase">
-        Mystery Fun Fest
+        Mystery <span style="white-space: nowrap">Fun Fest</span>
       </h1>
     </v-parallax>
 
