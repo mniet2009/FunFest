@@ -6,7 +6,7 @@
       :height="300"
       dark
       src="/img/activities.jpg"
-      class="d-flex align-center justify-center"
+      class="d-flex align-center justify-center top-image"
     >
       <h1>Activities</h1>
     </v-parallax>
