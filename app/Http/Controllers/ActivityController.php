@@ -40,9 +40,11 @@ class ActivityController extends Controller
 
     public function show(Activity $activity)
     {
-        if ($activity->revealed_at && $activity->revealed_at > now()) {
+
+        if (!$activity->visible()) {
             abort(404);
         }
+
         $activity->load(["completions" => function ($query) {
             $query->groupBy("activity_id", "user_id", "result", "placement")
                 ->select("user_id", "activity_id", "result", "placement", DB::raw("SUM(tickets) as tickets"), DB::raw("COUNT(*) as count"))
@@ -67,9 +69,26 @@ class ActivityController extends Controller
 
     public function complete(Request $request, Activity $activity)
     {
-        if ($activity->revealed_at && $activity->revealed_at > now()) {
+        // gotta be logged in
+        if (!Auth::check()) {
+            abort(401);
+        }
+
+        // activity needs to be visible (ie not before reveal date)
+        if (!$activity->visible()) {
             abort(404);
         }
+
+        // only activities of types 2, 3, 4 can be redeemed
+        if (!in_array($activity->activity_type_id, [2, 3, 4])) {
+            abort(400);
+        }
+
+        // activites with children can not be redeemed
+        if ($activity->children->count() > 0) {
+            abort(400);
+        }
+
 
         $validated = $request->validate([
             "proof" => "required"

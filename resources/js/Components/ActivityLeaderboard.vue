@@ -1,98 +1,100 @@
 <template>
   <div>
-    <v-card color="primary" class="mb-3">
-      <v-card-text>
-        <v-btn v-if="!formOpen" @click="formOpen = true" block
-          >Submit a {{ resultColumnName }}</v-btn
-        >
+    <div v-if="canRedeem()">
+      <v-card color="primary" class="mb-3">
+        <v-card-text>
+          <v-btn v-if="!formOpen" @click="formOpen = true" block
+            >Submit a {{ resultColumnName }}</v-btn
+          >
 
-        <v-card v-if="formOpen">
-          <v-card-text>
-            <v-form ref="form" v-model="valid" lazy-validation>
-              <div v-if="activity.leaderboard_type_id == 1">
-                <v-text-field
-                  v-model="form.result"
-                  label="Score"
-                  required
-                  :rules="resultRules"
-                  type="number"
-                  min="0"
-                  max="999"
-                  step="1"
-                ></v-text-field>
-              </div>
-
-              <div v-else-if="activity.leaderboard_type_id == 2">
-                <v-row>
-                  <v-col :cols="3">
-                    <v-text-field
-                      v-model="hours"
-                      label="Hours"
-                      type="number"
-                      step="1"
-                      min="0"
-                    ></v-text-field>
-                  </v-col>
-
-                  <v-col :cols="3">
-                    <v-text-field
-                      v-model="minutes"
-                      label="Minutes"
-                      type="number"
-                      step="1"
-                      min="0"
-                      max="59"
-                    ></v-text-field>
-                  </v-col>
-
-                  <v-col :cols="3">
-                    <v-text-field
-                      v-model="seconds"
-                      label="Seconds"
-                      type="number"
-                      step="1"
-                      min="0"
-                      max="59"
-                    ></v-text-field>
-                  </v-col>
-
-                  <v-col :cols="3">
-                    <v-text-field
-                      v-model="milliseconds"
-                      label="Milliseconds"
-                      type="number"
-                      step="1"
-                      min="0"
-                      max="999"
-                    ></v-text-field>
-                  </v-col>
-                </v-row>
-
-                <div v-if="invalidTime" class="error--text">
-                  {{ invalidTime }}
+          <v-card v-if="formOpen">
+            <v-card-text>
+              <v-form ref="form" v-model="valid" lazy-validation>
+                <div v-if="activity.leaderboard_type_id == 1">
+                  <v-text-field
+                    v-model="form.result"
+                    label="Score"
+                    required
+                    :rules="resultRules"
+                    type="number"
+                    min="0"
+                    max="999"
+                    step="1"
+                  ></v-text-field>
                 </div>
-              </div>
 
-              <v-text-field
-                v-model="form.proof"
-                label="Vod/Screenshot"
-                required
-                :rules="proofRules"
-              ></v-text-field>
-            </v-form>
-          </v-card-text>
+                <div v-else-if="activity.leaderboard_type_id == 2">
+                  <v-row>
+                    <v-col :cols="3">
+                      <v-text-field
+                        v-model="hours"
+                        label="Hours"
+                        type="number"
+                        step="1"
+                        min="0"
+                      ></v-text-field>
+                    </v-col>
 
-          <v-card-actions>
-            <v-btn @click="submitComplete" color="primary">
-              Submit
-            </v-btn>
-            <v-btn @click="formOpen = false" color="grey">
-              Nevermind
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-card-text>
-    </v-card>
+                    <v-col :cols="3">
+                      <v-text-field
+                        v-model="minutes"
+                        label="Minutes"
+                        type="number"
+                        step="1"
+                        min="0"
+                        max="59"
+                      ></v-text-field>
+                    </v-col>
+
+                    <v-col :cols="3">
+                      <v-text-field
+                        v-model="seconds"
+                        label="Seconds"
+                        type="number"
+                        step="1"
+                        min="0"
+                        max="59"
+                      ></v-text-field>
+                    </v-col>
+
+                    <v-col :cols="3">
+                      <v-text-field
+                        v-model="milliseconds"
+                        label="Milliseconds"
+                        type="number"
+                        step="1"
+                        min="0"
+                        max="999"
+                      ></v-text-field>
+                    </v-col>
+                  </v-row>
+
+                  <div v-if="invalidTime" class="error--text">
+                    {{ invalidTime }}
+                  </div>
+                </div>
+
+                <v-text-field
+                  v-model="form.proof"
+                  label="Vod/Screenshot"
+                  required
+                  :rules="proofRules"
+                ></v-text-field>
+              </v-form>
+            </v-card-text>
+
+            <v-card-actions>
+              <v-btn @click="submitComplete" color="primary">
+                Submit
+              </v-btn>
+              <v-btn @click="formOpen = false" color="grey">
+                Nevermind
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-card-text>
+      </v-card>
+    </div>
 
     <v-simple-table class="mt-10">
       <thead>
@@ -103,7 +105,7 @@
           <th>Tickets</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody v-if="activity.completions.length > 0">
         <tr v-for="(completion, i) in activity.completions" :key="i">
           <td>{{ completion.placement }}</td>
           <td>
@@ -131,6 +133,14 @@
             </div>
           </td>
           <td>{{ completion.tickets }}</td>
+        </tr>
+      </tbody>
+
+      <tbody v-else>
+        <tr>
+          <td colspan="4" class="text-center">
+            No {{ resultColumnName.toLowerCase() }}s yet.
+          </td>
         </tr>
       </tbody>
     </v-simple-table>
@@ -175,6 +185,10 @@ export default {
         this.seconds = 0;
         this.milliseconds = 0;
       }
+    },
+
+    canRedeem() {
+      return this.$page.props.auth.user && this.$page.props.started;
     },
   },
 

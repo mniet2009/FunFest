@@ -21,7 +21,7 @@
       <v-tab-item v-for="(activity, i) in activities" :key="activity.id">
         <v-card>
           <v-card-text>
-            <div class="mb-10" v-if="activityState.states[i] != 'complete'">
+            <div class="mb-10" v-if="canRedeem(i)">
               <p>
                 You can redeem this activity for {{ activity.tickets }} tickets.
               </p>
@@ -56,7 +56,10 @@
             </div>
 
             <h2>Completions</h2>
-            <div class="completion-list mt-3">
+            <div
+              v-if="activity.completions.length > 0"
+              class="completion-list mt-3"
+            >
               <user-avatar
                 v-for="completion in activity.completions"
                 :key="completion.id"
@@ -66,6 +69,12 @@
                 tooltip
                 :number="activity.limit > 1 ? completion.count : null"
               ></user-avatar>
+            </div>
+
+            <div v-else>
+              <p class="grey--text mb-0 mt-3">
+                No one has completed this activity yet.
+              </p>
             </div>
           </v-card-text>
         </v-card>
@@ -87,6 +96,14 @@ export default {
         this.formOpen = false;
         this.form.proof = "";
       }
+    },
+
+    canRedeem(i) {
+      return (
+        this.$page.props.auth.user &&
+        this.$page.props.started &&
+        this.activityState.states[i] != "complete"
+      );
     },
   },
 

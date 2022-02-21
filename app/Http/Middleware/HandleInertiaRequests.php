@@ -50,6 +50,7 @@ class HandleInertiaRequests extends Middleware
         }
 
         return array_merge(parent::share($request), [
+            'started' => config("funfest.started"),
             'auth' => $auth,
             'teams' => Team::all(),
             'flash' => fn () => $request->session()->get('flash')

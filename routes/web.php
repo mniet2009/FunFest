@@ -20,18 +20,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get("/test", function () {
-  Auth::login(User::find("167157504847904768"));
-});
-
 Route::get('/', [HomeController::class, 'home'])->name("home");
+Route::get('/signup', [HomeController::class, 'signup'])->name("signup");
 
 // auth bs
 Route::get('tologin', [DiscordController::class, 'tologin'])
   ->name('login');
 Route::get('login', [DiscordController::class, 'loginCallback'])
   ->withoutMiddleware('VerifyCsrfToken');
-Route::get('logout', [DiscordController::class, 'logout'])
+Route::post('logout', [DiscordController::class, 'logout'])
   ->name('logout');
 
 // Activities

@@ -18,6 +18,8 @@ class CreateActivityTypesTable extends Migration
 
             $table->text("name");
             $table->text("icon");
+            $table->text("description");
+            $table->boolean("hidden")->default(false);
         });
     }
 

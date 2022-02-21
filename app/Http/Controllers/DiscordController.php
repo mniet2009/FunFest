@@ -56,12 +56,12 @@ class DiscordController extends Controller
       $accessTokenData = $client->post($this->tokenURL, ["form_params" => $this->tokenData]);
       $accessTokenData = json_decode($accessTokenData->getBody());
     } catch (\GuzzleHttp\Exception\ClientException $error) {
-      dd($error);
+      abort(500);
     };
 
     $userData = Http::withToken($accessTokenData->access_token)->get($this->apiURLBase);
     if ($userData->clientError() || $userData->serverError()) {
-      dd($userData);
+      abort(500);
     };
 
     $userData = json_decode($userData);

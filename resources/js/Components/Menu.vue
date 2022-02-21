@@ -15,7 +15,7 @@
           <v-tooltip left>
             <template v-slot:activator="{ on, attrs }">
               <div v-bind="attrs" v-on="on">
-                <v-btn icon :to="route('logout')">
+                <v-btn icon @click="logout">
                   <v-icon>mdi-logout</v-icon>
                 </v-btn>
               </div>
@@ -90,6 +90,12 @@
 
 <script>
 export default {
+  methods: {
+    logout() {
+      this.$inertia.post(this.route("logout"));
+    },
+  },
+
   data() {
     return {
       drawer: true,

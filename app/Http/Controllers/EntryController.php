@@ -11,6 +11,12 @@ class EntryController extends Controller
 {
     public function store(Request $request, Activity $activity)
     {
+        // gotta be logged in
+        if (!Auth::check()) {
+            abort(401);
+        }
+
+        // activity needs to be visible (ie not before reveal date)
         if (!$activity->visible()) {
             abort(404);
         }
