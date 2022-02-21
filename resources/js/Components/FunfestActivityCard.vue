@@ -1,5 +1,5 @@
 <template>
-  <v-card class="activity-card">
+  <v-card class="activity-card d-flex flex-column" style="height: 100%">
     <v-img height="250" :src="activity.image"> </v-img>
 
     <div class="d-flex">

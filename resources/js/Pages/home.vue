@@ -17,7 +17,7 @@
       <div
         class="mx-auto my-5"
         style="max-width: 500px"
-        v-if="!$page.props.started"
+        v-if="$page.props.signupsOpen"
       >
         <v-btn
           color="primary"
@@ -41,17 +41,22 @@
 
       <p>
         Mystery Fun Fest is a cooperative event running from
-        <strong>3/18/2022 - 4/3/2022</strong> in which two teams compete to
-        accrue the most tickets throughout its 17-day duration. Players will
-        battle in competitive sub-events, complete both solo and team-based
-        activities, and perform a variety of other tasks to accumulate tickets
-        for their team. Above all else, however, this event is designed to give
-        community members a myriad of reasons to play games and bond with one
-        another and reward them for doing so! Whether you grind tickets to help
-        your team win or casually play only one or two games that suit your
-        interests, there's no wrong way to participate.
+        <strong>
+          {{ new Date(Date.parse("2022-03-15T12:00:00")).toLocaleDateString() }}
+          -
+          {{ new Date(Date.parse("2022-04-03T12:00:00")).toLocaleDateString() }}
+        </strong>
+        in which two teams compete to accrue the most tickets throughout its
+        17-day duration. Players will battle in competitive sub-events, complete
+        both solo and team-based activities, and perform a variety of other
+        tasks to accumulate tickets for their team. Above all else, however,
+        this event is designed to give community members a myriad of reasons to
+        play games and bond with one another and reward them for doing so!
+        Whether you grind tickets to help your team win or casually play only
+        one or two games that suit your interests, there's no wrong way to
+        participate.
       </p>
-      <h2 class="text-center mb-3">
+      <h2 class="text-center mb-3" v-if="$page.props.signupsOpen">
         To participate in Mystery Fun Fest, you are required to
         <a target="_blank" :href="route('signup')">register</a> on this website
         before <local-datetime :t="1647406740000"></local-datetime>.

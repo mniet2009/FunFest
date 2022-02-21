@@ -38,7 +38,7 @@
         >
       </div>
 
-      <v-row>
+      <v-row class="align-stretch">
         <v-col
           :cols="12"
           :md="6"
@@ -49,8 +49,12 @@
           <router-link
             :href="route('activities.show', { activity: activity })"
             as="div"
+            style="height: 100%"
           >
-            <funfest-activity-card :activity="activity"></funfest-activity-card>
+            <funfest-activity-card
+              :activity="activity"
+              style="height: 100%"
+            ></funfest-activity-card>
           </router-link>
         </v-col>
       </v-row>
