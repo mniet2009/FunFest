@@ -29,9 +29,9 @@
           Sign up now!
         </v-btn>
       </div>
-      <h1>Welcome to Mystery Fun Fest!</h1>
+      <h1 class="text-center">Welcome to Mystery Fun Fest!</h1>
 
-      <p>
+      <p class="text-center mb-6">
         This event will take place in the
         <a target="_blank" href="https://discord.gg/ZpdMFuX"
           >Mystery community Discord</a
