@@ -33,7 +33,7 @@ class ActivityTypeSeeder extends Seeder
             ],
             [
                 "name" => "Matchmaking Wins",
-                "icon" => "mdi-ticket",
+                "icon" => "mdi-trophy",
                 "description" => "Win games and get tickets, but with much higher limits per player.",
             ],
             [
@@ -44,7 +44,7 @@ class ActivityTypeSeeder extends Seeder
             [
                 "name" => "Competitions",
                 "icon" => "mdi-tournament",
-                "description" => "Receive tickets based on your final placement and/or performance! The means of rewarding tickets will heavily vary based on the competition\'s format. Note: Players must check in to tournaments on Challonge in the hour leading up to the starting time or will be removed!"
+                "description" => "Receive tickets based on your final placement and/or performance! The means of rewarding tickets will heavily vary based on the competition's format."
             ],
             [
                 "name" => "Contests",

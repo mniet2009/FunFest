@@ -89,7 +89,7 @@
         >
           <v-card class="text-center rounded-lg" style="height: 100%">
             <v-card-text>
-              <v-icon :size="60" color="primary">
+              <v-icon :size="60" color="primary" class="mb-2">
                 {{ activityType.icon }}
               </v-icon>
               <h2 class="text-center mb-3 white--text">
