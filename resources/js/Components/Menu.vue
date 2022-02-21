@@ -120,11 +120,11 @@ export default {
           icon: "mdi-calendar",
           route: "activities.schedule",
         },
-        {
-          title: "About",
-          icon: "mdi-information",
-          route: "about",
-        },
+        // {
+        //   title: "About",
+        //   icon: "mdi-information",
+        //   route: "about",
+        // },
       ],
     };
   },

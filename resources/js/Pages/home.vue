@@ -6,7 +6,7 @@
       :height="700"
       dark
       src="/img/header.jpg"
-      class="d-flex align-center justify-center"
+      class="d-flex align-center justify-center parallax-home"
     >
       <h1 class="text-uppercase">
         Mystery Fun Fest
@@ -19,7 +19,7 @@
         style="max-width: 500px"
         v-if="!$page.props.started"
       >
-        <v-btn color="primary" :href="route('signup')" x-large block>
+        <v-btn color="primary" :to="route('signup')" x-large block>
           Sign up now!
         </v-btn>
       </div>

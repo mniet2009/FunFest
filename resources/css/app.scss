@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Rye&display=swap");
+@import "~vuetify/src/styles/settings/_variables";
 
 .v-main {
   padding-bottom: 200px !important;
@@ -12,6 +13,22 @@
   padding: 0.2em 0.5em;
   text-shadow: 5px 5px 0px #eb452b, 10px 10px 0px #efa032, 15px 15px 0px #46b59b,
     20px 20px 0px #017e7f, 25px 25px 0px #052939;
+}
+
+.parallax-home {
+  font-size: 1.5em;
+}
+
+@media #{map-get($display-breakpoints, 'lg-and-down')} {
+  .parallax-home {
+    font-size: 1em;
+  }
+}
+
+@media #{map-get($display-breakpoints, 'md-and-down')} {
+  .parallax-home {
+    font-size: 0.75em;
+  }
 }
 
 .ticket-action-box {
