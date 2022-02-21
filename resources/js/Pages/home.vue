@@ -19,7 +19,13 @@
         style="max-width: 500px"
         v-if="!$page.props.started"
       >
-        <v-btn color="primary" :to="route('signup')" x-large block>
+        <v-btn
+          color="primary"
+          target="_blank"
+          :href="route('signup')"
+          x-large
+          block
+        >
           Sign up now!
         </v-btn>
       </div>
@@ -45,13 +51,13 @@
         your team win or casually play only one or two games that suit your
         interests, there's no wrong way to participate.
       </p>
+      <h2 class="text-center mb-3">
+        To participate in Mystery Fun Fest, you are required to
+        <a target="_blank" :href="route('signup')">register</a> on this website
+        before 11:59pm ET on 3/15.
+      </h2>
 
       <p>
-        <strong
-          >To participate in Mystery Fun Fest, you are required to
-          <a target="_blank" :href="route('signup')">register</a> on this
-          website before 11:59pm ET on 3/15.</strong
-        >
         You will be randomly assigned to a team, though you may request up to
         three other community members -- assuming they also register -- to be
         teamed up with. You also have absolutely no obligation to participate if
