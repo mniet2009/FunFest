@@ -20,7 +20,7 @@
           :href="route('activities.show', activity)"
         >
           <td>{{ activity.name }}</td>
-          <td>{{ new Date(activity.event_at).toLocaleString() }}</td>
+          <td><local-datetime :t="activity.event_at"></local-datetime></td>
         </router-link>
       </tbody>
     </v-simple-table>

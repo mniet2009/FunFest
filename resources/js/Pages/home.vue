@@ -54,7 +54,7 @@
       <h2 class="text-center mb-3">
         To participate in Mystery Fun Fest, you are required to
         <a target="_blank" :href="route('signup')">register</a> on this website
-        before 11:59pm ET on 3/15.
+        before <local-datetime :t="1647406740000"></local-datetime>.
       </h2>
 
       <p>
