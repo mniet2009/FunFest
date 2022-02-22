@@ -21,10 +21,10 @@
       >
         <v-btn color="primary" :to="route('signUpForm')" x-large block>
           <div v-if="signedUp">
-            Edit signup data
+            Sign up now!
           </div>
           <div v-else>
-            Sign up now!
+            Edit signup data
           </div>
         </v-btn>
       </div>
