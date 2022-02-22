@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Activity;
+use App\Models\Completion;
 use App\Models\Entry;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -18,6 +19,10 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        User::all()->delete();
+        Entry::all()->delete();
+        Completion::all()->delete();
+
         $maurice = User::factory()->create([
             "id" => "84300263346704384",
             "username" => "Maurice",
