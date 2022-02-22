@@ -31,6 +31,7 @@ class ActivityController extends Controller
                     ->select("user_id", "activity_id", "placement", DB::raw("SUM(tickets) as tickets"))
                     ->where("user_id", Auth::id());
             }])
+            ->orderBy("name", "asc")
             ->get();
 
         // dd($activities->toArray());
