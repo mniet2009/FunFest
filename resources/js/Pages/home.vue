@@ -21,10 +21,10 @@
       >
         <v-btn color="primary" :to="route('signUpForm')" x-large block>
           <div v-if="signedUp">
-            Sign up now!
+            Edit signup data
           </div>
           <div v-else>
-            Edit signup data
+            Sign up now!
           </div>
         </v-btn>
       </div>
@@ -148,7 +148,7 @@ export default {
 
   computed: {
     signedUp() {
-      this.$page.props.auth.user && this.$page.props.auth.user.signedUp;
+      return this.$page.props.auth.user && this.$page.props.auth.user.signedUp;
     },
 
     activityTypesFixed() {
