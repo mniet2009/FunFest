@@ -19,9 +19,9 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::all()->delete();
-        Entry::all()->delete();
-        Completion::all()->delete();
+        User::truncate();
+        Entry::truncate();
+        Completion::truncate();
 
         $maurice = User::factory()->create([
             "id" => "84300263346704384",
