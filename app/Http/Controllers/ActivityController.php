@@ -105,7 +105,6 @@ class ActivityController extends Controller
         session()->flash('flash', [
             'type' => 'success',
             'text' => "{$activity->tickets} Tickets redeemed!",
-            'bla' => rand(1, 100),
         ]);
 
         return redirect()->back();

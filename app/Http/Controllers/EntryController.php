@@ -51,7 +51,6 @@ class EntryController extends Controller
         session()->flash('flash', [
             'type' => 'success',
             'text' => "Submission successful! You're in " . ordinal($completion->placement) . " place!",
-            'bla' => rand(1, 100),
         ]);
 
         return redirect()->back();

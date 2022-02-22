@@ -19,23 +19,22 @@
         style="max-width: 500px"
         v-if="$page.props.signupsOpen"
       >
-        <v-btn
-          color="primary"
-          target="_blank"
-          :href="route('signup')"
-          x-large
-          block
-        >
-          Sign up now!
+        <v-btn color="primary" :to="route('signUpForm')" x-large block>
+          <div v-if="$page.props.auth.user.signedUp">
+            Edit signup data
+          </div>
+          <div v-else>
+            Sign up now!
+          </div>
         </v-btn>
       </div>
       <h1 class="text-center">Welcome to Mystery Fun Fest!</h1>
 
       <p class="text-center mb-6">
         This event will take place in the
-        <a target="_blank" href="https://discord.gg/ZpdMFuX"
-          >Mystery community Discord</a
-        >
+        <a target="_blank" href="https://discord.gg/ZpdMFuX">
+          Mystery community Discord
+        </a>
         and on this website.
       </p>
 
@@ -58,8 +57,8 @@
       </p>
       <h2 class="text-center mb-3" v-if="$page.props.signupsOpen">
         To participate in Mystery Fun Fest, you are required to
-        <a target="_blank" :href="route('signup')">register</a> on this website
-        before <local-datetime :t="1647406740000"></local-datetime>.
+        <router-link :href="route('signUpForm')">register</router-link> on this
+        website before <local-datetime :t="1647406740000"></local-datetime>.
       </h2>
 
       <p>
@@ -113,13 +112,13 @@
       </v-row>
 
       <p>
-        All currently public games, challenges, and their point distributions to
-        be featured in Mystery Fun Fest can be viewed on the
+        All currently public games, activities, and their ticket distributions
+        to be featured in Mystery Fun Fest can be viewed on the
         <a target="_blank" :href="route('activities.index')">activity page</a>.
         The
-        <a target="_blank" :href="route('activities.schedule')"
-          >schedule page</a
-        >
+        <a target="_blank" :href="route('activities.schedule')">
+          schedule page
+        </a>
         will also show all currently public games that will take place at a
         specified time rather than being accessible throughout the entire event.
         Until the event begins, these pages will be incomplete - games will be

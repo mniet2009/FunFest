@@ -24,6 +24,9 @@ class CreateUsersTable extends Migration
             $table->string('locale');
             $table->boolean('mfa_enabled');
             $table->string('refresh_token')->nullable();
+            $table->text("friends")->nullable();
+            $table->integer("likelihood")->nullable();
+            $table->boolean("signed_up")->default(false);
             $table->rememberToken();
 
             $table->bigInteger("team_id")->nullable();
