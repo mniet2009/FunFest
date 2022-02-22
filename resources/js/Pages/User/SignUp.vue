@@ -38,7 +38,7 @@
               <v-radio-group
                 class="mb-3"
                 v-model="form.likelihood"
-                label="How likely are you participate?"
+                label="How likely are you to participate?"
                 :rules="rules.likelihood"
               >
                 <v-radio
