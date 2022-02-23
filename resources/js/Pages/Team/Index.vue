@@ -1,47 +1,58 @@
 <template>
-  <v-container>
+  <div>
     <Head title="Standings" />
 
-    <v-row>
-      <v-col :cols="6" v-for="team of teams" :key="team.id">
-        <div class="team-top text-center" :style="{ background: team.color }">
-          <h1>{{ team.name }}</h1>
-          <h2>{{ formatNumber(team.completions_sum_tickets) }}</h2>
-        </div>
+    <v-parallax
+      :height="300"
+      dark
+      src="/img/standings.jpg"
+      class="d-flex align-center justify-center top-image"
+    >
+      <h1>Standings</h1>
+    </v-parallax>
 
-        <v-simple-table>
-          <template v-slot:default>
-            <thead>
-              <tr>
-                <th class="text-left">
-                  Player
-                </th>
-                <th class="text-right">
-                  Tickets
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr
-                v-for="completion in team.completions"
-                :key="completion.user.username"
-              >
-                <td>
-                  <user-avatar
-                    :url="completion.user.id"
-                    :username="completion.user.username"
-                  ></user-avatar>
-                </td>
-                <td class="text-right">
-                  {{ formatNumber(completion.tickets) }}
-                </td>
-              </tr>
-            </tbody>
-          </template>
-        </v-simple-table>
-      </v-col>
-    </v-row>
-  </v-container>
+    <v-container>
+      <v-row>
+        <v-col :cols="6" v-for="team of teams" :key="team.id">
+          <div class="team-top text-center" :style="{ background: team.color }">
+            <h1>{{ team.name }}</h1>
+            <h2>{{ formatNumber(team.completions_sum_tickets) }}</h2>
+          </div>
+
+          <v-simple-table>
+            <template v-slot:default>
+              <thead>
+                <tr>
+                  <th class="text-left">
+                    Player
+                  </th>
+                  <th class="text-right">
+                    Tickets
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  v-for="completion in team.completions"
+                  :key="completion.user.username"
+                >
+                  <td>
+                    <user-avatar
+                      :url="completion.user.id"
+                      :username="completion.user.username"
+                    ></user-avatar>
+                  </td>
+                  <td class="text-right">
+                    {{ formatNumber(completion.tickets) }}
+                  </td>
+                </tr>
+              </tbody>
+            </template>
+          </v-simple-table>
+        </v-col>
+      </v-row>
+    </v-container>
+  </div>
 </template>
 
 <style scoped lang="scss">

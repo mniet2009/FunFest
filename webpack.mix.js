@@ -19,6 +19,6 @@ mix
   .vuetify("vuetify-loader")
   .alias({ "@": path.join(__dirname, "resources/js") })
   .sass("resources/css/app.scss", "public/css")
-  .sourceMaps()
+  .sourceMaps(false)
   .version()
   .disableNotifications();

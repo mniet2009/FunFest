@@ -32,9 +32,9 @@
 
       <p class="text-center mb-6">
         This event will take place in the
-        <a target="_blank" href="https://discord.gg/ZpdMFuX">
-          Mystery community Discord
-        </a>
+        <a target="_blank" href="https://discord.gg/ZpdMFuX"
+          >Mystery community Discord</a
+        >
         and on this website.
       </p>
 
