@@ -37,6 +37,7 @@ class ActivitySeeder extends Seeder
                         "slug" => str_replace(" ", "-", $name),
                         "parent_id" => $activity->id,
                         "activity_type_id" => rand(3, 4),
+                        "leaderboard_tickets" => null,
                         "limit" => 1,
                     ]);
                 }

@@ -19,7 +19,7 @@ class TeamController extends Controller
                 $query->groupBy("user_id", "team_id")
                     ->select("user_id", DB::raw("SUM(tickets) as tickets"))
                     ->orderBy("tickets", "desc")
-                    ->with("user:id,username,avatar");
+                    ->with("user:id,username,avatar,slug");
             }])
             ->get();
 

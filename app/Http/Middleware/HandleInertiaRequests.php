@@ -54,7 +54,6 @@ class HandleInertiaRequests extends Middleware
             'signupsOpen' => config("funfest.signups_open"),
             'started' => config("funfest.started"),
             'auth' => $auth,
-            'teams' => Team::all(),
             'flash' => fn () => $request->session()->get('flash')
         ]);
     }

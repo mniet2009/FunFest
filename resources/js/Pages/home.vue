@@ -41,7 +41,7 @@
       <p>
         Mystery Fun Fest is a cooperative event running from
         <strong>
-          {{ new Date(Date.parse("2022-03-15T12:00:00")).toLocaleDateString() }}
+          {{ new Date(Date.parse("2022-03-18T12:00:00")).toLocaleDateString() }}
           -
           {{ new Date(Date.parse("2022-04-03T12:00:00")).toLocaleDateString() }}
         </strong>
@@ -152,20 +152,16 @@ export default {
     },
 
     activityTypesFixed() {
-      return this.activityTypes
-        .filter((activityType) => {
-          return activityType.id !== 3; // remove team based completion challenge
-        })
-        .map((activityType) => {
-          if (activityType.id == 2) {
-            return Object.assign(activityType, {
-              // rename regular one
-              name: "Completion Challenges",
-            });
-          }
+      return this.activityTypes.map((activityType, i) => {
+        if (i == 1) {
+          return Object.assign(activityType, {
+            // rename regular Completion Challenges Solo
+            name: "Completion Challenges",
+          });
+        }
 
-          return activityType;
-        });
+        return activityType;
+      });
     },
   },
 };

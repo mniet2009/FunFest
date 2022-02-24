@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Activity;
 use App\Models\ActivityType;
+use App\Models\Team;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -13,7 +14,7 @@ class ActivityController extends Controller
 {
     public function index()
     {
-        $activityTypes = ActivityType::all();
+        $activityTypes = ActivityType::select("name", "id")->get();
         $activities = Activity::forUser(Auth::user())->get();
 
         return Inertia::render('Activity/Index', compact('activities', 'activityTypes'));
@@ -21,7 +22,7 @@ class ActivityController extends Controller
 
     public function show(Activity $activity)
     {
-
+        $teams = Team::select("id", "color")->get();
         if (!$activity->visible()) {
             abort(404);
         }
@@ -29,7 +30,7 @@ class ActivityController extends Controller
         $activity->load(["completions" => function ($query) {
             $query->groupBy("activity_id", "user_id", "result", "placement")
                 ->select("user_id", "activity_id", "result", "placement", DB::raw("SUM(tickets) as tickets"), DB::raw("COUNT(*) as count"))
-                ->with("user")
+                ->with("user:id,username,avatar,slug,team_id")
                 ->orderBy("count", "desc")
                 ->orderBy("placement", "asc")
                 ->orderBy(DB::raw("MIN(id)"), "asc");
@@ -39,13 +40,13 @@ class ActivityController extends Controller
             ->load(["children.completions" => function ($query) {
                 $query->groupBy("activity_id", "user_id", "result", "placement")
                     ->select("user_id", "activity_id", "result", "placement", DB::raw("SUM(tickets) as tickets"), DB::raw("COUNT(*) as count"))
-                    ->with("user")
+                    ->with("user:id,username,avatar,slug,team_id")
                     ->orderBy("count", "desc")
                     ->orderBy("placement", "asc")
                     ->orderBy(DB::raw("MIN(id)"), "asc");
             }]);
 
-        return Inertia::render('Activity/Show', compact('activity'));
+        return Inertia::render('Activity/Show', compact('activity', 'teams'));
     }
 
     public function complete(Request $request, Activity $activity)
@@ -99,6 +100,7 @@ class ActivityController extends Controller
             })
             ->whereNotNull("event_at")
             ->orderBy("event_at")
+            ->select("name", "slug", "event_at")
             ->get();
 
         return Inertia::render('Activity/Schedule', compact('activities'));

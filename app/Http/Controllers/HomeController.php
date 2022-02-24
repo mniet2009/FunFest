@@ -9,7 +9,9 @@ class HomeController extends Controller
 {
     public function home()
     {
-        $activityTypes = ActivityType::all();
+        $activityTypes = ActivityType::where("hidden", false)
+            ->select("description", "icon", "name")
+            ->get();
         return Inertia::render('home', compact('activityTypes'));
     }
 

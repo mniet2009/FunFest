@@ -89,24 +89,30 @@ class Activity extends Model
 
     public static function forUser($user)
     {
+        function groupActivities($query, $user)
+        {
+            $query->groupBy("activity_id", "user_id", "placement")
+                ->where("user_id", $user->id)
+                ->select("activity_id", "placement", DB::raw("SUM(tickets) as tickets"));
+        }
+
         return Activity::whereNull("parent_id")
             ->where(function ($query) {
                 $query->where("revealed_at", "<=", now())
                     ->orWhereNull("revealed_at");
             })
-            ->with("activityType")
+            ->with("activityType:id,icon")
             ->with(["completions" => function ($query) use ($user) {
-                $query->groupBy("activity_id", "user_id", "placement")
-                    ->select("user_id", "activity_id", "placement", DB::raw("SUM(tickets) as tickets"))
-                    ->where("user_id", $user->id);
+                groupActivities($query, $user);
             }])
-            ->with("children")
-            ->with(["children.completions" => function ($query) use ($user) {
-                $query->groupBy("activity_id", "user_id", "placement")
-                    ->select("user_id", "activity_id", "placement", DB::raw("SUM(tickets) as tickets"))
-                    ->where("user_id", $user->id);
+            ->with(["children" => function ($query) use ($user) {
+                $query->select("id", "parent_id", "activity_type_id", "name", "excerpt", "tickets", "limit")
+                    ->with(["completions" => function ($query) use ($user) {
+                        groupActivities($query, $user);
+                    }]);
             }])
-            ->orderBy("name", "asc");
+            ->orderBy("name", "asc")
+            ->select("id", "activity_type_id", "name", "slug", "excerpt", "tickets", "limit", "image");
     }
 
     /**
