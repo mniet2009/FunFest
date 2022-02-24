@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Head title="Activities" />
+    <Head :title="heading" />
 
     <v-parallax
       :height="300"
@@ -8,7 +8,7 @@
       src="/img/activities.jpg"
       class="d-flex align-center justify-center top-image"
     >
-      <h1>Activities</h1>
+      <h1>{{ heading }}</h1>
     </v-parallax>
 
     <v-container>
@@ -71,6 +71,7 @@ export default {
   props: {
     activities: Array,
     activityTypes: Array,
+    user: Object,
   },
 
   computed: {
@@ -96,6 +97,14 @@ export default {
       }
 
       return filtered;
+    },
+
+    heading() {
+      if (this.user) {
+        return `${this.user.username}'s Activities`;
+      } else {
+        return "Activities";
+      }
     },
   },
 

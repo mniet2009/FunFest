@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class DiscordController extends Controller
 {
@@ -92,7 +93,8 @@ class DiscordController extends Controller
         'verified' => $userData->verified,
         'locale' => $userData->locale,
         'mfa_enabled' => $userData->mfa_enabled,
-        'refresh_token' => $accessTokenData->refresh_token
+        'refresh_token' => $accessTokenData->refresh_token,
+        'slug' => Str::slug($userData->username . "-" . $userData->discriminator),
       ]
     );
 

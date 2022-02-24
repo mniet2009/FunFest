@@ -9,7 +9,8 @@
 
           <v-list-item-title>
             <div class="logged-in-as">Logged in as:</div>
-            <strong>{{ $page.props.auth.user.username }}</strong>
+            <strong>{{ $page.props.auth.user.username }}</strong
+            >l
           </v-list-item-title>
 
           <v-tooltip left>
@@ -59,7 +60,7 @@
 
     <template v-slot:append>
       <v-sheet color="rgba(0, 0, 0, 0.5)" class="pa-1 text-center grey--text">
-        <span class="by">made by Maurice</span>
+        <span class="by">Made by Maurice</span>
       </v-sheet>
     </template>
   </v-navigation-drawer>

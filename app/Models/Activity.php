@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Activity extends Model
 {
@@ -84,6 +85,28 @@ class Activity extends Model
     public function visible()
     {
         return is_null($this->revealed_at) || $this->revealed_at <= now();
+    }
+
+    public static function forUser($user)
+    {
+        return Activity::whereNull("parent_id")
+            ->where(function ($query) {
+                $query->where("revealed_at", "<=", now())
+                    ->orWhereNull("revealed_at");
+            })
+            ->with("activityType")
+            ->with(["completions" => function ($query) use ($user) {
+                $query->groupBy("activity_id", "user_id", "placement")
+                    ->select("user_id", "activity_id", "placement", DB::raw("SUM(tickets) as tickets"))
+                    ->where("user_id", $user->id);
+            }])
+            ->with("children")
+            ->with(["children.completions" => function ($query) use ($user) {
+                $query->groupBy("activity_id", "user_id", "placement")
+                    ->select("user_id", "activity_id", "placement", DB::raw("SUM(tickets) as tickets"))
+                    ->where("user_id", $user->id);
+            }])
+            ->orderBy("name", "asc");
     }
 
     /**

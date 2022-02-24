@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activity;
+use App\Models\ActivityType;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -50,5 +53,13 @@ class UserController extends Controller
 
 
         return redirect()->route("home");
+    }
+
+    public function show(User $user)
+    {
+        $activityTypes = ActivityType::all();
+        $activities = Activity::forUser($user)->get();
+
+        return Inertia::render('Activity/Index', compact('activities', 'activityTypes', "user"));
     }
 }

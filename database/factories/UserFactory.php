@@ -5,7 +5,7 @@ namespace Database\Factories;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class UserFactory extends Factory
 {
@@ -23,10 +23,13 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        $username = $this->faker->userName;
+        $discriminator = $this->faker->randomNumber(4);
+
         return [
             'id' => $this->faker->uuid,
-            'username' => $this->faker->userName,
-            'discriminator' => $this->faker->randomNumber(4),
+            'username' => $username,
+            'discriminator' => $discriminator,
             'email' => $this->faker->email,
             'avatar' => "doesntmatter",
             'verified' => $this->faker->boolean,
@@ -34,6 +37,7 @@ class UserFactory extends Factory
             'mfa_enabled' => $this->faker->boolean,
             'refresh_token' => $this->faker->uuid,
             'team_id' => Team::all()->random()->id,
+            'slug' => Str::slug($username . "-" . $discriminator),
         ];
     }
 }

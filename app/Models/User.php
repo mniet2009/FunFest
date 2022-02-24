@@ -25,8 +25,14 @@ class User extends Authenticatable
         'verified',
         'locale',
         'mfa_enabled',
-        'refresh_token'
+        'refresh_token',
+        "slug"
     ];
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 
     /**
      * Indicates if the model's ID is auto-incrementing.

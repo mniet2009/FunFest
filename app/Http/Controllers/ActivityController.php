@@ -14,27 +14,7 @@ class ActivityController extends Controller
     public function index()
     {
         $activityTypes = ActivityType::all();
-        $activities = Activity::whereNull("parent_id")
-            ->where(function ($query) {
-                $query->where("revealed_at", "<=", now())
-                    ->orWhereNull("revealed_at");
-            })
-            ->with("activityType")
-            ->with(["completions" => function ($query) {
-                $query->groupBy("activity_id", "user_id", "placement")
-                    ->select("user_id", "activity_id", "placement", DB::raw("SUM(tickets) as tickets"))
-                    ->where("user_id", Auth::id());
-            }])
-            ->with("children")
-            ->with(["children.completions" => function ($query) {
-                $query->groupBy("activity_id", "user_id", "placement")
-                    ->select("user_id", "activity_id", "placement", DB::raw("SUM(tickets) as tickets"))
-                    ->where("user_id", Auth::id());
-            }])
-            ->orderBy("name", "asc")
-            ->get();
-
-        // dd($activities->toArray());
+        $activities = Activity::forUser(Auth::user())->get();
 
         return Inertia::render('Activity/Index', compact('activities', 'activityTypes'));
     }
