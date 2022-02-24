@@ -1,6 +1,17 @@
 <template>
   <div>
-    <h1>Countdown goes here</h1>
+    <div v-if="countdownActive" class="d-flex flex-wrap justify-center my-6">
+      <div
+        v-for="(value, i) in countdown"
+        :key="i"
+        class="d-flex flex-column align-center mr-3"
+      >
+        <Flip :value="value.toString().padStart(2, 0)"></Flip>
+
+        {{ units[i] }}
+      </div>
+    </div>
+
     <v-simple-table>
       <thead>
         <tr>
@@ -27,13 +38,35 @@
 </template>
 
 <script>
+import Tick from "@pqina/tick";
+
 export default {
+  created() {
+    let counter = Tick.count.down(this.activity.event_at);
+
+    counter.onupdate = (value) => {
+      this.countdown = value;
+    };
+  },
+
+  computed: {
+    countdownActive() {
+      return (
+        this.activity.event_at && new Date(this.activity.event_at) > Date.now()
+      );
+    },
+  },
+
   props: {
     activity: Object,
   },
 
   data() {
-    return {};
+    return {
+      units: ["Days", "Hours", "Minutes", "Seconds"],
+      countdown: 0,
+      counter: null,
+    };
   },
 };
 </script>

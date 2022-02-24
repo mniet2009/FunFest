@@ -12,7 +12,7 @@
     </v-parallax>
 
     <v-container>
-      <div>
+      <div class="d-flex justify-center">
         <v-btn
           class="mr-3 mb-3"
           v-for="activityType of activityTypesPlusAll"
@@ -25,7 +25,7 @@
         >
       </div>
 
-      <div>
+      <div class="d-flex justify-center" v-if="$page.props.auth.user">
         <v-btn
           class="mr-3 mb-3"
           v-for="filter of completionFilters"

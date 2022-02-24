@@ -11,9 +11,6 @@
       <h1 class="text-uppercase">
         Mystery <span style="white-space: nowrap">Fun Fest</span>
       </h1>
-    </v-parallax>
-
-    <v-container>
       <div
         class="mx-auto my-5"
         style="max-width: 500px"
@@ -28,6 +25,9 @@
           </div>
         </v-btn>
       </div>
+    </v-parallax>
+
+    <v-container>
       <h1 class="text-center">Welcome to Mystery Fun Fest!</h1>
 
       <p class="text-center mb-6">
