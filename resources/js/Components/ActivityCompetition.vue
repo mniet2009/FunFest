@@ -12,7 +12,7 @@
       </div>
     </div>
 
-    <v-simple-table>
+    <v-simple-table v-else>
       <thead>
         <tr>
           <th>Rank</th>
