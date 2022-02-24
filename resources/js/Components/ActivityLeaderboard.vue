@@ -107,7 +107,7 @@
       </thead>
       <tbody v-if="activity.completions.length > 0">
         <tr v-for="(completion, i) in activity.completions" :key="i">
-          <td>{{ completion.placement }}</td>
+          <td>{{ ordinal_number(completion.placement) }}</td>
           <td>
             <user-avatar
               :url="completion.user.id"
@@ -152,6 +152,7 @@ import * as util from "../util.js";
 
 export default {
   methods: {
+    ordinal_number: util.ordinal_number,
     formatNumber: util.formatNumber,
     formatTime: util.formatTime,
 

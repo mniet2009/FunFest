@@ -12,7 +12,7 @@
     </v-parallax>
 
     <v-container>
-      <v-simple-table class="schedule-table">
+      <v-simple-table>
         <thead>
           <tr>
             <th>Activity</th>
@@ -26,6 +26,8 @@
             v-for="activity of activities"
             :key="activity.id"
             :href="route('activities.show', activity)"
+            class="pointer"
+            v-ripple
           >
             <td>{{ activity.name }}</td>
             <td><local-datetime :t="activity.event_at"></local-datetime></td>

@@ -105,12 +105,12 @@ class Activity extends Model
             ->with(["completions" => function ($query) use ($user) {
                 groupActivities($query, $user);
             }])
-            ->with(["children" => function ($query) use ($user) {
-                $query->select("id", "parent_id", "activity_type_id", "name", "excerpt", "tickets", "limit")
-                    ->with(["completions" => function ($query) use ($user) {
-                        groupActivities($query, $user);
-                    }]);
-            }])
+            ->with([
+                "children:id,parent_id,activity_type_id,name,excerpt,tickets,limit",
+                "children.completions" => function ($query) use ($user) {
+                    groupActivities($query, $user);
+                }
+            ])
             ->orderBy("name", "asc")
             ->select("id", "activity_type_id", "name", "slug", "excerpt", "tickets", "limit", "image");
     }

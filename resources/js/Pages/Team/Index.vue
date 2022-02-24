@@ -20,34 +20,36 @@
           </div>
 
           <v-simple-table>
-            <template v-slot:default>
-              <thead>
-                <tr>
-                  <th class="text-left">
-                    Player
-                  </th>
-                  <th class="text-right">
-                    Tickets
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr
-                  v-for="completion in team.completions"
-                  :key="completion.user.username"
-                >
-                  <td>
-                    <user-avatar
-                      :url="completion.user.id"
-                      :username="completion.user.username"
-                    ></user-avatar>
-                  </td>
-                  <td class="text-right">
-                    {{ formatNumber(completion.tickets) }}
-                  </td>
-                </tr>
-              </tbody>
-            </template>
+            <thead>
+              <tr>
+                <th class="text-left">
+                  Player
+                </th>
+                <th class="text-right">
+                  Tickets
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <router-link
+                as="tr"
+                v-for="completion in team.completions"
+                :key="completion.user.username"
+                :href="route('users.show', completion.user)"
+                class="pointer"
+                v-ripple
+              >
+                <td>
+                  <user-avatar
+                    :url="completion.user.id"
+                    :username="completion.user.username"
+                  ></user-avatar>
+                </td>
+                <td class="text-right">
+                  {{ formatNumber(completion.tickets) }}
+                </td>
+              </router-link>
+            </tbody>
           </v-simple-table>
         </v-col>
       </v-row>

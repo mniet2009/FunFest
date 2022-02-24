@@ -27,24 +27,29 @@ class ActivityController extends Controller
             abort(404);
         }
 
-        $activity->load(["completions" => function ($query) {
+        function groupCompletions($query)
+        {
             $query->groupBy("activity_id", "user_id", "result", "placement")
                 ->select("user_id", "activity_id", "result", "placement", DB::raw("SUM(tickets) as tickets"), DB::raw("COUNT(*) as count"))
                 ->with("user:id,username,avatar,slug,team_id")
                 ->orderBy("count", "desc")
                 ->orderBy("placement", "asc")
                 ->orderBy(DB::raw("MIN(id)"), "asc");
+        }
+
+        $activity->load(["completions" => function ($query) {
+            groupCompletions($query);
         }]);
 
-        $activity->load("children")
-            ->load(["children.completions" => function ($query) {
-                $query->groupBy("activity_id", "user_id", "result", "placement")
-                    ->select("user_id", "activity_id", "result", "placement", DB::raw("SUM(tickets) as tickets"), DB::raw("COUNT(*) as count"))
-                    ->with("user:id,username,avatar,slug,team_id")
-                    ->orderBy("count", "desc")
-                    ->orderBy("placement", "asc")
-                    ->orderBy(DB::raw("MIN(id)"), "asc");
-            }]);
+        $activity->load([
+            "children:id,parent_id,activity_type_id,name,excerpt,tickets,limit",
+            "children.completions" => function ($query) {
+                groupCompletions($query);
+            }
+        ]);
+
+        // filter activity
+        $activity = $activity->only(["id", "activity_type_id", "name", "description", "children", "image", "completions", "tickets", "limit"]);
 
         return Inertia::render('Activity/Show', compact('activity', 'teams'));
     }
