@@ -24,7 +24,7 @@ class ActivityController extends Controller
     {
         $teams = Team::select("id", "color")->get();
         if (!$activity->visible()) {
-            abort(404);
+            abort(404); // https://c.tenor.com/iaqJajlqXq4AAAAM/peace-out-disappear.gif
         }
 
         function groupCompletions($query)
@@ -42,14 +42,14 @@ class ActivityController extends Controller
         }]);
 
         $activity->load([
-            "children:id,parent_id,activity_type_id,name,excerpt,tickets,limit",
+            "children:id,slug,parent_id,activity_type_id,name,excerpt,tickets,limit",
             "children.completions" => function ($query) {
                 groupCompletions($query);
             }
         ]);
 
         // filter activity
-        $activity = $activity->only(["id", "activity_type_id", "name", "description", "children", "image", "completions", "tickets", "limit"]);
+        $activity = $activity->only(["id", "slug", "activity_type_id", "name", "description", "children", "image", "completions", "tickets", "limit", "leaderboard_type_id", "leaderboard_tickets", "event_at"]);
 
         return Inertia::render('Activity/Show', compact('activity', 'teams'));
     }

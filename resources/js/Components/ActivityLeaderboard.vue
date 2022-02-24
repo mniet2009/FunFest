@@ -106,7 +106,14 @@
         </tr>
       </thead>
       <tbody v-if="activity.completions.length > 0">
-        <tr v-for="(completion, i) in activity.completions" :key="i">
+        <router-link
+          as="tr"
+          v-for="(completion, i) in activity.completions"
+          :key="i"
+          :href="route('users.show', completion.user)"
+          class="pointer"
+          v-ripple
+        >
           <td>{{ ordinal_number(completion.placement) }}</td>
           <td>
             <user-avatar
@@ -133,7 +140,7 @@
             </div>
           </td>
           <td>{{ completion.tickets }}</td>
-        </tr>
+        </router-link>
       </tbody>
 
       <tbody v-else>

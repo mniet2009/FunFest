@@ -64,6 +64,7 @@
                 v-for="completion in activity.completions"
                 :key="completion.id"
                 :url="completion.user.id"
+                :to="route('users.show', completion.user)"
                 :username="completion.user.username"
                 :color="$page.props.teams[completion.user.team_id - 1].color"
                 tooltip

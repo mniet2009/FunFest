@@ -2,20 +2,22 @@
   <div>
     <v-tooltip top v-if="tooltip" :color="color">
       <template v-slot:activator="{ on, attrs }">
-        <div
+        <router-link
+          :href="to"
           class="avatar avatar-bordered mr-3 mb-3"
           size="100"
           v-bind="attrs"
           v-on="on"
           style="width: 100px; height: 100px; border-width: 5px;"
           :style="{ 'border-color': color }"
+          v-ripple="{ class: 'white--text' }"
         >
           <img :src="`/storage/avatars/${url}`" />
 
           <div class="avatar-number" v-if="number">
             {{ number }}
           </div>
-        </div>
+        </router-link>
       </template>
       {{ username }}
     </v-tooltip>
@@ -42,6 +44,7 @@ export default {
     tooltip: Boolean,
     color: String,
     number: Number,
+    to: String,
   },
 };
 </script>

@@ -112,7 +112,7 @@ class Activity extends Model
                 }
             ])
             ->orderBy("name", "asc")
-            ->select("id", "activity_type_id", "name", "slug", "excerpt", "tickets", "limit", "image");
+            ->select("id", "activity_type_id", "name", "slug", "excerpt", "tickets", "limit", "image", "event_at");
     }
 
     /**

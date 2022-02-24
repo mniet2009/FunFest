@@ -21,7 +21,14 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(completion, i) in activity.completions" :key="i">
+        <router-link
+          as="tr"
+          v-for="(completion, i) in activity.completions"
+          :key="i"
+          :href="route('users.show', completion.user)"
+          class="pointer"
+          v-ripple
+        >
           <td>{{ completion.placement }}</td>
           <td>
             <user-avatar
@@ -31,7 +38,7 @@
             ></user-avatar>
           </td>
           <td>{{ completion.tickets }}</td>
-        </tr>
+        </router-link>
       </tbody>
     </v-simple-table>
   </div>
