@@ -156,7 +156,11 @@ td .avatar {
 }
 
 .tick {
-  font-size: 4rem !important;
+  font-size: 3rem !important;
   white-space: nowrap;
   font-family: arial, sans-serif;
+}
+
+.flip-part:not(:last-child) {
+  margin-right: 1em;
 }

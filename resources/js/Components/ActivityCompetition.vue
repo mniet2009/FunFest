@@ -4,7 +4,7 @@
       <div
         v-for="(value, i) in countdown"
         :key="i"
-        class="d-flex flex-column align-center mr-3"
+        class="d-flex flex-column align-center flip-part"
       >
         <Flip :value="value.toString().padStart(2, 0)"></Flip>
 
