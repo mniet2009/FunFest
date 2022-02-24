@@ -3,15 +3,16 @@
     <Head title="Schedule" />
 
     <v-parallax
-      :height="300"
+      style="height: 300px"
       dark
-      src="/img/standings.jpg"
+      src="/img/schedule.jpg"
       class="d-flex align-center justify-center top-image"
     >
       <h1>Activity Schedule</h1>
     </v-parallax>
 
     <v-container>
+      Fuck this page. fix it before release
       <v-simple-table>
         <thead>
           <tr>

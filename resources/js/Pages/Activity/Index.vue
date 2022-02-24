@@ -3,7 +3,7 @@
     <Head :title="heading" />
 
     <v-parallax
-      :height="300"
+      style="height: 300px;"
       dark
       src="/img/activities.jpg"
       class="d-flex align-center justify-center top-image"

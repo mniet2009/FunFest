@@ -29,14 +29,14 @@ class ActivitySeeder extends Seeder
             ]);
 
             if (in_array($activity->activity_type_id, [2, 3]) && rand(0, 1)) {
-                for ($i = 0; $i < rand(1, 8); $i++) {
+                for ($i = 0; $i < rand(2, 8); $i++) {
                     $name = $activityName . " child " . $i;
                     Activity::factory()->create([
                         "name" => $name,
                         "image" => $url,
                         "slug" => str_replace(" ", "-", $name),
                         "parent_id" => $activity->id,
-                        "activity_type_id" => rand(3, 4),
+                        "activity_type_id" => rand(2, 3),
                         "leaderboard_tickets" => null,
                         "limit" => 1,
                     ]);

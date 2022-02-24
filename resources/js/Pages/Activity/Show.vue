@@ -3,7 +3,7 @@
     <Head :title="activity.name" />
 
     <v-parallax
-      :height="300"
+      style="height: 300px"
       dark
       :src="activity.image"
       class="d-flex align-center justify-center top-image"

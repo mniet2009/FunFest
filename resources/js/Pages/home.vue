@@ -3,9 +3,9 @@
     <Head title="Home" />
 
     <v-parallax
-      :height="700"
+      style="height: 700px;"
       dark
-      src="/img/header.jpg"
+      src="/img/home.jpg"
       class="d-flex align-center justify-center parallax-home"
     >
       <h1 class="text-uppercase">

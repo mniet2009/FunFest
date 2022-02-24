@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-tabs
-      v-if="activities.length > 1"
+      v-if="activity.children.length > 0"
       v-model="tab"
       grow
       dark

@@ -14,9 +14,4 @@ class HomeController extends Controller
             ->get();
         return Inertia::render('home', compact('activityTypes'));
     }
-
-    public function about()
-    {
-        return Inertia::render('about');
-    }
 }

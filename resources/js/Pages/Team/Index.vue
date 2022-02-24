@@ -3,7 +3,7 @@
     <Head title="Standings" />
 
     <v-parallax
-      :height="300"
+      style="height: 300px;"
       dark
       src="/img/standings.jpg"
       class="d-flex align-center justify-center top-image"

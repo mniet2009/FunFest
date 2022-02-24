@@ -89,10 +89,12 @@ class Activity extends Model
 
     public static function forUser($user)
     {
-        function groupActivities($query, $user)
+        $userId = $user ? $user->id : null;
+
+        function groupActivities($query, $userId)
         {
             $query->groupBy("activity_id", "user_id", "placement")
-                ->where("user_id", $user->id)
+                ->where("user_id", $userId)
                 ->select("activity_id", "placement", DB::raw("SUM(tickets) as tickets"));
         }
 
@@ -102,13 +104,13 @@ class Activity extends Model
                     ->orWhereNull("revealed_at");
             })
             ->with("activityType:id,icon")
-            ->with(["completions" => function ($query) use ($user) {
-                groupActivities($query, $user);
+            ->with(["completions" => function ($query) use ($userId) {
+                groupActivities($query, $userId);
             }])
             ->with([
                 "children:id,parent_id,activity_type_id,name,excerpt,tickets,limit",
-                "children.completions" => function ($query) use ($user) {
-                    groupActivities($query, $user);
+                "children.completions" => function ($query) use ($userId) {
+                    groupActivities($query, $userId);
                 }
             ])
             ->orderBy("name", "asc")

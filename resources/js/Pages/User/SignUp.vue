@@ -3,7 +3,7 @@
     <Head title="Sign Up" />
 
     <v-parallax
-      :height="300"
+      style="height: 300px"
       dark
       src="/img/signup.jpg"
       class="d-flex align-center justify-center top-image"
