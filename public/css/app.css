@@ -169,5 +169,5 @@ td .avatar {
 }
 
 .v-card__title {
-  word-break: break-word;
+  word-break: break-word !important;
 }
