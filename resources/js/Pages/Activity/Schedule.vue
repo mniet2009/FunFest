@@ -42,11 +42,11 @@
                   class="text-h6"
                 ></local-datetime>
 
-                <Countdown
+                <!-- <Countdown
                   class="mx-auto"
                   :endDate="activity.event_at"
                   style="font-size: 0.8em"
-                ></Countdown>
+                ></Countdown> -->
               </v-card-text>
             </v-card>
           </router-link>
