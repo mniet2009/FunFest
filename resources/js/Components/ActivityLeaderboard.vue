@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="canRedeem()" class="mb-10">
+    <div v-if="canRedeem()" class="mb-6">
       <v-card color="primary" class="mb-3">
         <v-card-text>
           <v-btn v-if="!formOpen" @click="formOpen = true" block

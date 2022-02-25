@@ -23,7 +23,7 @@
 
           <v-card
             v-if="[1, 5, 6, 7].includes(activity.activity_type_id)"
-            class="mt-10"
+            class="mt-6"
           >
             <v-card-title>Ticket distribution</v-card-title>
             <v-simple-table>
