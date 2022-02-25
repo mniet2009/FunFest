@@ -95,7 +95,7 @@ class Activity extends Model
         {
             $query->groupBy("activity_id", "user_id", "placement")
                 ->where("user_id", $userId)
-                ->select("activity_id", "placement", DB::raw("SUM(tickets) as tickets"));
+                ->select("user_id", "activity_id", "placement", DB::raw("SUM(tickets) as tickets"));
         }
 
         return Activity::whereNull("parent_id")

@@ -1,4 +1,5 @@
 export function getActivityState(activity, user_id) {
+  console.log(user_id);
   let ret = {
     availableTickets: 0,
     tickets: 0,
