@@ -14,13 +14,17 @@
     <v-container class="pt-3">
       <v-row>
         <v-col cols="12" lg="6">
-          <vue-markdown>{{ activity.description }}</vue-markdown>
+          <v-card>
+            <v-card-text>
+              <vue-markdown>{{ activity.description }}</vue-markdown>
+            </v-card-text>
+          </v-card>
 
-          <div
+          <v-card
             v-if="[1, 5, 6, 7].includes(activity.activity_type_id)"
             class="mt-10"
           >
-            <h2>Ticket distribution</h2>
+            <v-card-title>Ticket distribution</v-card-title>
             <v-simple-table>
               <thead>
                 <tr>
@@ -38,7 +42,7 @@
                 </tr>
               </tbody>
             </v-simple-table>
-          </div>
+          </v-card>
         </v-col>
 
         <v-col cols="12" lg="6">
