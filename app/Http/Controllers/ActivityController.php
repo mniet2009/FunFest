@@ -14,7 +14,7 @@ class ActivityController extends Controller
 {
     public function index()
     {
-        $activityTypes = ActivityType::select("name", "id")->get();
+        $activityTypes = ActivityType::select("name", "id", "icon")->get();
         $activities = Activity::forUser(Auth::user())->get();
 
         return Inertia::render('Activity/Index', compact('activities', 'activityTypes'));

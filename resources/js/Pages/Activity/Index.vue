@@ -12,7 +12,7 @@
     </v-parallax>
 
     <v-container>
-      <div class="d-flex justify-center">
+      <div class="d-flex justify-center flex-wrap">
         <v-btn
           class="mr-3 mb-3"
           v-for="activityType of activityTypesPlusAll"
@@ -21,11 +21,14 @@
           :color="filter == activityType.id ? 'primary' : 'grey'"
           dark
           @click="filter = activityType.id"
-          >{{ activityType.name }}</v-btn
+          ><v-icon v-if="activityType.icon" class="mr-2">{{
+            activityType.icon
+          }}</v-icon>
+          {{ activityType.name }}</v-btn
         >
       </div>
 
-      <div class="d-flex justify-center" v-if="$page.props.auth.user">
+      <div class="d-flex justify-center flex-wrap" v-if="$page.props.auth.user">
         <v-btn
           class="mr-3 mb-3"
           v-for="filter of completionFilters"
