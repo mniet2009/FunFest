@@ -167,3 +167,7 @@ td .avatar {
 .activity-description p:last-child {
   margin-bottom: 0;
 }
+
+.v-card__title {
+  word-break: break-word;
+}
