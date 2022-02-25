@@ -104,8 +104,9 @@ class ActivityController extends Controller
                     ->orWhereNull("revealed_at");
             })
             ->whereNotNull("event_at")
-            ->orderBy("event_at")
-            ->select("name", "slug", "event_at")
+            ->where("event_at", ">", now())
+            ->orderBy("event_at", "ASC")
+            ->select("name", "slug", "event_at", "image")
             ->get();
 
         return Inertia::render('Activity/Schedule', compact('activities'));

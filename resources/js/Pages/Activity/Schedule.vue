@@ -12,29 +12,46 @@
     </v-parallax>
 
     <v-container>
-      Fuck this page. fix it before release
-      <v-simple-table>
-        <thead>
-          <tr>
-            <th>Activity</th>
-            <th>Time</th>
-          </tr>
-        </thead>
-
-        <tbody>
+      <v-row>
+        <v-col
+          v-for="activity of activities"
+          :key="activity.id"
+          :cols="12"
+          :md="6"
+          :lg="6"
+          :xl="3"
+        >
           <router-link
-            as="tr"
-            v-for="activity of activities"
-            :key="activity.id"
-            :href="route('activities.show', activity)"
+            as="div"
             class="pointer"
-            v-ripple
+            :href="route('activities.show', activity)"
           >
-            <td>{{ activity.name }}</td>
-            <td><local-datetime :t="activity.event_at"></local-datetime></td>
+            <v-card>
+              <v-img
+                :src="activity.image"
+                class="white--text align-end"
+                gradient="to bottom, rgba(0,0,0,0), rgba(0,0,0,.5)"
+                height="400px"
+              >
+                <v-card-title v-text="activity.name"></v-card-title>
+              </v-img>
+
+              <v-card-text class="text-center">
+                <local-datetime
+                  :t="activity.event_at"
+                  class="text-h6"
+                ></local-datetime>
+
+                <Countdown
+                  class="mx-auto"
+                  :endDate="activity.event_at"
+                  style="font-size: 0.8em"
+                ></Countdown>
+              </v-card-text>
+            </v-card>
           </router-link>
-        </tbody>
-      </v-simple-table>
+        </v-col>
+      </v-row>
     </v-container>
   </div>
 </template>
