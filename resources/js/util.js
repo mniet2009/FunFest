@@ -15,8 +15,10 @@ export function getActivityState(activity, user_id) {
 
   for (activity of activities) {
     // filter completions for current user
-    let completions = [];
-    if (user_id) {
+    let completions;
+    if (typeof user_id == "undefined") {
+      completions = activity.completions;
+    } else {
       completions = activity.completions.filter(
         (completion) => completion.user_id === user_id
       );

@@ -96,10 +96,7 @@ export default {
 
   computed: {
     activityState() {
-      return util.getActivityState(
-        this.activity,
-        this.$page.props.auth.user ? this.$page.props.auth.user.id : null
-      );
+      return util.getActivityState(this.activity);
     },
 
     excerpts() {
