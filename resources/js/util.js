@@ -14,7 +14,7 @@ export function getActivityState(activity, user_id) {
 
   for (activity of activities) {
     // filter completions for current user
-    let completions = activity.completions;
+    let completions = [];
     if (user_id) {
       completions = activity.completions.filter(
         (completion) => completion.user_id === user_id
