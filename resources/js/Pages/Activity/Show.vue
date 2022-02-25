@@ -16,7 +16,7 @@
         <v-col cols="12" lg="6">
           <v-card>
             <v-card-title>Task</v-card-title>
-            <v-card-text>
+            <v-card-text class="activity-description">
               <vue-markdown>{{ activity.description }}</vue-markdown>
             </v-card-text>
           </v-card>

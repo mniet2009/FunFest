@@ -163,3 +163,7 @@ td .avatar {
 .flip-part:not(:last-child) {
   margin-right: 1em;
 }
+
+.activity-description p:last-child {
+  margin-bottom: 0;
+}
