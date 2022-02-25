@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="canRedeem()">
+    <div v-if="canRedeem()" class="mb-10">
       <v-card color="primary" class="mb-3">
         <v-card-text>
           <v-btn v-if="!formOpen" @click="formOpen = true" block
@@ -96,61 +96,65 @@
       </v-card>
     </div>
 
-    <v-simple-table class="mt-10">
-      <thead>
-        <tr>
-          <th>Rank</th>
-          <th>Player</th>
-          <th class="text-right">{{ resultColumnName }}</th>
-          <th>Tickets</th>
-        </tr>
-      </thead>
-      <tbody v-if="activity.completions.length > 0">
-        <router-link
-          as="tr"
-          v-for="(completion, i) in activity.completions"
-          :key="i"
-          :href="route('users.show', completion.user)"
-          class="pointer"
-          v-ripple
-        >
-          <td>{{ ordinal_number(completion.placement) }}</td>
-          <td>
-            <user-avatar
-              :url="completion.user.id"
-              :username="completion.user.username"
-              :color="$page.props.teams[completion.user.team_id - 1].color"
-            ></user-avatar>
-          </td>
-          <td class="text-right">
-            <div v-if="activity.leaderboard_type_id == 1">
-              {{ formatNumber(completion.result) }}
-            </div>
+    <v-card>
+      <v-card-title>Leaderboard</v-card-title>
 
-            <div v-else-if="activity.leaderboard_type_id == 2">
-              <span
-                v-for="part of formatTime(completion.result)"
-                :key="part.symbol"
-              >
-                {{ part.number
-                }}<span class="leaderboard-time-symbol grey--text">{{
-                  part.symbol
-                }}</span>
-              </span>
-            </div>
-          </td>
-          <td>{{ completion.tickets }}</td>
-        </router-link>
-      </tbody>
+      <v-simple-table>
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Player</th>
+            <th class="text-right">{{ resultColumnName }}</th>
+            <th>Tickets</th>
+          </tr>
+        </thead>
+        <tbody v-if="activity.completions.length > 0">
+          <router-link
+            as="tr"
+            v-for="(completion, i) in activity.completions"
+            :key="i"
+            :href="route('users.show', completion.user)"
+            class="pointer"
+            v-ripple
+          >
+            <td>{{ ordinal_number(completion.placement) }}</td>
+            <td>
+              <user-avatar
+                :url="completion.user.id"
+                :username="completion.user.username"
+                :color="$page.props.teams[completion.user.team_id - 1].color"
+              ></user-avatar>
+            </td>
+            <td class="text-right">
+              <div v-if="activity.leaderboard_type_id == 1">
+                {{ formatNumber(completion.result) }}
+              </div>
 
-      <tbody v-else>
-        <tr>
-          <td colspan="4" class="text-center">
-            No {{ resultColumnName.toLowerCase() }}s yet.
-          </td>
-        </tr>
-      </tbody>
-    </v-simple-table>
+              <div v-else-if="activity.leaderboard_type_id == 2">
+                <span
+                  v-for="part of formatTime(completion.result)"
+                  :key="part.symbol"
+                >
+                  {{ part.number
+                  }}<span class="leaderboard-time-symbol grey--text">{{
+                    part.symbol
+                  }}</span>
+                </span>
+              </div>
+            </td>
+            <td>{{ completion.tickets }}</td>
+          </router-link>
+        </tbody>
+
+        <tbody v-else>
+          <tr>
+            <td colspan="4" class="text-center">
+              No {{ resultColumnName.toLowerCase() }}s yet.
+            </td>
+          </tr>
+        </tbody>
+      </v-simple-table>
+    </v-card>
   </div>
 </template>
 
