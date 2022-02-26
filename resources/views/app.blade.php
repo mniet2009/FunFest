@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
+        <meta property="og:site_name" content="Mystery Fun Fest" />
         <meta property="og:title" content="{{ $title ?? 'Mystery Fun Fest' }}" />
         <meta property="og:description" content="{{ $description ?? 'Mystery Fun Fest is a cooperative event in which two teams compete to accrue the most tickets throughout its 17-day duration.' }}" />
         <meta property="og:image" content="{{ $image ?? asset('/img/home.jpg') }}" />
