@@ -21,7 +21,7 @@
       <v-tab-item v-for="(activity, i) in activities" :key="activity.id">
         <v-card>
           <v-card-text>
-            <p class="primary--text" v-if="loggedIn">
+            <p class="primary--text">
               {{ redeemText(i) }}
             </p>
 
