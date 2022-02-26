@@ -58,7 +58,7 @@
               ></v-textarea>
 
               <v-btn color="primary" @click="submit">
-                {{ signedUp ? "Edit data" : "Sign Up" }}
+                {{ signedUp ? "Save" : "Sign Up" }}
               </v-btn>
             </v-form>
           </div>
