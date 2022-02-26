@@ -9,8 +9,7 @@
 
           <v-list-item-title>
             <div class="logged-in-as">Logged in as:</div>
-            <strong>{{ $page.props.auth.user.username }}</strong
-            >l
+            <strong>{{ $page.props.auth.user.username }}</strong>
           </v-list-item-title>
 
           <v-tooltip left>
