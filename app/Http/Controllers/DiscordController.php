@@ -98,11 +98,6 @@ class DiscordController extends Controller
       ]
     );
 
-    if (is_null($user->team)) {
-      $user->team = rand(1, 2);
-      $user->save();
-    }
-
     Auth::login($user, true);
 
     return redirect(session('from'));
