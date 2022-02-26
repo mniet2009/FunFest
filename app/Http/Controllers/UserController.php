@@ -21,7 +21,7 @@ class UserController extends Controller
         return Inertia::render('User/SignUp', compact("initialLikelihood", "initialFriends"))
             ->withViewData([
                 "title" => "Sign Up",
-                "description" => "Sign up for all the Fun and the Fest.",
+                "description" => "Sign up for all the Fun and the Fest",
                 "image" => asset("img/signup.jpg"),
             ]);
     }
@@ -68,7 +68,7 @@ class UserController extends Controller
         return Inertia::render('Activity/Index', compact('activities', 'activityTypes', "user"))
             ->withViewData([
                 "title" => "{$user->username}'s Activities",
-                "description" => "View {$user->username}'s progress in the Mystery Fun Fest.",
+                "description" => "View {$user->username}'s progress in the Mystery Fun Fest",
                 "image" => asset("img/activities.jpg"),
             ]);
     }

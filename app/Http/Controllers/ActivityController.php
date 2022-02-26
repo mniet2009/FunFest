@@ -125,7 +125,7 @@ class ActivityController extends Controller
         return Inertia::render('Activity/Schedule', compact('activities'))
             ->withViewData([
                 "title" => "Schedule",
-                "description" => "All upcoming Fun Fest activities.",
+                "description" => "All upcoming Fun Fest activities",
                 "image" => asset("img/schedule.jpg"),
             ]);
     }
