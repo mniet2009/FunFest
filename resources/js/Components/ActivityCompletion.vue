@@ -10,8 +10,8 @@
       <v-tab
         v-for="(activity, i) in activities"
         :key="activity.id"
-        class="white--text"
-        :class="getStateColor(activityState.states[i])"
+        class="text--lighten-1"
+        :class="getStateColor(activityState.states[i]) + '--text'"
       >
         {{ activity.name }}
       </v-tab>
@@ -21,11 +21,11 @@
       <v-tab-item v-for="(activity, i) in activities" :key="activity.id">
         <v-card>
           <v-card-text>
-            <div class="mb-10" v-if="canRedeem(i)">
-              <p>
-                You can redeem this activity for {{ activity.tickets }} tickets.
-              </p>
+            <p class="primary--text" v-if="loggedIn">
+              {{ redeemText(i) }}
+            </p>
 
+            <div class="mb-10" v-if="canRedeem(i)">
               <v-btn
                 v-if="!formOpen"
                 @click="formOpen = true"
@@ -101,15 +101,43 @@ export default {
     },
 
     canRedeem(i) {
-      return (
-        this.$page.props.auth.user &&
-        this.$page.props.started &&
-        this.activityState.states[i] != "complete"
+      return this.loggedIn && this.activityState.states[i] != "complete";
+    },
+
+    redeemText(i) {
+      let activity = this.activities[i];
+
+      if (activity.limit == 1) {
+        if (this.activityState.states[i] == "incomplete") {
+          return `You can redeem this activity for ${activity.tickets} tickets.`;
+        } else {
+          return `You have redeemed this activity for ${activity.tickets} tickets.`;
+        }
+      } else {
+        if (this.activityState.states[i] == "incomplete") {
+          return `You can redeem this activity ${activity.limit} times for ${activity.tickets} tickets each.`;
+        } else {
+          return `You have redeemed this activity ${
+            this.ownCompletions(i).count
+          } out of ${activity.limit} times for ${
+            activity.tickets
+          } tickets each.`;
+        }
+      }
+    },
+
+    ownCompletions(i) {
+      return this.activities[i].completions.find(
+        (completion) => completion.user_id == this.$page.props.auth.user.id
       );
     },
   },
 
   computed: {
+    loggedIn() {
+      return this.$page.props.auth.user && this.$page.props.started;
+    },
+
     activityState() {
       return util.getActivityState(
         this.activity,

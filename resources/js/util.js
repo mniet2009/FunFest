@@ -141,7 +141,7 @@ export function formatTime(ms) {
 
 export function getStateColor(state) {
   if (state == "incomplete") {
-    return "error";
+    return "red";
   } else if (state == "partial") {
     return "warning";
   } else if (state == "complete") {
