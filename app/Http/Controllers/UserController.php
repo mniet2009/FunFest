@@ -18,7 +18,12 @@ class UserController extends Controller
         $initialLikelihood = $user->likelihood ?? null;
         $initialFriends = $user->friends ?? "";
 
-        return Inertia::render('User/SignUp', compact("initialLikelihood", "initialFriends"));
+        return Inertia::render('User/SignUp', compact("initialLikelihood", "initialFriends"))
+            ->withViewData([
+                "title" => "Sign Up",
+                "description" => "Sign up for all the Fun and the Fest.",
+                "image" => asset("img/signup.jpg"),
+            ]);
     }
 
     public function signUp(Request $request)
@@ -60,6 +65,11 @@ class UserController extends Controller
         $activityTypes = ActivityType::all();
         $activities = Activity::forUser($user)->get();
 
-        return Inertia::render('Activity/Index', compact('activities', 'activityTypes', "user"));
+        return Inertia::render('Activity/Index', compact('activities', 'activityTypes', "user"))
+            ->withViewData([
+                "title" => "{$user->username}'s Activities",
+                "description" => "View {$user->username}'s progress in the Mystery Fun Fest.",
+                "image" => asset("img/activities.jpg"),
+            ]);
     }
 }

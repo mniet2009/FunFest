@@ -54,9 +54,17 @@ class ActivityController extends Controller
         ]);
 
         // filter activity
-        $activity = $activity->only(["id", "slug", "activity_type_id", "name", "description", "children", "image", "completions", "tickets", "limit", "leaderboard_type_id", "leaderboard_tickets", "event_at"]);
+        $activityArray = $activity->only(["id", "slug", "activity_type_id", "name", "description", "children", "image", "completions", "tickets", "limit", "leaderboard_type_id", "leaderboard_tickets", "event_at"]);
 
-        return Inertia::render('Activity/Show', compact('activity', 'teams'));
+        return Inertia::render('Activity/Show', [
+            'activity' => $activityArray,
+            'teams' => $teams,
+        ])
+            ->withViewData([
+                "title" => $activity->name,
+                "description" => $activity->excerpt,
+                "image" => asset($activity->image),
+            ]);
     }
 
     public function complete(Request $request, Activity $activity)
@@ -114,6 +122,11 @@ class ActivityController extends Controller
             ->select("name", "slug", "event_at", "image")
             ->get();
 
-        return Inertia::render('Activity/Schedule', compact('activities'));
+        return Inertia::render('Activity/Schedule', compact('activities'))
+            ->withViewData([
+                "title" => "Schedule",
+                "description" => "All upcoming Fun Fest activities.",
+                "image" => asset("img/schedule.jpg"),
+            ]);
     }
 }

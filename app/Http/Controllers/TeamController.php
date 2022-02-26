@@ -23,6 +23,11 @@ class TeamController extends Controller
             }])
             ->get();
 
-        return Inertia::render('Team/Index', compact("teams"));
+        return Inertia::render('Team/Index', compact("teams"))
+            ->withViewData([
+                "title" => "Standings",
+                "description" => "View the Fun Fest standings",
+                "image" => asset("img/standings.jpg"),
+            ]);
     }
 }
