@@ -6,6 +6,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <meta property="og:title" content="{{ $title ?? 'Mystery Fun Fest' }}" />
+        <meta property="og:description" content="{{ $title ?? 'Mystery Fun Fest is a cooperative event in which two teams compete to accrue the most tickets throughout its 17-day duration.' }}" />
         <meta property="og:image" content="{{ $image ?? asset('/img/home.jpg') }}" />
 
         <link rel="icon" type="image/png" href="/img/favicon.png">
