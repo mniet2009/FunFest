@@ -15,7 +15,7 @@ class HomeController extends Controller
         return Inertia::render('home', compact('activityTypes'))
             ->withViewData([
                 "title" => "Mystery Fun Fest",
-                "image" => asset("/images/home.jpg"),
+                "image" => asset("/img/home.jpg"),
             ]);
     }
 }

@@ -6,7 +6,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <meta property="og:title" content="{{ $title ?? 'Mystery Fun Fest' }}" />
-        <meta property="og:image" content="{{ $image ?? asset('/images/home.jpg') }}" />
+        <meta property="og:image" content="{{ $image ?? asset('/img/home.jpg') }}" />
 
         <link rel="icon" type="image/png" href="/img/favicon.png">
 
