@@ -47,6 +47,7 @@ class HandleInertiaRequests extends Middleware
                 'username' => $user->username,
                 'avatar' => $user->avatar,
                 'signedUp' => $user->signed_up,
+                'color' => $user->team ? $user->team->color : null,
             ];
         }
 

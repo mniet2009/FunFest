@@ -1,6 +1,6 @@
 <template>
   <v-navigation-drawer permanent app expand-on-hover v-model="drawer">
-    <v-sheet color="primary">
+    <v-sheet :color="userColor">
       <v-list>
         <v-list-item class="px-2" v-if="$page.props.auth.user">
           <v-list-item-avatar>
@@ -93,6 +93,16 @@ export default {
   methods: {
     logout() {
       this.$inertia.post(this.route("logout"));
+    },
+  },
+
+  computed: {
+    userColor() {
+      if (this.$page.props.auth.user) {
+        return this.$page.props.auth.user.color ?? "primary";
+      } else {
+        return "primary";
+      }
     },
   },
 
