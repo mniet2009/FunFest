@@ -12,6 +12,10 @@ class HomeController extends Controller
         $activityTypes = ActivityType::where("hidden", false)
             ->select("description", "icon", "name")
             ->get();
-        return Inertia::render('home', compact('activityTypes'));
+        return Inertia::render('home', compact('activityTypes'))
+            ->withViewData([
+                "title" => "Mystery Fun Fest",
+                "image" => asset("/images/home.jpg"),
+            ]);
     }
 }

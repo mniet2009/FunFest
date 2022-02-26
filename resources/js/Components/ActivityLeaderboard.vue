@@ -8,8 +8,13 @@
           >
 
           <v-card v-if="formOpen">
-            <v-card-text>
-              <v-form ref="form" v-model="valid" lazy-validation>
+            <v-form
+              @submit.prevent="submitComplete"
+              ref="form"
+              v-model="valid"
+              lazy-validation
+            >
+              <v-card-text>
                 <div v-if="activity.leaderboard_type_id == 1">
                   <v-text-field
                     v-model="form.result"
@@ -80,17 +85,17 @@
                   required
                   :rules="proofRules"
                 ></v-text-field>
-              </v-form>
-            </v-card-text>
+              </v-card-text>
 
-            <v-card-actions>
-              <v-btn @click="submitComplete" color="primary">
-                Submit
-              </v-btn>
-              <v-btn @click="formOpen = false" color="grey">
-                Nevermind
-              </v-btn>
-            </v-card-actions>
+              <v-card-actions>
+                <v-btn @click="submitComplete" color="primary">
+                  Submit
+                </v-btn>
+                <v-btn @click="formOpen = false" color="grey">
+                  Nevermind
+                </v-btn>
+              </v-card-actions>
+            </v-form>
           </v-card>
         </v-card-text>
       </v-card>

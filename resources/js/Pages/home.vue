@@ -114,11 +114,12 @@
       <p>
         All currently public games, activities, and their ticket distributions
         to be featured in Mystery Fun Fest can be viewed on the
-        <a target="_blank" :href="route('activities.index')">activities page</a
+        <router-link :href="route('activities.index')"
+          >activities page</router-link
         >. The
-        <a target="_blank" :href="route('activities.schedule')">
+        <router-link :href="route('activities.schedule')">
           schedule page
-        </a>
+        </router-link>
         will also show all currently public games that will take place at a
         specified time rather than being accessible throughout the entire event.
         Until the event begins, these pages will be incomplete - games will be

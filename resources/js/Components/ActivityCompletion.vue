@@ -35,6 +35,7 @@
               >
 
               <v-form
+                @submit.prevent="submitComplete"
                 v-if="formOpen"
                 ref="form"
                 v-model="valid"
