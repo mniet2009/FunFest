@@ -17,7 +17,12 @@ class ActivityController extends Controller
         $activityTypes = ActivityType::select("name", "id", "icon")->get();
         $activities = Activity::forUser(Auth::user())->get();
 
-        return Inertia::render('Activity/Index', compact('activities', 'activityTypes'));
+        return Inertia::render('Activity/Index', compact('activities', 'activityTypes'))
+            ->withViewData([
+                "title" => "Activities",
+                "description" => "View all Fun Fest activities",
+                "image" => asset("/img/activities.jpg"),
+            ]);
     }
 
     public function show(Activity $activity)
@@ -51,12 +56,7 @@ class ActivityController extends Controller
         // filter activity
         $activity = $activity->only(["id", "slug", "activity_type_id", "name", "description", "children", "image", "completions", "tickets", "limit", "leaderboard_type_id", "leaderboard_tickets", "event_at"]);
 
-        return Inertia::render('Activity/Show', compact('activity', 'teams'))
-            ->withViewData([
-                "title" => "Activities",
-                "description" => "View all Fun Fest activities",
-                "image" => asset("/img/activities.jpg"),
-            ]);
+        return Inertia::render('Activity/Show', compact('activity', 'teams'));
     }
 
     public function complete(Request $request, Activity $activity)
