@@ -75,9 +75,15 @@ class DiscordController extends Controller
       $avatarUrl = "https://cdn.discordapp.com/avatars/$userData->id/$userData->avatar";
 
       $path = Storage::path('public/avatars/' . $userData->id);
-      $client->request('GET', $avatarUrl, [
-        'sink' => $path,
-      ]);
+
+      try {
+        $client->request('GET', $avatarUrl, [
+          'sink' => $path,
+        ]);
+      } catch (\GuzzleHttp\Exception\ClientException $error) {
+        // if the request fails for whatever reason, avatar is null
+        $userData->avatar = null;
+      };
     }
 
     $user = User::updateOrCreate(
