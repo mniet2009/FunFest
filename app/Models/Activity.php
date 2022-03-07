@@ -113,6 +113,7 @@ class Activity extends Model
                     groupActivities($query, $userId);
                 }
             ])
+            ->orderBy("revealed_at", "asc")
             ->orderBy("name", "asc")
             ->select("id", "activity_type_id", "name", "slug", "excerpt", "tickets", "limit", "image", "event_at");
     }
