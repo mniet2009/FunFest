@@ -19,7 +19,8 @@ class TeamController extends Controller
                 $query
                     ->select("id", "team_id", "username", "slug")
                     ->withSum("completions", "tickets")
-                    ->orderBy("completions_sum_tickets", "desc");
+                    ->orderBy("completions_sum_tickets", "desc")
+                    ->orderBy("username", "asc");
             }])
             ->get();
 
