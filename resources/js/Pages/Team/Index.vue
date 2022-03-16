@@ -33,20 +33,20 @@
             <tbody>
               <router-link
                 as="tr"
-                v-for="completion in team.completions"
-                :key="completion.user.username"
-                :href="route('users.show', completion.user)"
+                v-for="user in team.users"
+                :key="user.username"
+                :href="route('users.show', user)"
                 class="pointer"
                 v-ripple
               >
                 <td>
                   <user-avatar
-                    :url="completion.user.id"
-                    :username="completion.user.username"
+                    :url="user.id"
+                    :username="user.username"
                   ></user-avatar>
                 </td>
                 <td class="text-right">
-                  {{ formatNumber(completion.tickets) }}
+                  {{ formatNumber(user.completions_sum_tickets) }}
                 </td>
               </router-link>
             </tbody>

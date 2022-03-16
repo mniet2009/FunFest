@@ -15,11 +15,11 @@ class TeamController extends Controller
         DB::enableQueryLog();
 
         $teams = Team::withSum("completions", "tickets")
-            ->with(["completions" => function ($query) {
-                $query->groupBy("user_id", "team_id")
-                    ->select("user_id", DB::raw("SUM(tickets) as tickets"))
-                    ->orderBy("tickets", "desc")
-                    ->with("user:id,username,avatar,slug");
+            ->with(["users" => function ($query) {
+                $query
+                    ->select("id", "team_id", "username")
+                    ->withSum("completions", "tickets")
+                    ->orderBy("completions_sum_tickets", "desc");
             }])
             ->get();
 
