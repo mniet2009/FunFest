@@ -42,7 +42,7 @@
       <router-link
         v-for="item in items"
         :key="item.title"
-        :href="item.route"
+        :href="route(item.route)"
         as="div"
       >
         <v-list-item link>
@@ -55,6 +55,22 @@
           </v-list-item-content>
         </v-list-item>
       </router-link>
+
+      <a
+        style="text-decoration: none;"
+        target="_blank"
+        href="https://drive.google.com/file/d/1YT_wcr8sKqjKJUeUFu2jMoyIM_DjhWC1/view"
+      >
+        <v-list-item link>
+          <v-list-item-icon>
+            <v-icon>mdi-download</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>Download Pack</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </a>
     </v-list>
 
     <template v-slot:append>
@@ -113,28 +129,22 @@ export default {
         {
           title: "Home",
           icon: "mdi-home",
-          route: route("home"),
+          route: "home",
         },
         {
           title: "Activities",
           icon: "mdi-ticket",
-          route: route("activities.index"),
+          route: "activities.index",
         },
         {
           title: "Standings",
           icon: "mdi-podium",
-          route: route("teams.index"),
+          route: "teams.index",
         },
         {
           title: "Schedule",
           icon: "mdi-calendar",
-          route: route("activities.schedule"),
-        },
-        {
-          title: "Download Pack",
-          icon: "mdi-download",
-          href:
-            "https://drive.google.com/file/d/1YT_wcr8sKqjKJUeUFu2jMoyIM_DjhWC1/view",
+          route: "activities.schedule",
         },
         // {
         //   title: "About",
