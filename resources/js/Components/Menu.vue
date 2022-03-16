@@ -42,7 +42,7 @@
       <router-link
         v-for="item in items"
         :key="item.title"
-        :href="route(item.route)"
+        :href="item.route"
         as="div"
       >
         <v-list-item link>
@@ -113,22 +113,28 @@ export default {
         {
           title: "Home",
           icon: "mdi-home",
-          route: "home",
+          route: route("home"),
         },
         {
           title: "Activities",
           icon: "mdi-ticket",
-          route: "activities.index",
+          route: route("activities.index"),
         },
         {
           title: "Standings",
           icon: "mdi-podium",
-          route: "teams.index",
+          route: route("teams.index"),
         },
         {
           title: "Schedule",
           icon: "mdi-calendar",
-          route: "activities.schedule",
+          route: route("activities.schedule"),
+        },
+        {
+          title: "Download Pack",
+          icon: "mdi-download",
+          href:
+            "https://drive.google.com/file/d/1YT_wcr8sKqjKJUeUFu2jMoyIM_DjhWC1/view",
         },
         // {
         //   title: "About",

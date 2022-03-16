@@ -205,7 +205,11 @@ export default {
     },
 
     canRedeem() {
-      return this.$page.props.auth.user && this.$page.props.started;
+      return (
+        this.$page.props.auth.user &&
+        this.$page.props.started &&
+        this.$page.props.auth.user.team_id
+      );
     },
   },
 
