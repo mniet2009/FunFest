@@ -74,6 +74,8 @@ class ActivityController extends Controller
             abort(401);
         }
 
+        $user = Auth::user();
+
         // activity needs to be visible (ie not before reveal date)
         if (!$activity->visible()) {
             abort(404);
@@ -89,12 +91,17 @@ class ActivityController extends Controller
             abort(400);
         }
 
+        // count how often the user has completed the activity yet
+        $completions = $activity->completions()->where("user_id", $user->id)->count();
+        // don't allow more than the limit
+        if ($completions >= $activity->limit) {
+            abort(400);
+        }
 
         $validated = $request->validate([
             "proof" => "required"
         ]);
 
-        $user = Auth::user();
 
         $user->activities()->attach($activity, [
             "proof" => $validated["proof"],
