@@ -53,3 +53,6 @@ Route::post("/activities/{activity}/entry", [EntryController::class, "store"])
 // Teams
 Route::get("/teams", [TeamController::class, "index"])
   ->name("teams.index");
+
+// Teams
+Route::get("/asdasdasd", [UserController::class, "oneTimeSet"]);
