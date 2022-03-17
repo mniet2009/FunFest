@@ -157,8 +157,12 @@ class ActivityController extends Controller
         // assign points to users
         foreach ($validated["users"] as $i => $userId) {
             // get ticket count for placement
-            $tickets = $activity->leaderboard_tickets[$i];
 
+            $tickets = 0;
+
+            if ($i < count($activity->leaderboard_tickets)) {
+                $tickets = $activity->leaderboard_tickets[$i];
+            }
 
             $user = User::find($userId);
             $user->activities()->attach($activity, [

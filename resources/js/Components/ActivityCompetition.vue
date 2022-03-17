@@ -4,7 +4,7 @@
 
     <v-card v-else>
       <v-card-title>
-        Leaderboard
+        Results
         <v-btn
           class="ml-4"
           v-if="$page.props.can['assign points']"
