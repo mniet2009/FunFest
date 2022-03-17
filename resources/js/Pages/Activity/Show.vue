@@ -21,29 +21,11 @@
             </v-card-text>
           </v-card>
 
-          <v-card
+          <Ticket-Distribution
             v-if="[1, 5, 6, 7].includes(activity.activity_type_id)"
             class="mt-6"
-          >
-            <v-card-title>Ticket distribution</v-card-title>
-            <v-simple-table>
-              <thead>
-                <tr>
-                  <th>Rank</th>
-                  <th>Tickets</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr
-                  v-for="(tickets, rank) in activity.leaderboard_tickets"
-                  :key="rank"
-                >
-                  <td>{{ ordinal_number(rank + 1) }}</td>
-                  <td>{{ tickets }}</td>
-                </tr>
-              </tbody>
-            </v-simple-table>
-          </v-card>
+            :activity="activity"
+          ></Ticket-Distribution>
         </v-col>
 
         <v-col cols="12" lg="6">

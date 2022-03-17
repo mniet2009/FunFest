@@ -50,6 +50,13 @@ Route::get("/schedule", [ActivityController::class, "schedule"])
 Route::post("/activities/{activity}/entry", [EntryController::class, "store"])
   ->name("entries.store");
 
+Route::group(['middleware' => ['can:assign points']], function () {
+  Route::get("/activities/{activity}/points", [ActivityController::class, "pointsForm"])
+    ->name("activities.pointsForm");
+  Route::post("/activities/{activity}/points", [ActivityController::class, "assignPoints"])
+    ->name("activities.assignPoints");
+});
+
 // Teams
 Route::get("/teams", [TeamController::class, "index"])
   ->name("teams.index");

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Activity;
 use App\Models\ActivityType;
 use App\Models\Team;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -135,5 +136,37 @@ class ActivityController extends Controller
                 "description" => "All upcoming Fun Fest activities",
                 "image" => asset("img/schedule.jpg"),
             ]);
+    }
+
+    public function pointsForm(Activity $activity)
+    {
+        $users = User::orderBy("username", "asc")->get();
+
+        return Inertia::render('Activity/PointsForm', compact('activity', 'users'));
+    }
+
+    public function assignPoints(Activity $activity)
+    {
+        $validated = request()->validate([
+            "users" => "required|array",
+        ]);
+
+        // delete all completions
+        $activity->completions()->delete();
+
+        // assign points to users
+        foreach ($validated["users"] as $i => $userId) {
+            // get ticket count for placement
+            $tickets = $activity->leaderboard_tickets[$i];
+
+
+            $user = User::find($userId);
+            $user->activities()->attach($activity, [
+                "tickets" => $tickets,
+                "placement" => $i + 1,
+            ]);
+        }
+
+        return redirect(route("activities.show", $activity));
     }
 }

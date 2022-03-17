@@ -1,12 +1,19 @@
 <template>
   <div>
-    <Countdown
-      v-if="countdownActive"
-      :endDate="this.activity.event_at"
-    ></Countdown>
+    <Countdown v-if="countdownActive" :endDate="activity.event_at"></Countdown>
 
     <v-card v-else>
-      <v-card-title>Leaderboard</v-card-title>
+      <v-card-title>
+        Leaderboard
+        <v-btn
+          class="ml-4"
+          v-if="$page.props.can['assign points']"
+          :to="route('activities.pointsForm', activity)"
+          color="primary"
+        >
+          <v-icon>mdi-crown</v-icon> Assign Points
+        </v-btn>
+      </v-card-title>
 
       <v-simple-table>
         <thead>
@@ -25,7 +32,7 @@
             class="pointer"
             v-ripple
           >
-            <td>{{ completion.placement }}</td>
+            <td>{{ ordinal_number(completion.placement) }}</td>
             <td>
               <user-avatar
                 :url="completion.user.id"
@@ -42,7 +49,13 @@
 </template>
 
 <script>
+import * as util from "../util.js";
+
 export default {
+  methods: {
+    ordinal_number: util.ordinal_number,
+  },
+
   computed: {
     countdownActive() {
       return (
