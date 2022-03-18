@@ -140,7 +140,7 @@ class ActivityController extends Controller
 
     public function pointsForm(Activity $activity)
     {
-        $users = User::orderBy("username", "asc")->get();
+        $users = User::whereNotNull("team_id")->orderBy("username", "asc")->get();
 
         return Inertia::render('Activity/PointsForm', compact('activity', 'users'));
     }
