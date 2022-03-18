@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Activity;
 use App\Models\Entry;
+use App\Models\EntryHistory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -38,6 +39,13 @@ class EntryController extends Controller
             ->delete();
 
         Entry::create([
+            "user_id" => $user->id,
+            "activity_id" => $activity->id,
+            "proof" => $validated["proof"],
+            "result" => $validated["result"],
+        ]);
+
+        EntryHistory::create([
             "user_id" => $user->id,
             "activity_id" => $activity->id,
             "proof" => $validated["proof"],
