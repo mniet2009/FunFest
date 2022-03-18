@@ -45,13 +45,6 @@ class EntryController extends Controller
             "result" => $validated["result"],
         ]);
 
-        EntryHistory::create([
-            "user_id" => $user->id,
-            "activity_id" => $activity->id,
-            "proof" => $validated["proof"],
-            "result" => $validated["result"],
-        ]);
-
         $activity->updateLeaderboard();
 
         $completion = $activity->completions()->where("user_id", $user->id)->first();
