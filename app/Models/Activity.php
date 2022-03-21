@@ -60,7 +60,7 @@ class Activity extends Model
             $placement = $i + 1;
             $tickets = 0;
 
-            if ($placement < count($this->leaderboard_tickets)) {
+            if ($placement <= count($this->leaderboard_tickets)) {
                 $tickets = $this->leaderboard_tickets[$placement - 1];
             }
 
