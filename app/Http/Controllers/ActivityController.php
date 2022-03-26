@@ -57,9 +57,24 @@ class ActivityController extends Controller
         // filter activity
         $activityArray = $activity->only(["id", "slug", "activity_type_id", "name", "description", "children", "image", "completions", "tickets", "limit", "leaderboard_type_id", "leaderboard_tickets", "event_at"]);
 
+        $entries = null;
+
+        if ($activity->activity_type_id == 1) {
+            // We need leaderboard entry data
+            $entries = $activity->users()->with("entries", function ($query) use ($activity) {
+                $query->where("activity_id", $activity->id)
+                    ->select("user_id", "result", "created_at")
+                    ->orderBy("created_at", "asc")
+                    ->withTrashed();
+            })
+                ->select("users.id", "username", "team_id")
+                ->get();
+        }
+
         return Inertia::render('Activity/Show', [
             'activity' => $activityArray,
             'teams' => $teams,
+            "entries" => $entries,
         ])
             ->withViewData([
                 "title" => $activity->name,

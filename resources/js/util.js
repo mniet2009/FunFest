@@ -132,11 +132,30 @@ export function formatTime(ms) {
   if (milliseconds > 0) {
     ret.push({
       symbol: "ms",
-      number: milliseconds.toString().padStart(3, 0),
+      number: Math.floor(milliseconds)
+        .toString()
+        .padStart(3, 0),
     });
   }
 
   return ret;
+}
+
+export function formatTimeString(ms) {
+  let out = "";
+  let parts = formatTime(ms);
+
+  for (let part of parts) {
+    if (part.symbol != "ms") {
+      out += ":";
+    } else {
+      out += ".";
+    }
+
+    out += part.number;
+  }
+
+  return out.substring(1);
 }
 
 export function getStateColor(state) {

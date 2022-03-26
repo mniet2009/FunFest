@@ -21,6 +21,8 @@
             </v-card-text>
           </v-card>
 
+          <Leaderboard-Chart :chart-data="chartData" :activity="activity" />
+
           <Ticket-Distribution
             v-if="[1, 5, 6, 7].includes(activity.activity_type_id)"
             class="mt-6"
@@ -77,6 +79,37 @@ export default {
 
   props: {
     activity: Object,
+    entries: Array,
+  },
+
+  computed: {
+    chartData() {
+      let chartData = {
+        datasets: [],
+      };
+
+      for (let user of this.entries) {
+        let data = [];
+
+        for (let entry of user.entries) {
+          data.push({
+            x: entry.created_at,
+            y: entry.result,
+          });
+        }
+
+        chartData.datasets.push({
+          stepped: true,
+          label: user.username,
+          user: user,
+          data: data,
+          fill: false,
+          backgroundColor: this.$page.props.teams[user.team_id - 1].color,
+        });
+      }
+
+      return chartData;
+    },
   },
 
   data() {

@@ -1,39 +1,44 @@
 {
-    "private": true,
-    "scripts": {
-        "dev": "npm run development",
-        "development": "mix",
-        "watch": "mix watch",
-        "watch-poll": "mix watch -- --watch-options-poll=1000",
-        "hot": "mix watch --hot",
-        "prod": "npm run production",
-        "production": "mix --production"
-    },
-    "devDependencies": {
-        "axios": "^0.21",
-        "browser-sync": "^2.27.7",
-        "browser-sync-webpack-plugin": "^0.1.0",
-        "deepmerge": "^4.2.2",
-        "laravel-mix": "^6.0.6",
-        "lodash": "^4.17.19",
-        "postcss": "^8.1.14",
-        "resolve-url-loader": "^4.0.0",
-        "sass": "~1.32",
-        "sass-loader": "^12.1.0",
-        "vue-loader": "^15.9.8",
-        "vue-template-compiler": "^2.6.14",
-        "vuetify-loader": "^1.7.2"
-    },
-    "dependencies": {
-        "@adapttive/vue-markdown": "^4.0.1",
-        "@inertiajs/inertia": "^0.10.1",
-        "@inertiajs/inertia-vue": "^0.7.2",
-        "@inertiajs/progress": "^0.2.6",
-        "@pqina/flip": "^1.7.7",
-        "@pqina/tick": "^1.8.0",
-        "vue": "^2.6.14",
-        "vuedraggable": "^2.24.3",
-        "vuetify": "^2.5.9",
-        "vuetifyjs-mix-extension": "^0.0.20"
-    }
+  "private": true,
+  "scripts": {
+    "dev": "npm run development",
+    "development": "mix",
+    "watch": "mix watch",
+    "watch-poll": "mix watch -- --watch-options-poll=1000",
+    "hot": "mix watch --hot",
+    "prod": "npm run production",
+    "production": "mix --production"
+  },
+  "devDependencies": {
+    "axios": "^0.21",
+    "browser-sync": "^2.27.7",
+    "browser-sync-webpack-plugin": "^0.1.0",
+    "deepmerge": "^4.2.2",
+    "laravel-mix": "^6.0.6",
+    "lodash": "^4.17.19",
+    "postcss": "^8.1.14",
+    "resolve-url-loader": "^4.0.0",
+    "sass": "~1.32",
+    "sass-loader": "^12.1.0",
+    "vue-loader": "^15.9.8",
+    "vue-template-compiler": "^2.6.14",
+    "vuetify-loader": "^1.7.2"
+  },
+  "dependencies": {
+    "@adapttive/vue-markdown": "^4.0.1",
+    "@inertiajs/inertia": "^0.10.1",
+    "@inertiajs/inertia-vue": "^0.7.2",
+    "@inertiajs/progress": "^0.2.6",
+    "@pqina/flip": "^1.7.7",
+    "@pqina/tick": "^1.8.0",
+    "@vue/composition-api": "^1.4.9",
+    "chart.js": "^3.7.1",
+    "chartjs-adapter-moment": "^1.0.0",
+    "chartjs-plugin-zoom": "^1.2.1",
+    "moment": "^2.29.1",
+    "vue": "^2.6.14",
+    "vuedraggable": "^2.24.3",
+    "vuetify": "^2.5.9",
+    "vuetifyjs-mix-extension": "^0.0.20"
+  }
 }
