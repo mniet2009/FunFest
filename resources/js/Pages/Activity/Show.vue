@@ -21,7 +21,11 @@
             </v-card-text>
           </v-card>
 
-          <Leaderboard-Chart :chart-data="chartData" :activity="activity" />
+          <Leaderboard-Chart
+            v-if="activity.activity_type_id == 1"
+            :chart-data="chartData"
+            :activity="activity"
+          />
 
           <Ticket-Distribution
             v-if="[1, 5, 6, 7].includes(activity.activity_type_id)"
