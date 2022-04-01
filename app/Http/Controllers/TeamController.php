@@ -24,6 +24,14 @@ class TeamController extends Controller
             }])
             ->get();
 
+        foreach ($teams as $team) {
+            foreach ($team->users as $user) {
+                if ($user->username == "Alpha-5") {
+                    $user->completions_sum_tickets -= 1000;
+                }
+            }
+        }
+
         return Inertia::render('Team/Index', compact("teams"))
             ->withViewData([
                 "title" => "Standings",
