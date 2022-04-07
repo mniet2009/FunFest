@@ -83,6 +83,8 @@ export default {
 
   computed: {
     chartData() {
+      let activities = [];
+
       let chartData = {
         labels: [],
         datasets: [],
@@ -97,11 +99,30 @@ export default {
 
         // add up teams points for activities
         for (let activity of team.completions) {
-          if (team.id == 1) {
-            chartData.labels.push(activity.activity.name);
+          let currentActivity = activities.find(
+            (a) => a.id === activity.activity.id
+          );
+
+          if (!currentActivity) {
+            currentActivity = {
+              id: activity.activity.id,
+              name: activity.activity.name,
+              points: [],
+            };
+
+            activities.push(currentActivity);
           }
 
-          chartData.datasets[team.id - 1].data.push(activity.tickets);
+          currentActivity.points[team.id] = activity.tickets;
+        }
+      }
+
+      activities = activities.sort((a, b) => a.id - b.id);
+
+      for (let activity of activities) {
+        chartData.labels.push(activity.name);
+        for (let team of this.teams) {
+          chartData.datasets[team.id - 1].data.push(activity.points[team.id]);
         }
       }
 

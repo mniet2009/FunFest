@@ -23,8 +23,9 @@ class TeamController extends Controller
             }])
             ->with(["completions" => function ($query) {
                 $query->select("activity_id", DB::raw("SUM(tickets) as tickets"))
-                    ->groupBy("activity_id", "laravel_through_key")
-                    ->with("activity:id,name");
+                    ->groupBy("laravel_through_key", "activity_id")
+                    ->with("activity:id,name")
+                    ->orderBy("activity_id");
             }])
             ->get();
 
