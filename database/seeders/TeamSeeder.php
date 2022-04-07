@@ -23,5 +23,10 @@ class TeamSeeder extends Seeder
             "name" => "Team Do It",
             "color" => "#F44336",
         ]);
+
+        // Team::create([
+        //     "name" => "Baba is Team",
+        //     "color" => "#FFC107",
+        // ]);
     }
 }

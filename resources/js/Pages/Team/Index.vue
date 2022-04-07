@@ -10,6 +10,7 @@
     >
       <h1>Standings</h1>
     </v-parallax>
+    <ActivityChart :chartData="chartData" class="pa-4" />
 
     <v-container>
       <v-row>
@@ -78,6 +79,44 @@ export default {
 
   props: {
     teams: Array,
+    activities: Array,
+  },
+
+  computed: {
+    chartData() {
+      let chartData = {
+        labels: [],
+        datasets: [],
+      };
+
+      for (let team of this.teams) {
+        chartData.datasets.push({
+          label: team.name,
+          backgroundColor: team.color,
+          data: [],
+        });
+      }
+
+      // add up teams points for activities
+      for (let activity of this.activities) {
+        let points = [];
+        for (let team of this.teams) {
+          points[team.id] = 0;
+        }
+
+        for (let user of activity.users) {
+          points[user.team_id] += parseInt(user.completions_sum_tickets);
+        }
+
+        chartData.labels.push(activity.name);
+
+        for (let team of this.teams) {
+          chartData.datasets[team.id - 1].data.push(points[team.id]);
+        }
+      }
+
+      return chartData;
+    },
   },
 };
 </script>

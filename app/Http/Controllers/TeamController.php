@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activity;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -24,6 +25,15 @@ class TeamController extends Controller
             }])
             ->get();
 
+
+
+        $activities = Activity::with(["users" => function ($query) {
+            $query->select("team_id", "username")
+                ->withSum("completions", "tickets");
+        }])
+            ->select("id", "name", "parent_id")
+            ->get();
+
         foreach ($teams as $team) {
             foreach ($team->users as $user) {
                 if ($user->username == "Alpha-5") {
@@ -32,7 +42,7 @@ class TeamController extends Controller
             }
         }
 
-        return Inertia::render('Team/Index', compact("teams"))
+        return Inertia::render('Team/Index', compact("teams", "activities"))
             ->withViewData([
                 "title" => "Standings",
                 "description" => "View the Fun Fest standings",
