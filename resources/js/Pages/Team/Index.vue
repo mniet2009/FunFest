@@ -79,7 +79,6 @@ export default {
 
   props: {
     teams: Array,
-    activities: Array,
   },
 
   computed: {
@@ -95,23 +94,14 @@ export default {
           backgroundColor: team.color,
           data: [],
         });
-      }
 
-      // add up teams points for activities
-      for (let activity of this.activities) {
-        let points = [];
-        for (let team of this.teams) {
-          points[team.id] = 0;
-        }
+        // add up teams points for activities
+        for (let activity of team.completions) {
+          if (team.id == 1) {
+            chartData.labels.push(activity.activity.name);
+          }
 
-        for (let user of activity.users) {
-          points[user.team_id] += parseInt(user.completions_sum_tickets);
-        }
-
-        chartData.labels.push(activity.name);
-
-        for (let team of this.teams) {
-          chartData.datasets[team.id - 1].data.push(points[team.id]);
+          chartData.datasets[team.id - 1].data.push(activity.tickets);
         }
       }
 

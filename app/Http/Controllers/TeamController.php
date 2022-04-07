@@ -21,22 +21,12 @@ class TeamController extends Controller
                     ->orderBy("completions_sum_tickets", "desc")
                     ->orderBy("username", "asc");
             }])
+            ->with(["completions" => function ($query) {
+                $query->select("activity_id", DB::raw("SUM(tickets) as tickets"))
+                    ->groupBy("activity_id", "laravel_through_key")
+                    ->with("activity:id,name");
+            }])
             ->get();
-
-
-
-        $activities = Activity::select("id", "name", "parent_id")
-            ->with("users:id,username,team_id")
-            ->get();
-
-
-        foreach ($activities as $activity) {
-            foreach ($activity->users as $user) {
-                $user->loadSum(["completions" => function ($query) use ($activity) {
-                    $query->where("activity_id", $activity->id);
-                }], "tickets");
-            }
-        }
 
         foreach ($teams as $team) {
             foreach ($team->users as $user) {
@@ -46,7 +36,7 @@ class TeamController extends Controller
             }
         }
 
-        return Inertia::render('Team/Index', compact("teams", "activities"))
+        return Inertia::render('Team/Index', compact("teams"))
             ->withViewData([
                 "title" => "Standings",
                 "description" => "View the Fun Fest standings",
