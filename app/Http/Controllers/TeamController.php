@@ -13,8 +13,6 @@ class TeamController extends Controller
 {
     public function index()
     {
-        DB::enableQueryLog();
-
         $teams = Team::withSum("completions", "tickets")
             ->with(["users" => function ($query) {
                 $query
@@ -27,12 +25,18 @@ class TeamController extends Controller
 
 
 
-        $activities = Activity::with(["users" => function ($query) {
-            $query->select("team_id", "username")
-                ->withSum("completions", "tickets");
-        }])
-            ->select("id", "name", "parent_id")
+        $activities = Activity::select("id", "name", "parent_id")
+            ->with("users:id,username,team_id")
             ->get();
+
+
+        foreach ($activities as $activity) {
+            foreach ($activity->users as $user) {
+                $user->loadSum(["completions" => function ($query) use ($activity) {
+                    $query->where("activity_id", $activity->id);
+                }], "tickets");
+            }
+        }
 
         foreach ($teams as $team) {
             foreach ($team->users as $user) {
