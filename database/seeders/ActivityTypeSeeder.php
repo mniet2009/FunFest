@@ -26,25 +26,25 @@ class ActivityTypeSeeder extends Seeder
                 "description" => "Complete the given goal and be rewarded with tickets. These can be done at any point throughout the event.",
             ],
             [
-                "name" => "Completion Challenges - Team",
+                "name" => "Completion Challenges - Squad",
                 "icon" => "mdi-ticket",
-                "description" => "Complete the given goal and be rewarded with tickets. These can be done at any point throughout the event.",
+                "description" => "Complete the given goal with teammate(s) and be rewarded with tickets. These can be done at any point throughout the event.",
                 "hidden" => true,
             ],
             [
-                "name" => "Matchmaking Wins",
+                "name" => "Completion Challenges - Team",
                 "icon" => "mdi-trophy",
-                "description" => "Win games and get tickets, but with much higher limits per player.",
+                "description" => "Complete the one-time team-wide given goal with teammate(s) and directly reward your team with tickets. These can be done at any point throughout the event.",
             ],
             [
                 "name" => "Races",
                 "icon" => "mdi-flag-checkered",
-                "description" => "Receive tickets based on your final placement in the race. Note: Some races will be mystery races and will be revealed shortly before they begin!",
+                "description" => "Receive tickets based on your final placement in the race and bonus participation tickets for simply finishing. Note: Some races will be mystery races and will be revealed shortly before they begin!",
             ],
             [
                 "name" => "Competitions",
                 "icon" => "mdi-tournament",
-                "description" => "Receive tickets based on your final placement and/or performance! The means of rewarding tickets will heavily vary based on the competition's format."
+                "description" => "Receive tickets based on your final placement and/or performance and bonus participation tickets for simply finishing. The means of rewarding tickets will heavily vary based on the competition's format."
             ],
             [
                 "name" => "Contests",
