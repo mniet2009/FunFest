@@ -59,7 +59,7 @@
       <a
         style="text-decoration: none;"
         target="_blank"
-        href="https://drive.google.com/file/d/1YT_wcr8sKqjKJUeUFu2jMoyIM_DjhWC1/view"
+        href="https://drive.google.com/file/d/1hQhasdMolNNNo5jzhQK4TfHLU3EQmZke/view?usp=sharing"
       >
         <v-list-item link>
           <v-list-item-icon>
