@@ -41,9 +41,9 @@
       <p>
         Mystery Fun Fest is a cooperative event running from
         <strong>
-          {{ new Date(Date.parse("2022-03-31T12:00:00")).toLocaleDateString() }}
+          {{ new Date(Date.parse("2023-03-31T12:00:00")).toLocaleDateString() }}
           -
-          {{ new Date(Date.parse("2022-04-23T12:00:00")).toLocaleDateString() }}
+          {{ new Date(Date.parse("2023-04-23T12:00:00")).toLocaleDateString() }}
         </strong>
         in which two teams compete to accrue the most tickets throughout its
         17-day duration. Players will battle in competitive sub-events, complete
