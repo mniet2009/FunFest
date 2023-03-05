@@ -46,7 +46,7 @@
           {{ new Date(Date.parse("2023-04-23T12:00:00")).toLocaleDateString() }}
         </strong>
         in which two teams compete to accrue the most tickets throughout its
-        17-day duration. Players will battle in competitive sub-events, complete
+        24-day duration. Players will battle in competitive sub-events, complete
         both solo and team-based activities, and perform a variety of other
         tasks to accumulate tickets for their team. Above all else, however,
         this event is designed to give community members a myriad of reasons to
@@ -58,7 +58,7 @@
       <h2 class="text-center mb-3" v-if="$page.props.signupsOpen">
         To participate in Mystery Fun Fest, you are required to
         <router-link :href="route('signUpForm')">register</router-link> on this
-        website before <local-datetime :t="1679979540000"></local-datetime>.
+        website before <local-datetime :t="1680065940000"></local-datetime>.
       </h2>
 
       <p>
