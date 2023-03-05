@@ -45,8 +45,8 @@ export default {
         scales: {
           x: {
             type: "time",
-            min: "2022-03-18 00:00:00",
-            max: "2022-04-03 23:59:00",
+            min: "2023-03-31 00:00:00",
+            max: "2023-04-23 23:59:00",
             time: {
               tooltipFormat: "LLL dd",
             },

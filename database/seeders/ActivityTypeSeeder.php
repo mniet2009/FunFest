@@ -33,8 +33,9 @@ class ActivityTypeSeeder extends Seeder
             ],
             [
                 "name" => "Completion Challenges - Team",
-                "icon" => "mdi-trophy",
+                "icon" => "mdi-ticket",
                 "description" => "Complete the one-time team-wide given goal with teammate(s) and directly reward your team with tickets. These can be done at any point throughout the event.",
+                "hidden" => true,
             ],
             [
                 "name" => "Races",

@@ -41,9 +41,9 @@
       <p>
         Mystery Fun Fest is a cooperative event running from
         <strong>
-          {{ new Date(Date.parse("2022-03-18T12:00:00")).toLocaleDateString() }}
+          {{ new Date(Date.parse("2022-03-31T12:00:00")).toLocaleDateString() }}
           -
-          {{ new Date(Date.parse("2022-04-03T12:00:00")).toLocaleDateString() }}
+          {{ new Date(Date.parse("2022-04-23T12:00:00")).toLocaleDateString() }}
         </strong>
         in which two teams compete to accrue the most tickets throughout its
         17-day duration. Players will battle in competitive sub-events, complete
@@ -58,7 +58,7 @@
       <h2 class="text-center mb-3" v-if="$page.props.signupsOpen">
         To participate in Mystery Fun Fest, you are required to
         <router-link :href="route('signUpForm')">register</router-link> on this
-        website before <local-datetime :t="1647406740000"></local-datetime>.
+        website before <local-datetime :t="1679979540000"></local-datetime>.
       </h2>
 
       <p>
