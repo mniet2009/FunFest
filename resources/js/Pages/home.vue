@@ -81,15 +81,16 @@
 
       <p>
         Please use this site to mark activities as complete and update personal
-        best scores and times where applicable. Note that team-based activities
-        must be marked by each player in the team. Proof must be linked for each
-        submission in the form of a Twitch or Youtube video. Screenshot-based
-        proof may be approved by an event moderator on a case-by-case basis.
+        best scores and times where applicable. Note that squad-based activities
+        must be marked by each player in the squad. Proof must be linked for
+        each submission in the form of a Twitch or Youtube video.
+        Screenshot-based proof may be approved by an event moderator on a
+        case-by-case basis.
       </p>
 
       <p>The categories of sub-events that will be featured are as follows:</p>
 
-      <v-row class="mb-3 align-stretch">
+      <v-row class="mb-3 align-stretch justify-center">
         <v-col
           cols="12"
           md="6"
