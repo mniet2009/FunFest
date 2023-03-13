@@ -98,7 +98,7 @@ class Activity extends Model
                 ->select("user_id", "activity_id", "placement", DB::raw("SUM(tickets) as tickets"));
         }
 
-        return Activity::whereNull("parent_id")
+        $query = Activity::whereNull("parent_id")
             ->where(function ($query) {
                 $query->where("revealed_at", "<=", now())
                     ->orWhereNull("revealed_at");
@@ -113,8 +113,15 @@ class Activity extends Model
                     groupActivities($query, $userId);
                 }
             ])
-            ->orderBy("name", "asc")
             ->select("id", "activity_type_id", "name", "slug", "excerpt", "tickets", "limit", "image", "event_at");
+
+        if (config("funfest.started")) {
+            $query->orderBy("name", "asc");
+        } else {
+            $query->orderBy("revealed_at", "asc");
+        }
+
+        return $query;
     }
 
     /**
