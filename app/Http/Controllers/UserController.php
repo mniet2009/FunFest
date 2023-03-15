@@ -65,6 +65,8 @@ class UserController extends Controller
         $activityTypes = ActivityType::all();
         $activities = Activity::forUser($user)->get();
 
+        $activities = Activity::filterUnrevealed($activities);
+
         return Inertia::render('Activity/Index', compact('activities', 'activityTypes', "user"))
             ->withViewData([
                 "title" => "{$user->username}'s Activities",

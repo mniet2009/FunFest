@@ -99,10 +99,10 @@ class Activity extends Model
         }
 
         $query = Activity::whereNull("parent_id")
-            ->where(function ($query) {
-                $query->where("revealed_at", "<=", now())
-                    ->orWhereNull("revealed_at");
-            })
+            // ->where(function ($query) {
+            //     $query->where("revealed_at", "<=", now())
+            //         ->orWhereNull("revealed_at");
+            // })
             ->with("activityType:id,icon")
             ->with(["completions" => function ($query) use ($userId) {
                 groupActivities($query, $userId);
@@ -113,7 +113,7 @@ class Activity extends Model
                     groupActivities($query, $userId);
                 }
             ])
-            ->select("id", "activity_type_id", "name", "slug", "excerpt", "tickets", "limit", "image", "event_at");
+            ->select("id", "activity_type_id", "name", "slug", "excerpt", "tickets", "limit", "image", "event_at", "revealed_at");
 
         if (config("funfest.started")) {
             $query->orderBy("name", "asc");
@@ -122,6 +122,31 @@ class Activity extends Model
         }
 
         return $query;
+    }
+
+    public static function filterUnrevealed($activities)
+    {
+        $activityTypes = ActivityType::all();
+
+        foreach ($activities as $i => $activity) {
+            if (!$activity->visible()) {
+                $activityTypeName = $activityTypes->find($activity->activity_type_id)->name;
+
+                $activity->name = "Unrevealed $activityTypeName";
+                $activity->excerpt = "";
+                $activity->image = "/storage/activities/mystery.png";
+                $activity->slug = "";
+
+                if ($activity->children->count() > 0) {
+                    foreach ($activity->children as $j => $child) {
+                        $child->name = "";
+                        $child->excerpt = "";
+                    }
+                }
+            }
+        }
+
+        return $activities;
     }
 
     /**

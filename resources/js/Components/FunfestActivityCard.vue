@@ -29,7 +29,10 @@
             <v-card-text>
               <v-tabs-items v-model="activeExcerpt">
                 <v-tab-item v-for="(excerpt, i) in excerpts" :key="i">
-                  {{ excerpt }}
+                  <div v-if="revealedAt <= new Date()">
+                    {{ excerpt }}
+                  </div>
+                  <CountdownSimpleSmall v-else :endDate="revealedAt" />
                 </v-tab-item>
               </v-tabs-items>
             </v-card-text>
@@ -97,6 +100,10 @@ export default {
   computed: {
     activityState() {
       return util.getActivityState(this.activity);
+    },
+
+    revealedAt() {
+      return new Date(this.activity.revealed_at);
     },
 
     excerpts() {

@@ -17,6 +17,7 @@ class ActivityController extends Controller
     {
         $activityTypes = ActivityType::select("name", "id", "icon")->get();
         $activities = Activity::forUser(Auth::user())->get();
+        $activities = Activity::filterUnrevealed($activities);
 
         return Inertia::render('Activity/Index', compact('activities', 'activityTypes'))
             ->withViewData([
