@@ -77,13 +77,6 @@
               <p class="grey--text mb-0 mt-3">
                 No one has completed this activity yet.
               </p>
-
-              <p
-                class="grey--text mb-0 mt-3"
-                v-if="activity.name == 'Call of Duty: Warzone'"
-              >
-                And nobody probably ever will.
-              </p>
             </div>
           </v-card-text>
         </v-card>
