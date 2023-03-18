@@ -3,10 +3,10 @@
     <Head title="Home" />
 
     <v-parallax
-      style="height: 700px;"
       dark
-      src="/img/home.jpg"
-      class="d-flex align-center justify-center parallax-home"
+      src="/img/home.png"
+      class="d-flex align-center justify-center parallax-home top-image"
+      style="height: 700px;"
     >
       <h1 class="text-uppercase">
         Mystery <span style="white-space: nowrap">Fun Fest</span>

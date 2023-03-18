@@ -1,5 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Rye&display=swap");
 @import "~vuetify/src/styles/settings/_variables";
+
+@font-face {
+  font-family: "Run";
+  src: url("/font/run.woff2") format("woff2");
+}
 
 abbr {
   cursor: help;
@@ -11,7 +15,7 @@ abbr {
 
 .v-parallax h1 {
   text-align: center;
-  font-family: "Rye", serif;
+  font-family: "Run", serif;
   font-size: 5em;
   font-weight: normal;
 
