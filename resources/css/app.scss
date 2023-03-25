@@ -180,8 +180,8 @@ td .avatar {
   font-family: arial, sans-serif;
 }
 
-.flip-part:not(:last-child) {
-  margin-right: 1em;
+.flip-flex {
+  gap: 1em;
 }
 
 .activity-description p:last-child {

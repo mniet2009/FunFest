@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex flex-wrap justify-center my-6">
+  <div class="d-flex flex-wrap justify-center my-6 flip-flex">
     <div
       v-for="(value, i) in countdown"
       :key="i"
