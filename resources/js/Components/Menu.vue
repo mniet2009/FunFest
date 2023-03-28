@@ -56,10 +56,10 @@
         </v-list-item>
       </router-link>
 
-      <!-- <a
+      <a
         style="text-decoration: none;"
         target="_blank"
-        href="https://drive.google.com/file/d/1hQhasdMolNNNo5jzhQK4TfHLU3EQmZke/view?usp=sharing"
+        href="https://drive.google.com/file/d/154qzKxhiohBzlGGF6TbjXr4JIBrUdBq3/view?usp=sharing"
       >
         <v-list-item link>
           <v-list-item-icon>
@@ -70,7 +70,7 @@
             <v-list-item-title>Download Pack</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-      </a> -->
+      </a>
     </v-list>
 
     <template v-slot:append>
