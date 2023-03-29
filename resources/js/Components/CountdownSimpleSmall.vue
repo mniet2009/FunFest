@@ -11,7 +11,7 @@ import Tick from "@pqina/tick";
 
 export default {
   props: {
-    endDate: String,
+    endDate: Date,
   },
 
   created() {
