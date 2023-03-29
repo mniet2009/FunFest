@@ -101,7 +101,12 @@ export default {
     },
 
     canRedeem(i) {
-      return this.loggedIn && this.activityState.states[i] != "complete";
+      return (
+        (this.activities[this.tab].activity_type_id != 4 ||
+          this.$page.props.can["redeem team points"]) &&
+        this.loggedIn &&
+        this.activityState.states[i] != "complete"
+      );
     },
 
     redeemText(i) {
@@ -145,7 +150,8 @@ export default {
     activityState() {
       return util.getActivityState(
         this.activity,
-        this.$page.props.auth.user ? this.$page.props.auth.user.id : null
+        this.$page.props.auth.user ? this.$page.props.auth.user.id : null,
+        this.$page.props.auth.user ? this.$page.props.auth.user.team_id : null
       );
     },
 

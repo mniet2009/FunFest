@@ -1,4 +1,4 @@
-export function getActivityState(activity, user_id) {
+export function getActivityState(activity, user_id, team_id) {
   let ret = {
     availableTickets: 0,
     tickets: 0,
@@ -19,9 +19,13 @@ export function getActivityState(activity, user_id) {
       completions = activity.completions;
     } else {
       completions = activity.completions.filter(
-        (completion) => completion.user_id === user_id
+        (completion) =>
+          completion.user_id === user_id ||
+          completion.user_id === String(team_id)
       );
     }
+
+    console.log(activity.completions);
 
     let state;
     let tickets = completions.length > 0 ? parseInt(completions[0].tickets) : 0;

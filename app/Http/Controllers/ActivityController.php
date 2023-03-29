@@ -108,6 +108,16 @@ class ActivityController extends Controller
             abort(400);
         }
 
+        // if it's a team activity (id 4), the user is replaced by the team user (user_id = team_id)
+        if ($activity->activity_type_id == 4) {
+            // but only if the user can redeem for the team!
+            if (!$user->can("redeem team points")) {
+                abort(403);
+            }
+
+            $user = User::find($user->team_id);
+        }
+
         // count how often the user has completed the activity yet
         $completions = $activity->completions()->where("user_id", $user->id)->count();
         // don't allow more than the limit

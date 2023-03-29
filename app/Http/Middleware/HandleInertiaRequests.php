@@ -54,6 +54,7 @@ class HandleInertiaRequests extends Middleware
             ];
 
             $can["assign points"] = $user->can("assign points");
+            $can["redeem team points"] = $user->can("redeem team points");
         }
 
         $flash = $request->session()->get('flash');

@@ -26,7 +26,12 @@ class User extends Authenticatable
         'locale',
         'mfa_enabled',
         'refresh_token',
-        "slug"
+        "slug",
+        "team_id",
+        "remember_token",
+        "friends",
+        "likelihood",
+        "signed_up",
     ];
 
     public function getRouteKeyName()

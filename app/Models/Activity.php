@@ -90,11 +90,13 @@ class Activity extends Model
     public static function forUser($user)
     {
         $userId = $user ? $user->id : null;
+        $teamId = $user ? $user->team_id : null;
 
-        function groupActivities($query, $userId)
+        function groupActivities($query, $userId, $teamId)
         {
             $query->groupBy("activity_id", "user_id", "placement")
                 ->where("user_id", $userId)
+                ->orWhere("user_id", $teamId)
                 ->select("user_id", "activity_id", "placement", DB::raw("SUM(tickets) as tickets"));
         }
 
@@ -104,13 +106,13 @@ class Activity extends Model
             //         ->orWhereNull("revealed_at");
             // })
             ->with("activityType:id,icon")
-            ->with(["completions" => function ($query) use ($userId) {
-                groupActivities($query, $userId);
+            ->with(["completions" => function ($query) use ($userId, $teamId) {
+                groupActivities($query, $userId, $teamId);
             }])
             ->with([
                 "children:id,parent_id,activity_type_id,name,excerpt,tickets,limit",
-                "children.completions" => function ($query) use ($userId) {
-                    groupActivities($query, $userId);
+                "children.completions" => function ($query) use ($userId, $teamId) {
+                    groupActivities($query, $userId, $teamId);
                 }
             ])
             ->select("id", "activity_type_id", "name", "slug", "excerpt", "tickets", "limit", "image", "event_at", "revealed_at");
