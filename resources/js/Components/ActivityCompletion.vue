@@ -133,7 +133,9 @@ export default {
 
     ownCompletions(i) {
       return this.activities[i].completions.find(
-        (completion) => completion.user_id == this.$page.props.auth.user.id
+        (completion) =>
+          completion.user_id == this.$page.props.auth.user.id ||
+          completion.user_id == this.$page.props.auth.user.team_id
       );
     },
   },
