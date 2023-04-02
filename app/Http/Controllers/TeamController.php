@@ -29,7 +29,7 @@ class TeamController extends Controller
             }])
             ->get();
 
-        $activities = Activity::select("id", "name")->whereNull("parent_id")->get();
+        $activities = Activity::select("id", "name")->whereNull("parent_id")->orderBy("name")->get();
 
         $teamActivityTickets = [];
 
