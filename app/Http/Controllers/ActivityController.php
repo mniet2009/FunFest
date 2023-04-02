@@ -184,7 +184,7 @@ class ActivityController extends Controller
         foreach ($validated["users"] as $i => $userId) {
             // get ticket count for placement
 
-            $tickets = 0;
+            $tickets = 2; // 2 tickets for participation
 
             if ($i < count($activity->leaderboard_tickets)) {
                 $tickets = $activity->leaderboard_tickets[$i];
